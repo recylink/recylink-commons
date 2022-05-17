@@ -1,0 +1,28 @@
+{
+  "name": "@recylink-commons/root",
+  "version": "1.0.8",
+  "description": "",
+  "main": "index.js",
+  "devDependencies": {
+    "lerna": "^4.0.0"
+  },
+  "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "clean": "lerna run clean",
+    "watch": "lerna run --parallel watch",
+    "test": "lerna run test",
+    "publish": "lerna publish --registry=https://npm.pkg.github.com/ ",
+    "publish-all": "lerna publish --dist-tag latest --force-publish=*",
+    "release": "lerna publish --dist-tag latest",
+    "release-alpha": "lerna publish --dist-tag next",
+    "create-test": "lerna create testi"
+  },
+  "keywords": [],
+  "author": "diegoolavarria",
+  "license": "MIT",
+  "workspaces": {
+    "packages": [
+      "packages/**"
+    ]
+  }
+}

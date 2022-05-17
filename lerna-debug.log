@@ -1,0 +1,16 @@
+0 silly argv {
+0 silly argv   _: [ 'publish' ],
+0 silly argv   registry: 'https://npm.pkg.github.com/',
+0 silly argv   composed: 'publish',
+0 silly argv   lernaVersion: '4.0.0',
+0 silly argv   '$0': '/home/diego/.yarn/bin/lerna'
+0 silly argv }
+1 notice cli v4.0.0
+2 verbose rootPath /home/diego/Projects/recylink/recylink-commons
+3 error Error: Invalid package name "@@ecylink-commons/components": name can only contain URL-friendly characters
+3 error     at invalidPackageName (/home/diego/Projects/recylink/recylink-commons/node_modules/npm-package-arg/npa.js:84:15)
+3 error     at Result.setName (/home/diego/Projects/recylink/recylink-commons/node_modules/npm-package-arg/npa.js:119:11)
+3 error     at new Result (/home/diego/Projects/recylink/recylink-commons/node_modules/npm-package-arg/npa.js:110:10)
+3 error     at Function.resolve (/home/diego/Projects/recylink/recylink-commons/node_modules/npm-package-arg/npa.js:54:15)
+3 error     at new Package (/home/diego/Projects/recylink/recylink-commons/node_modules/@lerna/package/index.js:95:26)
+3 error     at /home/diego/Projects/recylink/recylink-commons/node_modules/@lerna/project/index.js:207:26

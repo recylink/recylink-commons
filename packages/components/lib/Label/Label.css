@@ -1,0 +1,22 @@
+.recylink-label {
+  line-height: 22px;
+  font-size: 16px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: -0.1px;
+}
+
+.recylink-label:first-child {
+  margin-top: 0;
+}
+
+.recylink-label-optional {
+  color: #94969e;
+  font-size: 10px;
+  margin-left: 5px;
+}
+
+.recylink-label-required {
+  color: #f03a47;
+}
