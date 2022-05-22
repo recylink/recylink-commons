@@ -263,10 +263,15 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@recylink/react-components@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@recylink/react-components/-/react-components-1.0.0.tgz#68f015313771d0bf2f016e930d7aaceee5a50195"
-  integrity sha512-HSbYVO71JpCE1MUkkTPryiiLQGv8bD91Pc37n4M9RO93bTJSC76p26Hp35vZgawg9HRIPJ9GtGggYVnc9RllAw==
+"@recylink/react-components@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@recylink/react-components/-/react-components-1.0.1.tgz#e4f2ae363cb36d68c761c67441ba9f1e299949f3"
+  integrity sha512-RQlmB6QfTUT8LSWMJ140w5MoaTgmqtTLABCTzXTWWichK96g0RTXL/YemHbqbZKNQGcI8MGL/XSjfsY9IvEZsQ==
+  dependencies:
+    lodash "^4.17.21"
+    prop-types "^15.8.1"
+    react "^18.1.0"
+    react-input-mask "^2.0.4"
 
 acorn-jsx@^5.3.2:
   version "5.3.2"
