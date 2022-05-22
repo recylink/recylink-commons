@@ -2,16 +2,16 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import './Label.css'
 
-const Label = ({label, optional, required}) => {
+const Label = ({label, isOptional, isRequired}) => {
   const renderOptional = () => {
-    if (!optional) {
+    if (!isOptional) {
       return null
     }
     return <span className="recylink-label-optional">opcional</span>
   }
 
   const renderRequired = () => {
-    if (!required) {
+    if (!isRequired) {
       return null
     }
     return <span className="recylink-label-required">*</span>
@@ -30,5 +30,5 @@ const Label = ({label, optional, required}) => {
   )
 }
 
-Label.propTypes = {label: PropTypes.string, optional: PropTypes.bool, required: PropTypes.bool}
+Label.propTypes = {label: PropTypes.string, isOptional: PropTypes.bool, isRequired: PropTypes.bool}
 export default Label

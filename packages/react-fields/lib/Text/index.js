@@ -4,8 +4,6 @@ import InputMask from 'react-input-mask'
 import debounce from 'lodash/debounce'
 import {Label} from '@recylink/components'
 
-console.log({Label})
-
 const Text = props => {
   const {delay, onChange, toUpperCase} = props
   const [state, setState] = useState(props.value)
@@ -64,7 +62,7 @@ const Text = props => {
 
   return (
     <div>
-      <Label label={props.label} optional={props.optional} required={props.required} />
+      <Label label={props.label} isOptional={props.isOptional} isRequired={props.isRequired} />
       <div className="os-input-container">
         <InputMask
           mask={props.mask}
@@ -107,8 +105,8 @@ Text.propTypes = {
   toUpperCase: PropTypes.bool,
   delay: PropTypes.number,
   maskChar: PropTypes.bool,
-  optional: PropTypes.bool,
-  required: PropTypes.bool
+  isOptional: PropTypes.bool,
+  isRequired: PropTypes.bool
 }
 Text.defaultProps = {
   fieldType: 'text',
