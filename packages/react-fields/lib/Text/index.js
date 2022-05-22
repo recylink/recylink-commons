@@ -87,8 +87,8 @@ const Text = props => {
 }
 
 Text.propTypes = {
-  onChange: PropTypes.func,
   value: PropTypes.string,
+  onChange: PropTypes.func,
   className: PropTypes.string,
   fieldType: PropTypes.string,
   passProps: PropTypes.object,
