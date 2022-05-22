@@ -23,11 +23,7 @@ module.exports = {
     }
   },
   extends: ['eslint:recommended', 'plugin:react/recommended'],
-  plugins: [
-    'react',
-    // "react-native",
-    'react-hooks'
-  ],
+  plugins: ['react', 'react-hooks'],
   rules: {
     'no-empty': ['warn', {allowEmptyCatch: true}],
     'react/prop-types': [1, {skipUndeclared: true}],

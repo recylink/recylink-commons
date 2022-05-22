@@ -27,7 +27,6 @@
   },
   "gitHead": "935c916ee4e69ab1af388e65a6f8b135895e549c",
   "dependencies": {
-    "@recylink/react-components": "^1.2.1",
     "lodash": "^4.17.21",
     "prop-types": "^15.8.1",
     "react": "^18.1.0",
@@ -36,6 +35,9 @@
   "devDependencies": {
     "@babel/core": "^7.18.0",
     "@babel/eslint-parser": "^7.17.0",
+    "@babel/preset-env": "^7.18.0",
+    "@babel/preset-react": "^7.17.12",
+    "@recylink/react-components": "^1.0.1",
     "eslint": "^8.16.0"
   }
 }
