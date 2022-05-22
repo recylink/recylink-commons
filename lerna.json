@@ -4,7 +4,7 @@
   "npmClient": "yarn",
   "command": {
     "publish": {
-      "registry": "https://npm.pkg.github.com/diegoolavarria"
+      "registry": "https://npm.pkg.github.com/recylink"
     }
   }
 }
