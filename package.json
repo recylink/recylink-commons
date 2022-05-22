@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "devDependencies": {
+    "@babel/core": "^7.18.0",
+    "@babel/eslint-parser": "^7.17.0",
     "lerna": "^4.0.0"
   },
   "scripts": {
@@ -19,10 +21,5 @@
   },
   "keywords": [],
   "author": "diegoolavarria",
-  "license": "MIT",
-  "workspaces": {
-    "packages": [
-      "packages/**"
-    ]
-  }
+  "license": "MIT"
 }

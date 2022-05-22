@@ -1,0 +1,62 @@
+Arguments: 
+  /home/diego/.nvm/versions/node/v16.13.0/bin/node /usr/share/yarn/bin/yarn.js add @recylink/components
+
+PATH: 
+  /home/diego/.ebcli-virtual-env/executables:/home/diego/.local/bin:/home/diego/.nvm/versions/node/v16.13.0/bin:/home/diego/.ebcli-virtual-env/executables:/home/diego/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/.yarn/bin:/home/diego/.yarn/bin:/home/diego/.local/bin:/.yarn/bin:/home/diego/.yarn/bin:/home/diego/.local/bin:/home/diego/.yarn/bin:/home/diego/.local/bin:/home/diego/.yarn/bin:/home/diego/.local/bin
+
+Yarn version: 
+  1.22.18
+
+Node version: 
+  16.13.0
+
+Platform: 
+  linux x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/@recylink%2fcomponents: Not found
+      at Request.params.callback [as _callback] (/usr/share/yarn/lib/cli.js:66138:18)
+      at Request.self.callback (/usr/share/yarn/lib/cli.js:140883:22)
+      at Request.emit (node:events:390:28)
+      at Request.<anonymous> (/usr/share/yarn/lib/cli.js:141855:10)
+      at Request.emit (node:events:390:28)
+      at IncomingMessage.<anonymous> (/usr/share/yarn/lib/cli.js:141777:12)
+      at Object.onceWrapper (node:events:509:28)
+      at IncomingMessage.emit (node:events:402:35)
+      at endReadableNT (node:internal/streams/readable:1343:12)
+      at processTicksAndRejections (node:internal/process/task_queues:83:21)
+
+npm manifest: 
+  {
+    "name": "@recylink/fields",
+    "version": "1.1.5",
+    "description": "Recylink fields",
+    "author": "diegoolavarria <olavarriaubeda.diego@gmail.com>",
+    "homepage": "https://github.com/diegoolavarria/recylink-commons#readme",
+    "license": "MIT",
+    "main": "lib/index.js",
+    "directories": {
+      "lib": "lib",
+      "test": "__tests__"
+    },
+    "files": [
+      "lib"
+    ],
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/recylink/recylink-commons.git"
+    },
+    "scripts": {
+      "test": "echo \"Error: run tests from root\" && exit 1"
+    },
+    "bugs": {
+      "url": "https://github.com/recylink/recylink-commons/issues"
+    },
+    "gitHead": "b0614ed4edf9dc1052124ed320df85759d3b118b"
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
