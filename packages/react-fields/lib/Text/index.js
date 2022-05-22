@@ -41,11 +41,11 @@ const Text = props => {
     }
   }, [props.value, handleOnChange, state, delay])
 
-  const handleKeyDown = event => {
-    if (event.key === 'Enter') {
-      props.onEnter()
-    }
-  }
+  // const handleKeyDown = event => {
+  //   if (event.key === 'Enter') {
+  //     props.onEnter()
+  //   }
+  // }
 
   const getClassName = () => {
     if (props.className) {

@@ -1,10 +1,10 @@
 .recylink-label {
   line-height: 22px;
+  letter-spacing: -0.1px;
   font-size: 16px;
   font-weight: 600;
   font-stretch: normal;
   font-style: normal;
-  letter-spacing: -0.1px;
 }
 
 .recylink-label:first-child {
