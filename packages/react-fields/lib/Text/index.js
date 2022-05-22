@@ -106,7 +106,9 @@ Text.propTypes = {
   delay: PropTypes.number,
   maskChar: PropTypes.bool,
   isOptional: PropTypes.bool,
-  isRequired: PropTypes.bool
+  optionalLabel: PropTypes.string,
+  isRequired: PropTypes.bool,
+  requiredLabel: PropTypes.string
 }
 Text.defaultProps = {
   fieldType: 'text',
