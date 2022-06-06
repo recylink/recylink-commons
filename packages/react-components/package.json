@@ -20,7 +20,7 @@
     "test": "echo \"Error: run tests from root\" && exit 1",
     "start": "node src/index.js",
     "prebuild": "rm -rf dist",
-    "build": "tsc",
+    "build": "rm -rf types && tsc",
     "prepublish": "rollup -c && tsc",
     "rollup": "rm -rf dist && rollup -c"
   },
