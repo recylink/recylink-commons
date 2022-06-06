@@ -1,8 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import './Label.css'
+import './styles.css'
 
-const Label = ({label, isOptional, optionalLabel, isRequired, requiredLabel}) => {
+const Label = (props: any) => {
+  const {label, isOptional, optionalLabel, isRequired, requiredLabel} = props
+
   const renderOptional = () => {
     if (!isOptional) {
       return null
@@ -37,5 +39,5 @@ Label.propTypes = {
   isRequired: PropTypes.bool,
   requiredLabel: PropTypes.string
 }
-Label.defaultProps = {optionalLabel: 'opcional', requiredLabel: '*'}
+Label.defaultProps = {optionalLabel: 'optional', requiredLabel: '*'}
 export default Label
