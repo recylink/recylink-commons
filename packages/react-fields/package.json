@@ -25,7 +25,7 @@
   "bugs": {
     "url": "https://github.com/recylink/recylink-commons/issues"
   },
-  "gitHead": "935c916ee4e69ab1af388e65a6f8b135895e549c",
+  "gitHead": "2171a02401f8d04a9d7d181d65dc3ce338bca8a3",
   "dependencies": {
     "lodash": "^4.17.21",
     "prop-types": "^15.8.1",

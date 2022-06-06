@@ -27,7 +27,7 @@
   "bugs": {
     "url": "https://github.com/recylink/recylink-commons/issues"
   },
-  "gitHead": "935c916ee4e69ab1af388e65a6f8b135895e549c",
+  "gitHead": "2171a02401f8d04a9d7d181d65dc3ce338bca8a3",
   "dependencies": {
     "prop-types": "^15.8.1",
     "react": "^18.1.0",
@@ -44,6 +44,7 @@
     "@types/react": "^18.0.9",
     "eslint": "^8.16.0",
     "eslint-plugin-react": "^7.30.0",
+    "postcss": "^8.4.14",
     "rollup": "^2.74.1",
     "rollup-plugin-dts": "^4.2.1",
     "rollup-plugin-peer-deps-external": "^2.2.4",
