@@ -4,14 +4,14 @@ import InputMask from 'react-input-mask'
 import debounce from 'lodash/debounce'
 import {Label} from '@recylink/components'
 
-const Text = props => {
+const Text = (props: any) => {
   const {delay, onChange, toUpperCase} = props
   const [state, setState] = useState(props.value)
 
-  const delayedInput = useRef(debounce(changes => onChange(changes), props.delay)).current
+  const delayedInput = useRef(debounce((changes: string) => onChange(changes), props.delay)).current
 
   const handleOnChange = useCallback(
-    value => {
+    (value: string) => {
       const setValue = toUpperCase ? value.toUpperCase() : value
       setState(setValue)
       if (delay) {
@@ -61,8 +61,14 @@ const Text = props => {
   }
 
   return (
-    <div>
-      <Label label={props.label} isOptional={props.isOptional} isRequired={props.isRequired} />
+    <>
+      <Label
+        label={props.label}
+        isOptional={props.isOptional}
+        isOptionalLabel={props.isOptionalLabel}
+        isRequired={props.isRequired}
+        isRequiredLabel={props.isRequiredLabel}
+      />
       <div className="os-input-container">
         <InputMask
           mask={props.mask}
@@ -70,9 +76,8 @@ const Text = props => {
           type={props.fieldType}
           value={state || ''}
           placeholder={props.placeholder}
-          onChange={event => handleOnChange(event.target.value)}
+          onChange={(event: any) => handleOnChange(event.target.value)}
           disabled={props.disabled}
-          onKeyDown={handleKeyDown}
           maxLength={props.maxLength}
           onFocus={props.onFocus}
           onBlur={props.onBlur}
@@ -82,7 +87,7 @@ const Text = props => {
         <div className="description">{props.description}</div>
         <div className="os-input-error">{props.errorMessage}</div>
       </div>
-    </div>
+    </>
   )
 }
 

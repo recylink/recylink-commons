@@ -3,20 +3,20 @@ import PropTypes from 'prop-types'
 import './styles.css'
 
 const Label = (props: any) => {
-  const {label, isOptional, optionalLabel, isRequired, requiredLabel} = props
+  const {label, isOptional, isOptionalLabel, isRequired, isRequiredLabel} = props
 
   const renderOptional = () => {
     if (!isOptional) {
       return null
     }
-    return <span className="recylink-label-optional">{optionalLabel}</span>
+    return <span className="recylink-label-optional">{isOptionalLabel}</span>
   }
 
   const renderRequired = () => {
     if (!isRequired) {
       return null
     }
-    return <span className="recylink-label-required">{requiredLabel}</span>
+    return <span className="recylink-label-required">{isRequiredLabel}</span>
   }
 
   if (!label) {
@@ -35,9 +35,9 @@ const Label = (props: any) => {
 Label.propTypes = {
   label: PropTypes.string,
   isOptional: PropTypes.bool,
-  optionalLabel: PropTypes.string,
+  isOptionalLabel: PropTypes.string,
   isRequired: PropTypes.bool,
-  requiredLabel: PropTypes.string
+  isRequiredLabel: PropTypes.string
 }
-Label.defaultProps = {optionalLabel: 'optional', requiredLabel: '*'}
+Label.defaultProps = {isOptionalLabel: 'optional', isRequiredLabel: '*'}
 export default Label
