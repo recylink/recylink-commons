@@ -1,6 +1,6 @@
 {
   "name": "@recylink/react-fields",
-  "version": "1.3.4",
+  "version": "1.3.5",
   "description": "Recylink fields",
   "author": "diegoolavarria <olavarriaubeda.diego@gmail.com>",
   "homepage": "https://github.com/diegoolavarria/recylink-commons#readme",
@@ -37,7 +37,7 @@
     "@babel/eslint-parser": "^7.17.0",
     "@babel/preset-env": "^7.18.0",
     "@babel/preset-react": "^7.17.12",
-    "@recylink/react-components": "^1.3.4",
+    "@recylink/react-components": "^1.3.5",
     "eslint": "^8.16.0"
   }
 }
