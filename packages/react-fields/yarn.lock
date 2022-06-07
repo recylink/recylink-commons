@@ -1050,7 +1050,7 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@recylink/react-components@^1.3.5":
+"@recylink/react-components@^1.3.6":
   version "1.3.5"
   resolved "https://registry.yarnpkg.com/@recylink/react-components/-/react-components-1.3.5.tgz#e81c6f4d03ad73e4c1f2983165f39341a6b2997a"
   integrity sha512-t8s7CSINUhAS9HlvREJVa9XmEBhDlnk3VIoBmrIDh28vbwQlJM+bTaJtKQpFO0HHc4h2toT61C8KTXC+aUrwjg==

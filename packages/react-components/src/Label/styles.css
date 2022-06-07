@@ -11,10 +11,14 @@
   margin-top: 0;
 }
 
-.recylink-label-optional {
-  color: #94969e;
+.recylink-label-optional,
+.recylink-label-required {
   font-size: 10px;
   margin-left: 5px;
+}
+
+.recylink-label-optional {
+  color: #94969e;
 }
 
 .recylink-label-required {

@@ -11,7 +11,6 @@
   "files": [
     "dist"
   ],
-  "type": "commonjs",
   "repository": "https://github.com/recylink/recylink-commons",
   "publishConfig": {
     "@diegoolavarria:registry": "https://npm.pkg.github.com/diegoolavarria"
@@ -22,21 +21,33 @@
     "prebuild": "rm -rf dist",
     "build": "rm -rf types && tsc",
     "prepublish": "rollup -c && tsc",
-    "rollup": "rm -rf dist && rollup -c"
+    "rollup": "rm -rf dist && rollup -c",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "bugs": {
     "url": "https://github.com/recylink/recylink-commons/issues"
   },
-  "gitHead": "2171a02401f8d04a9d7d181d65dc3ce338bca8a3",
+  "gitHead": "199d5e1db6b348ae3f5cf119ff67772433e16cdf",
   "devDependencies": {
     "@babel/core": "^7.18.0",
     "@babel/preset-env": "^7.18.0",
     "@babel/preset-react": "^7.17.12",
     "@babel/preset-typescript": "^7.17.12",
+    "@mdx-js/react": "^2.1.1",
     "@rollup/plugin-commonjs": "^22.0.0",
     "@rollup/plugin-node-resolve": "^13.3.0",
     "@rollup/plugin-typescript": "^8.3.2",
+    "@storybook/addon-actions": "^6.5.7",
+    "@storybook/addon-essentials": "^6.5.7",
+    "@storybook/addon-interactions": "^6.5.7",
+    "@storybook/addon-links": "^6.5.7",
+    "@storybook/builder-webpack5": "^6.5.7",
+    "@storybook/manager-webpack5": "^6.5.7",
+    "@storybook/react": "^6.5.7",
+    "@storybook/testing-library": "^0.0.11",
     "@types/react": "^18.0.9",
+    "babel-loader": "^8.2.5",
     "eslint": "^8.16.0",
     "eslint-plugin-react": "^7.30.0",
     "postcss": "^8.4.14",
@@ -49,6 +60,10 @@
   },
   "peerDependencies": {
     "prop-types": "^15.8.1",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0"
+  },
+  "dependencies": {
     "react": "^18.1.0",
     "react-dom": "^18.1.0"
   }
