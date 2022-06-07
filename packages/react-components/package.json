@@ -28,7 +28,7 @@
   "bugs": {
     "url": "https://github.com/recylink/recylink-commons/issues"
   },
-  "gitHead": "199d5e1db6b348ae3f5cf119ff67772433e16cdf",
+  "gitHead": "f53a1de891c7940c01031ec0fb3cf6b91f98d352",
   "devDependencies": {
     "@babel/core": "^7.18.0",
     "@babel/preset-env": "^7.18.0",
