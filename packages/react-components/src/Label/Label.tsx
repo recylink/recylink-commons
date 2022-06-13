@@ -19,13 +19,17 @@ const Label = (props: any) => {
     return <span className="recylink-label-required">{isRequiredLabel}</span>
   }
 
+  const renderLabel = () => {
+    return label
+  }
+
   if (!label) {
     return null
   }
 
   return (
     <div className="recylink-label">
-      {label}
+      {renderLabel()}
       {renderOptional()}
       {renderRequired()}
     </div>
@@ -37,7 +41,8 @@ Label.propTypes = {
   isOptional: PropTypes.bool,
   isOptionalLabel: PropTypes.string,
   isRequired: PropTypes.bool,
-  isRequiredLabel: PropTypes.string
+  isRequiredLabel: PropTypes.string,
+  labelClassName: PropTypes.string
 }
 Label.defaultProps = {isOptionalLabel: 'optional', isRequiredLabel: '*'}
 export default Label
