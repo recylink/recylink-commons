@@ -5,6 +5,7 @@
   font-weight: 600;
   font-stretch: normal;
   font-style: normal;
+  display: table;
 }
 
 .recylink-label:first-child {
@@ -14,7 +15,8 @@
 .recylink-label-optional,
 .recylink-label-required {
   font-size: 10px;
-  margin-left: 5px;
+  padding-left: 5px;
+  display: table-cell;
 }
 
 .recylink-label-optional {

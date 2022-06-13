@@ -2,7 +2,8 @@ import React, {useRef, useState, useEffect, useCallback} from 'react'
 import PropTypes from 'prop-types'
 import InputMask from 'react-input-mask'
 import debounce from 'lodash.debounce'
-import {Label} from '@recylink/components'
+import {Label} from '@recylink/react-components'
+import '../styles.css'
 
 const Text = (props: any) => {
   const {delay, onChange, toUpperCase} = props
@@ -41,23 +42,17 @@ const Text = (props: any) => {
     }
   }, [props.value, handleOnChange, state, delay])
 
-  // const handleKeyDown = event => {
-  //   if (event.key === 'Enter') {
-  //     props.onEnter()
-  //   }
-  // }
-
   const getClassName = () => {
     if (props.className) {
       return props.className
     }
     if (props.errorMessage) {
-      return 'input-with-error'
+      return 'recylink-input-with-error'
     }
     if (props.disabled) {
-      return 'os-input-text os-input-disabled'
+      return 'recylink-input recylink-input-disabled'
     }
-    return 'os-input-text'
+    return 'recylink-input'
   }
 
   return (
@@ -69,7 +64,7 @@ const Text = (props: any) => {
         isRequired={props.isRequired}
         isRequiredLabel={props.isRequiredLabel}
       />
-      <div className="os-input-container">
+      <div className="recylink-input-container">
         <InputMask
           mask={props.mask}
           className={getClassName()}
@@ -84,8 +79,8 @@ const Text = (props: any) => {
           maskChar={props.maskChar}
           {...props.passProps}
         />
-        <div className="description">{props.description}</div>
-        <div className="os-input-error">{props.errorMessage}</div>
+        <div className="recylink-description">{props.description}</div>
+        <div className="recylink-input-error">{props.errorMessage}</div>
       </div>
     </>
   )
@@ -111,9 +106,9 @@ Text.propTypes = {
   delay: PropTypes.number,
   maskChar: PropTypes.bool,
   isOptional: PropTypes.bool,
-  optionalLabel: PropTypes.string,
+  isOptionalLabel: PropTypes.string,
   isRequired: PropTypes.bool,
-  requiredLabel: PropTypes.string
+  isRequiredLabel: PropTypes.string
 }
 Text.defaultProps = {
   fieldType: 'text',
