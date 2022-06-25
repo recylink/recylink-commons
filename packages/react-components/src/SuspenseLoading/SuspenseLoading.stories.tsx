@@ -12,9 +12,9 @@ export default {
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof SuspenseLoading> = args => <SuspenseLoading {...args} />
 
-const Component = React.lazy(async () => {
+const Component: React.FunctionComponent = React.lazy(async () => {
   await new Promise(resolve => setTimeout(resolve, 60000))
-  return import('./Component')
+  return import('./index')
 })
 
 export const BlockSuspenseLoading = Template.bind({})
