@@ -1,0 +1,24 @@
+.recylink-loading-block {
+  opacity: 0.4;
+  animation: loadingGlow 0.9s infinite;
+  position: relative;
+  background-color: #eee !important;
+  height: 100%;
+  border-radius: 4px;
+}
+
+.recylink-loading-block-default-height {
+  height: 16px;
+}
+
+@keyframes loadingGlow {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}

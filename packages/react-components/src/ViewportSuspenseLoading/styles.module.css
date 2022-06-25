@@ -1,0 +1,17 @@
+:local(.container) {
+  /* composes: loadingGlow from global;
+  background-color: #eee;
+  border-radius: 5px; */
+  width: fit-content;
+  margin: auto;
+  height: 34px;
+  padding-top: 10px;
+}
+
+:local(.loadingBlock) {
+  composes: loadingGlow from global;
+  position: relative;
+  background-color: #eee !important;
+  height: 100%;
+  border-radius: 4px;
+}

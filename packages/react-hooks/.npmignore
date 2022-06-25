@@ -1,0 +1,7 @@
+.git
+.gitignore
+node_modules
+.npmrc
+babel.config.js
+dist
+types
