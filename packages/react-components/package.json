@@ -1,6 +1,6 @@
 {
   "name": "@recylink/react-components",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "Recylink components",
   "author": "diegoolavarria <olavarriaubeda.diego@gmail.com>",
   "homepage": "https://github.com/diegoolavarria/recylink-commons#readme",
@@ -65,7 +65,7 @@
     "react-dom": "^18.1.0"
   },
   "dependencies": {
-    "@recylink/react-hooks": "^1.0.3",
+    "@recylink/react-hooks": "^1.1.1",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-icons": "^4.4.0"
