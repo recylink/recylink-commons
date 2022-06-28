@@ -8,9 +8,7 @@ const ViewportSuspenseLoading = props => {
 
   const [inView] = useIntersectionObserver(nodivRef, {threshold: 0})
 
-  useEffect(() => {
-    props.onView()
-  }, [inView])
+  useEffect(() => props.onView(), [inView])
 
   if (!inView) return <div ref={nodivRef} />
 
