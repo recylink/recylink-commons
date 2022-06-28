@@ -1436,6 +1436,14 @@
     schema-utils "^3.0.0"
     source-map "^0.7.3"
 
+"@recylink/react-hooks@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@recylink/react-hooks/-/react-hooks-1.0.3.tgz#3c7d3278f291276e3fae5600cb08cf5fe7c7be13"
+  integrity sha512-899+SYeSTt1aDp7eIAeK3uU2DqPj3c+lN2K0iJud9ikYOd3mdJgGGsxfBOnaQiVMU9aE+O60Wn+EB5Y/pBH5yQ==
+  dependencies:
+    react "^18.1.0"
+    react-dom "^18.1.0"
+
 "@rollup/plugin-commonjs@^22.0.0":
   version "22.0.0"
   resolved "https://registry.yarnpkg.com/@rollup/plugin-commonjs/-/plugin-commonjs-22.0.0.tgz#f4d87016e2fbf187a593ab9f46626fe05b59e8bd"

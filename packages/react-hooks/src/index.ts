@@ -1,3 +1,5 @@
 import useIntersectionObserver from './useIntersectionObserver'
+import useKeyPress from './useKeyPress'
+import useOutsideClick from './useOutsideClick'
 
-export {useIntersectionObserver}
+export {useIntersectionObserver, useKeyPress, useOutsideClick}

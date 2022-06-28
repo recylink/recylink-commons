@@ -1,3 +1,1 @@
-// export {default} from './ViewportSuspenseLoading'
-
-export {}
+export {default} from './ViewportSuspenseLoading'

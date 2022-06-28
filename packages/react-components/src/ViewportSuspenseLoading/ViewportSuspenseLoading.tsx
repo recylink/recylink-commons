@@ -1,28 +1,28 @@
-// import React, {useEffect, useRef} from 'react'
-// import useIntersectionObserver from 'App/hooks/useIntersectionObserver'
-// import PropTypes from 'prop-types'
-// import SuspenseLoading from 'App/components/SuspenseLoading'
+import React, {useEffect, useRef} from 'react'
+import PropTypes from 'prop-types'
+import {useIntersectionObserver} from '@recylink/react-hooks'
+import SuspenseLoading from '../SuspenseLoading'
 
-// function OnView(props) {
-//   const nodivRef = useRef()
+const ViewportSuspenseLoading = props => {
+  const nodivRef = useRef<HTMLDivElement>(null)
 
-//   const [inView] = useIntersectionObserver(nodivRef, {threshold: 0})
+  const [inView] = useIntersectionObserver(nodivRef, {threshold: 0})
 
-//   useEffect(() => {}, [inView])
+  useEffect(() => {
+    props.onView()
+  }, [inView])
 
-//   if (!inView) return <div ref={nodivRef} />
-//   props.onView()
-//   return <SuspenseLoading {...props}>{props.children}</SuspenseLoading>
-// }
+  if (!inView) return <div ref={nodivRef} />
 
-// OnView.propTypes = {
-//   children: PropTypes.node,
-//   className: PropTypes.string,
-//   noLoading: PropTypes.bool,
-//   block: PropTypes.bool,
-//   size: PropTypes.number,
-//   onRender: PropTypes.func,
-//   onView: PropTypes.func
-// }
-// OnView.defaultProps = {onView: () => {}}
-// export default OnView
+  return <SuspenseLoading {...props}>{props.children}</SuspenseLoading>
+}
+
+ViewportSuspenseLoading.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+  onRender: PropTypes.func,
+  onView: PropTypes.func,
+  fallback: PropTypes.node
+}
+ViewportSuspenseLoading.defaultProps = {onView: () => {}}
+export default ViewportSuspenseLoading
