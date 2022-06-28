@@ -11,10 +11,7 @@
   "files": [
     "dist"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/recylink/recylink-commons.git"
-  },
+  "repository": "https://github.com/recylink/recylink-commons",
   "publishConfig": {
     "@diegoolavarria:registry": "https://npm.pkg.github.com/diegoolavarria"
   },
@@ -72,5 +69,6 @@
   "directories": {
     "lib": "lib",
     "test": "__tests__"
-  }
+  },
+  "gitHead": "9db01aad2d1d058fcb53692995fe0acb0f62279e"
 }
