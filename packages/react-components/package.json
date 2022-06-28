@@ -28,7 +28,7 @@
   "bugs": {
     "url": "https://github.com/recylink/recylink-commons/issues"
   },
-  "gitHead": "2e5e7b708ad438ed7f036edfebd061442159fee3",
+  "gitHead": "020bf3943fde699f9b9757e048341f40d8df2a74",
   "devDependencies": {
     "@babel/core": "^7.18.0",
     "@babel/preset-env": "^7.18.0",
@@ -38,18 +38,19 @@
     "@rollup/plugin-commonjs": "^22.0.0",
     "@rollup/plugin-node-resolve": "^13.3.0",
     "@rollup/plugin-typescript": "^8.3.2",
-    "@storybook/addon-actions": "^6.5.7",
-    "@storybook/addon-essentials": "^6.5.7",
-    "@storybook/addon-interactions": "^6.5.7",
-    "@storybook/addon-links": "^6.5.7",
-    "@storybook/builder-webpack5": "^6.5.7",
-    "@storybook/manager-webpack5": "^6.5.7",
-    "@storybook/react": "^6.5.7",
-    "@storybook/testing-library": "^0.0.11",
+    "@storybook/addon-actions": "^6.5.9",
+    "@storybook/addon-essentials": "^6.5.9",
+    "@storybook/addon-interactions": "^6.5.9",
+    "@storybook/addon-links": "^6.5.9",
+    "@storybook/builder-webpack5": "^6.5.9",
+    "@storybook/manager-webpack5": "^6.5.9",
+    "@storybook/react": "^6.5.9",
+    "@storybook/testing-library": "^0.0.13",
     "@types/react": "^18.0.9",
     "babel-loader": "^8.2.5",
     "eslint": "^8.16.0",
     "eslint-plugin-react": "^7.30.0",
+    "eslint-plugin-storybook": "^0.5.13",
     "postcss": "^8.4.14",
     "rollup": "^2.74.1",
     "rollup-plugin-dts": "^4.2.1",
@@ -65,6 +66,7 @@
   },
   "dependencies": {
     "react": "^18.1.0",
-    "react-dom": "^18.1.0"
+    "react-dom": "^18.1.0",
+    "react-icons": "^4.4.0"
   }
 }

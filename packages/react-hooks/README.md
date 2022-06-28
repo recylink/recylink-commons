@@ -1,11 +1,11 @@
-# `fields`
+# `@recylink/react-hooks`
 
 > TODO: description
 
 ## Usage
 
 ```
-const fields = require('fields');
+const reactHooks = require('@recylink/react-hooks');
 
 // TODO: DEMONSTRATE API
 ```

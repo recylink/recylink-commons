@@ -4,5 +4,6 @@ module.exports = {
     babelOptions: {
       rootMode: 'upward'
     }
-  }
-}
+  },
+  extends: ['plugin:storybook/recommended']
+};

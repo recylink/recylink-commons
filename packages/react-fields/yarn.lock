@@ -1428,10 +1428,10 @@
     schema-utils "^3.0.0"
     source-map "^0.7.3"
 
-"@recylink/react-components@^1.3.9":
-  version "1.3.10"
-  resolved "https://registry.yarnpkg.com/@recylink/react-components/-/react-components-1.3.10.tgz#b9856c051c91f3a1f64fb782595ded804c153e49"
-  integrity sha512-cFfkYw3PrVdUrDWH5zskCgiXwEXa80nmjdOZMcZFdEineNtEuMIEH01LUKKS8heTBj2meMkduV5fMxiGXGhsJQ==
+"@recylink/react-components@^1.3.14":
+  version "1.3.14"
+  resolved "https://registry.yarnpkg.com/@recylink/react-components/-/react-components-1.3.14.tgz#c3a8196871c0d1c15110b52e6ee37a05a1f7697d"
+  integrity sha512-UX6Kd8C5XusVF4G1eeHCRQ0w3tkF6I08ncUu5vt+Z9O/ERmjGmZtZIcEgzsq7Exe+OzrxwkWjWfgj5FX8eSxHA==
   dependencies:
     react "^18.1.0"
     react-dom "^18.1.0"
