@@ -21,7 +21,7 @@ const RenderIcon = ({library, icon, className, onClick}) => {
   useEffect(() => {
     const IconComponent = get(icons, `${library}.${icon}`)
     if (!IconComponent) {
-      console.error('No icon found')
+      console.error('No icon or library found')
     }
     setRenderIcon(<IconComponent className={className} onClick={onCLickIcon} />)
   }, [icon, library, className, onCLickIcon])
