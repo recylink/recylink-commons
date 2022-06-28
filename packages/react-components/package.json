@@ -1,6 +1,6 @@
 {
   "name": "@recylink/react-components",
-  "version": "1.3.16",
+  "version": "1.3.17",
   "description": "Recylink components",
   "author": "diegoolavarria <olavarriaubeda.diego@gmail.com>",
   "homepage": "https://github.com/diegoolavarria/recylink-commons#readme",
@@ -28,7 +28,7 @@
   "bugs": {
     "url": "https://github.com/recylink/recylink-commons/issues"
   },
-  "gitHead": "b2881a9619ebae03bc27b2ec0bf1c9c965f3c196",
+  "gitHead": "8baf49c0fec2d5ce447cdc2101d03411e3a2f471",
   "devDependencies": {
     "@babel/core": "^7.18.0",
     "@babel/preset-env": "^7.18.0",
