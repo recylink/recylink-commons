@@ -28,7 +28,7 @@
   "bugs": {
     "url": "https://github.com/recylink/recylink-commons/issues"
   },
-  "gitHead": "55d602c537b29a200b9dd4f74c39e995ce3434b9",
+  "gitHead": "c172fcfab6a63905bb3e5600a405b84a475b936b",
   "dependencies": {
     "@recylink/react-components": "^1.3.4",
     "lodash.debounce": "^4.0.8",
