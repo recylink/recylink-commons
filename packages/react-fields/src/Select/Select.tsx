@@ -7,7 +7,7 @@ import isEqual from 'lodash.isequal'
 import isNil from 'lodash.isnil'
 
 import selectStyles from './styles'
-import './styles.css'
+import '../styles.css'
 
 const Select = props => {
   const {value, options, multi, extraOptions, filter, onChange} = props
@@ -117,8 +117,12 @@ const Select = props => {
   const renderIcon = () => {
     if (props.icon) {
       return (
-        <div className="recylink-props-icon-container">
-          <Icon icon={props.icon} library={props.iconLibrary} className="recylink-props-icon" />
+        <div className="recylink-select-props-icon-container">
+          <Icon
+            icon={props.icon}
+            library={props.iconLibrary}
+            className="recylink-select-props-icon"
+          />
         </div>
       )
     }
