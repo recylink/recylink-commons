@@ -1,0 +1,94 @@
+.recylink-select-icon-container {
+  padding: 6px 6px 3px 6px;
+  cursor: pointer;
+  color: #cccccc;
+  transition: all ease 100ms;
+}
+.recylink-select-icon-container:hover {
+  color: #999999;
+}
+.recylink-select-icon {
+  height: 20px;
+  color: inherit;
+  transform: rotate(90deg);
+}
+
+.recylink-props-icon-container {
+  position: absolute;
+  left: 9px;
+  bottom: 4px;
+  color: #c0c1c6;
+  z-index: 2;
+}
+.recylink-props-icon {
+  height: 17px;
+}
+
+.recylink-select-container {
+  position: relative;
+}
+.recylink-select-container > .recylink-props-icon {
+  color: #0078c8;
+}
+
+.recylink-select-option {
+  padding: 6px 12px;
+  line-height: 16px;
+  font-size: 14px;
+  display: flex;
+  cursor: pointer;
+}
+.recylink-select-option:hover {
+  background-color: #0078c8;
+  color: #ffffff;
+}
+
+.recylink-select-selected-option-colored,
+.recylink-select-non-selected-option-colored {
+  height: 16px;
+  min-width: 16px;
+  margin-right: 10px;
+  border-radius: 4px;
+  position: relative;
+}
+.recylink-select-selected-option-colored {
+  background-color: #0078c8;
+}
+
+.recylink-select-check .recylink-select-selected-check {
+  position: absolute;
+  content: '';
+  border-radius: 4px;
+  transform: rotate(135deg) scale(0);
+}
+.recylink-select-selected-check {
+  transform: rotate(135deg) scale(1);
+  opacity: 1;
+  left: 3px;
+  top: 3px;
+  width: 9px;
+  height: 5px;
+  border: solid;
+  border-width: 2px 2px 0px 0px;
+  background-color: transparent;
+  border-radius: 0;
+  color: #fff;
+}
+
+:local(.removeButton) {
+  position: absolute;
+  right: 25px;
+  bottom: 4px;
+}
+
+:local(.remove) {
+  color: #cccccc;
+}
+
+:local(.remove:hover) {
+  color: #999999;
+}
+
+:local(.remove:focus) {
+  color: #333333;
+}

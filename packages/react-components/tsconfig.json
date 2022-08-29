@@ -17,6 +17,8 @@
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "emitDeclarationOnly": true,
+    "allowJs": true,
+
     "noImplicitAny": false
   }
 }

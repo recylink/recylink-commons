@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useState} from 'react'
 import PropTypes from 'prop-types'
-import get from 'lodash/get'
+import get from 'lodash.get'
 import SuspenseLoading from '../SuspenseLoading'
 import icons from './icons'
 import './styles.css'
@@ -38,6 +38,7 @@ const Icon = props => (
 Icon.propTypes = {
   library: PropTypes.string.isRequired,
   icon: PropTypes.string.isRequired,
+  className: PropTypes.string,
   onClick: PropTypes.func,
   suspenseClassName: PropTypes.string
 }

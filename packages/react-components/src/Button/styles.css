@@ -1,0 +1,162 @@
+.recylink-button-container {
+  margin: unset;
+}
+.recylink-button-container:last-child {
+  margin-right: auto;
+}
+
+.recylink-icon-button {
+  height: 14px;
+  cursor: pointer;
+}
+.recylink-icon-button:hover {
+  stroke-width: 3px;
+}
+
+.recylink-href-button {
+  text-decoration: none;
+}
+
+.recylink-button,
+.recylink-button-small {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 15px;
+  text-align: center;
+  cursor: pointer;
+  white-space: nowrap;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+  transition: all 0.15s ease;
+  text-transform: none;
+  padding: 0 12px;
+  letter-spacing: 0.1px;
+  background: #e9e9eb;
+  color: #45555c;
+}
+
+.recylink-button {
+  height: 36px;
+  line-height: 36px;
+  font-size: 16px;
+}
+
+.recylink-button-small {
+  line-height: 24px;
+  height: 24px;
+  font-size: 12px;
+}
+
+.recylink-button:hover,
+.recylink-button-small:hover {
+  transform: translateY(-1px);
+  background: #d4d4d9;
+}
+.recylink-button:active,
+.recylink-button-small:active {
+  transform: translateY(1px);
+  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+  background: #bebec5;
+}
+
+.recylink-button-loading {
+  color: #9e9e9e;
+  background: #e0e0e0;
+  box-shadow: none;
+}
+.recylink-button-loading:hover {
+  color: #9e9e9e;
+  background: #e0e0e0;
+  box-shadow: none;
+  cursor: default;
+}
+
+.recylink-button-primary {
+  color: #fff;
+  background: #0078c8;
+}
+.recylink-button-primary:hover {
+  background: #008deb;
+}
+.recylink-button-primary:active {
+  background: #005994;
+}
+
+.recylink-button-danger {
+  color: #fff;
+  background: #f03a47;
+}
+
+.recylink-button-disabled,
+.recylink-button-disabled:hover {
+  color: #b1b3b9;
+  background: #efeff1;
+  box-shadow: none;
+  cursor: default;
+}
+
+.recylink-button-ghost {
+  background-color: #fff;
+  color: #a3a3ad;
+}
+.recylink-button-ghost:hover {
+  background-color: #f4f4f5;
+  color: #888895;
+}
+.recylink-button-ghost:active {
+  background-color: #e9e9eb;
+  color: #888895;
+}
+.recylink-button-ghost-disabled {
+  background-color: #fbfbfc;
+  color: #cacace;
+}
+
+.recylink-button-link {
+  background-color: #fff;
+  color: #0078c8;
+}
+.recylink-button-link:hover {
+  background-color: #f2f9fd;
+}
+.recylink-button-link:active {
+  background-color: #e5eef4;
+  color: #005994;
+}
+.recylink-button-link-disabled {
+  background-color: #fbfbfc;
+  color: #6e98b4;
+}
+
+.recylink-button-big {
+  height: 45px;
+  line-height: 45px;
+  padding: 0 14px;
+  font-size: 18px;
+  letter-spacing: 0.04em;
+}
+
+.recylink-button-icon-left {
+  margin: -4px 8px 0px 0px;
+}
+
+.recylink-prop-icon-button {
+  margin-right: 10px;
+  position: relative;
+}
+
+@media only screen and (max-width: 768px) {
+  .recylink-button,
+  .recylink-button:active,
+  .recylink-button:hover {
+    margin-top: 5px;
+    white-space: normal;
+    line-height: 12px;
+    height: initial;
+    padding: 8px;
+    font-size: 14px;
+  }
+}
