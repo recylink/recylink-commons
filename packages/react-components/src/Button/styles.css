@@ -1,5 +1,6 @@
 .recylink-button-container {
   margin: unset;
+  text-decoration: none;
 }
 .recylink-button-container:last-child {
   margin-right: auto;
@@ -18,7 +19,8 @@
 }
 
 .recylink-button,
-.recylink-button-small {
+.recylink-button-small,
+.recylink-button-loading {
   display: inline-flex;
   align-items: center;
   justify-content: center;

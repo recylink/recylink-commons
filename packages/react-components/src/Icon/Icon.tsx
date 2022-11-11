@@ -1,11 +1,19 @@
 import React, {useCallback, useEffect, useState} from 'react'
-import PropTypes from 'prop-types'
+import PropTypes, {InferProps} from 'prop-types'
 import get from 'lodash.get'
 import SuspenseLoading from '../SuspenseLoading'
 import icons from './icons'
 import './styles.css'
 
-const RenderIcon = ({library, icon, className, onClick}) => {
+const IconPropTypes = {
+  library: PropTypes.string.isRequired,
+  icon: PropTypes.string.isRequired,
+  className: PropTypes.string,
+  onClick: PropTypes.func,
+  suspenseClassName: PropTypes.string
+}
+
+const RenderIcon = ({library, icon, className, onClick}: InferProps<typeof IconPropTypes>) => {
   const [renderIcon, setRenderIcon] = useState(<span />)
 
   const onCLickIcon = useCallback(
@@ -35,11 +43,5 @@ const Icon = props => (
   </SuspenseLoading>
 )
 
-Icon.propTypes = {
-  library: PropTypes.string.isRequired,
-  icon: PropTypes.string.isRequired,
-  className: PropTypes.string,
-  onClick: PropTypes.func,
-  suspenseClassName: PropTypes.string
-}
+Icon.propTypes = IconPropTypes
 export default React.memo(Icon)

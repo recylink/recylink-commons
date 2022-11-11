@@ -1,16 +1,36 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import ReactTooltip from 'react-tooltip'
+import PropTypes, {InferProps} from 'prop-types'
+import ReactTooltip, {Place} from 'react-tooltip'
 import isString from 'lodash.isstring'
 import uniqueId from 'lodash.uniqueid'
 import './styles.css'
 
-const Tooltip = (props: any) => {
+const TooltipPropTypes = {
+  children: PropTypes.node,
+  title: PropTypes.string,
+  content: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
+  place: PropTypes.oneOf(['top', 'right', 'bottom', 'left'] as const).isRequired,
+  offset: PropTypes.object,
+  type: PropTypes.oneOf(['dark', 'success', 'warning', 'error', 'info', 'light'] as const)
+    .isRequired,
+  containerClassName: PropTypes.string,
+  className: PropTypes.string,
+  contentClassName: PropTypes.string,
+  delayHide: PropTypes.number,
+
+  border: PropTypes.bool,
+  backgroundColor: PropTypes.string,
+  textColor: PropTypes.string,
+  borderColor: PropTypes.string,
+  arrowColor: PropTypes.string
+}
+
+const Tooltip = (props: InferProps<typeof TooltipPropTypes>) => {
   const id = uniqueId('os-tooltip')
 
   const getContent = () =>
-    isString(props.content)
-      ? props.content.split('\n').map((line, index) => (
+    props.content && isString(props.content)
+      ? (props.content as string).split('\n').map((line, index) => (
           <div key={index} className={`recylink-tooltip-content ${props.contentClassName}`}>
             {line}
           </div>
@@ -33,19 +53,19 @@ const Tooltip = (props: any) => {
       {props.content && (
         <div className="recylink-tooltip-content-container">
           <ReactTooltip
-            className={`recylink-tooltip ${props.className}`}
             id={id}
             place={props.place}
-            offset={props.offset}
-            effect="solid"
+            offset={props.offset || undefined}
             type={props.type}
-            delayHide={props.delayHide}
+            delayHide={props.delayHide || undefined}
+            className={`recylink-tooltip ${props.className}`}
+            effect="solid"
             getContent={() => renderContent()}
-            border={props.border}
-            backgroundColor={props.backgroundColor}
-            textColor={props.textColor}
-            borderColor={props.borderColor}
-            arrowColor={props.arrowColor}
+            border={props.border || undefined}
+            backgroundColor={props.backgroundColor || undefined}
+            textColor={props.textColor || undefined}
+            borderColor={props.borderColor || undefined}
+            arrowColor={props.arrowColor || undefined}
           />
         </div>
       )}
@@ -53,23 +73,7 @@ const Tooltip = (props: any) => {
   )
 }
 
-Tooltip.propTypes = {
-  children: PropTypes.node,
-  content: PropTypes.node,
-  place: PropTypes.string,
-  offset: PropTypes.object,
-  type: PropTypes.string,
-  containerClassName: PropTypes.string,
-  className: PropTypes.string,
-  contentClassName: PropTypes.string,
-  delayHide: PropTypes.number,
-
-  border: PropTypes.bool,
-  backgroundColor: PropTypes.string,
-  textColor: PropTypes.string,
-  borderColor: PropTypes.string,
-  arrowColor: PropTypes.string
-}
+Tooltip.propTypes = TooltipPropTypes
 Tooltip.defaultProps = {
   className: '',
   backgroundColor: 'var(--blue)',

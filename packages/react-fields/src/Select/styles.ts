@@ -61,13 +61,15 @@ export default function ({
           width: '100%',
           flexWrap: 'unset',
           overflowX: 'auto',
-          ...valueContainerStyle
+          ...valueContainerStyle,
+          ...multiValueContainerStyle
         }
       } else {
         return {
           ...provided,
-          padding: icon ? '0px 0px 0px 38px' : '5px 6px 0px 12px',
-          height: '36px'
+          padding: icon ? '0px 0px 0px 38px' : '0px 6px 0px 12px',
+          height: '36px',
+          ...valueContainerStyle
         }
       }
     },

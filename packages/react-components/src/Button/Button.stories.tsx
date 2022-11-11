@@ -1,18 +1,24 @@
 import React from 'react'
-import {ComponentStory, ComponentMeta} from '@storybook/react'
+import {Story, ComponentMeta} from '@storybook/react'
 import Button from './Button'
+import ButtonPropTypes from './ButtonPropTypes'
+import {InferProps} from 'prop-types'
+
+type ButtonPropsInterface = InferProps<typeof ButtonPropTypes>
 
 export default {
   title: 'RecylinkReactComponents/Button',
   component: Button
 } as ComponentMeta<typeof Button>
 
-const Template: ComponentStory<typeof Button> = args => <Button {...args} />
+const Template: Story<ButtonPropsInterface> = args => <Button {...args} />
 
 export const TestButton = Template.bind({})
 TestButton.args = {
   label: 'Label',
-  onClick: () => console.log('Clicked')
+  onClick: () => console.log('Clicked'),
+  type: 'button',
+  use: 'function'
 }
 
 export const TestPrimaryButton = Template.bind({})

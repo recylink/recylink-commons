@@ -1,8 +1,13 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import PropTypes, {InferProps} from 'prop-types'
 import './styles.css'
 
-const ButtonsContainer = ({children, position}) => {
+const ButtonsContainerPropTypes = {
+  children: PropTypes.node,
+  position: PropTypes.string
+}
+
+const ButtonsContainer = ({children, position}: InferProps<typeof ButtonsContainerPropTypes>) => {
   if (position === 'right') {
     return <div className="recylink-buttons-container-right">{children}</div>
   }
@@ -10,8 +15,5 @@ const ButtonsContainer = ({children, position}) => {
   return <div className="recylink-buttons-container">{children}</div>
 }
 
-ButtonsContainer.propTypes = {
-  children: PropTypes.node,
-  position: PropTypes.string
-}
+ButtonsContainer.propTypes = ButtonsContainerPropTypes
 export default ButtonsContainer

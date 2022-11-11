@@ -1,11 +1,12 @@
 import React, {forwardRef, useEffect, useImperativeHandle, useState} from 'react'
+import {InferProps} from 'prop-types'
 import keys from 'lodash.keys'
 import omit from 'lodash.omit'
-import PropTypes from 'prop-types'
 import {Link} from 'react-router-dom'
 import Tooltip from '../Tooltip'
 import Icon from '../Icon'
 import './styles.css'
+import ButtonPropTypes from './ButtonPropTypes'
 
 const debounce = (func: Function, time: number, immediate?: boolean) => {
   var timeout: any
@@ -22,40 +23,7 @@ const debounce = (func: Function, time: number, immediate?: boolean) => {
   }
 }
 
-const buttonProperties = {
-  id: PropTypes.string,
-  tooltip: PropTypes.string,
-  to: PropTypes.string,
-  href: PropTypes.string,
-  linkButton: PropTypes.bool,
-  label: PropTypes.any,
-  children: PropTypes.any,
-  primary: PropTypes.bool,
-  ghost: PropTypes.bool,
-  danger: PropTypes.bool,
-  link: PropTypes.bool,
-  default: PropTypes.bool,
-  big: PropTypes.bool,
-  style: PropTypes.object,
-  disabled: PropTypes.bool,
-  loading: PropTypes.bool,
-  loadingComponent: PropTypes.node,
-  fullWidth: PropTypes.bool,
-  icon: PropTypes.any,
-  onClick: PropTypes.func,
-  state: PropTypes.object,
-  noLoading: PropTypes.bool,
-  containerClassName: PropTypes.string,
-  className: PropTypes.string,
-  small: PropTypes.bool,
-  iconName: PropTypes.string,
-  iconLibrary: PropTypes.string,
-
-  type: PropTypes.string,
-  use: PropTypes.string
-}
-
-const Button = forwardRef((props: any, buttonRef) => {
+const Button = forwardRef((props: InferProps<typeof ButtonPropTypes>, buttonRef) => {
   const [loading, setLoading] = useState(false)
   const [isMounted, setMounted] = useState(true)
 
@@ -69,7 +37,7 @@ const Button = forwardRef((props: any, buttonRef) => {
       setLoading(true)
     }
     try {
-      await debounce(await props.onClick(e), 250)
+      await debounce(await props.onClick?.(e), 250)
     } catch (error) {
       setLoading(false)
     }
@@ -81,7 +49,7 @@ const Button = forwardRef((props: any, buttonRef) => {
   useImperativeHandle(buttonRef, () => ({onClick: async (e: any) => await click(e)}))
 
   const getChildProps = () => {
-    const omitKeys = keys(buttonProperties)
+    const omitKeys = keys(ButtonPropTypes)
     return omit(props, ...omitKeys)
   }
 
@@ -143,19 +111,27 @@ const Button = forwardRef((props: any, buttonRef) => {
   }
 
   const renderButtonType = () => (
-    <span id={props.id} className={getClassName()} style={props.style}>
+    <span id={props.id || undefined} className={getClassName()} style={props.style || {}}>
       {renderButtonInner()}
     </span>
   )
 
-  const renderIconType = () => (
-    <Icon
-      className={`recylink-icon-button ${props.className}`}
-      library={props.iconLibrary}
-      icon={props.iconName}
-      onClick={async (e: any) => await click(e)}
-    />
-  )
+  const renderIconType = () => {
+    if (!props.iconLibrary) {
+      return 'Error: iconLibrary needed'
+    }
+    if (!props.iconName) {
+      return 'Error: iconName needed'
+    }
+    return (
+      <Icon
+        className={`recylink-icon-button ${props.className}`}
+        library={props.iconLibrary}
+        icon={props.iconName}
+        onClick={async (e: any) => await click(e)}
+      />
+    )
+  }
 
   const renderButton = () => {
     const buttonType = buttonTypes[props.type]
@@ -165,26 +141,36 @@ const Button = forwardRef((props: any, buttonRef) => {
     return buttonType()
   }
 
-  const renderLinkButton = () => (
-    <Link
-      id={props.id}
-      to={props.disabled ? '#' : props.to}
-      state={props.disabled ? {} : props.state}
-      className={`recylink-button-container ${props.containerClassName}`}>
-      {renderButton()}
-    </Link>
-  )
+  const renderLinkButton = () => {
+    if (!props.to) {
+      return `Error: "to" url prop needed`
+    }
+    return (
+      <Link
+        id={props.id || undefined}
+        to={props.disabled ? '#' : props.to}
+        state={props.disabled ? {} : props.state}
+        className={`recylink-button-container ${props.containerClassName}`}>
+        {renderButton()}
+      </Link>
+    )
+  }
 
-  const renderHrefButton = () => (
-    <a
-      id={props.id}
-      className={`recylink-href-button ${getClassName()}`}
-      href={props.href}
-      target="blank"
-      rel="noopener">
-      {renderButtonInner()}
-    </a>
-  )
+  const renderHrefButton = () => {
+    if (!props.href) {
+      return `Error: "href" url prop needed`
+    }
+    return (
+      <a
+        id={props.id || undefined}
+        className={`recylink-href-button ${getClassName()}`}
+        href={props.href}
+        target="blank"
+        rel="noopener">
+        {renderButtonInner()}
+      </a>
+    )
+  }
 
   const renderFunctionButton = () => (
     <span
@@ -215,13 +201,17 @@ const Button = forwardRef((props: any, buttonRef) => {
   }
 
   if (props.tooltip) {
-    return <Tooltip content={props.tooltip}>{renderMain()}</Tooltip>
+    return (
+      <Tooltip place="top" type="info" content={props.tooltip}>
+        {renderMain()}
+      </Tooltip>
+    )
   } else {
     return renderMain()
   }
 })
 
-Button.propTypes = buttonProperties
+Button.propTypes = ButtonPropTypes
 Button.defaultProps = {
   linkButton: false,
   primary: false,

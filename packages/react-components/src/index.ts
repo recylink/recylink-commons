@@ -1,5 +1,6 @@
 import Tooltip from './Tooltip'
 import Label from './Label'
+import {Modal, ModalContext, ModalProvider, useModal} from './Modal'
 import Button from './Button'
 import ButtonsContainer from './ButtonsContainer'
 import Icon from './Icon'
@@ -15,5 +16,9 @@ export {
   IconsContainer,
   Tooltip,
   SuspenseLoading,
-  ViewportSuspenseLoading
+  ViewportSuspenseLoading,
+  Modal,
+  ModalContext,
+  ModalProvider,
+  useModal
 }

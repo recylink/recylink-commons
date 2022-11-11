@@ -4,7 +4,6 @@ import typescript from '@rollup/plugin-typescript'
 import postcss from 'rollup-plugin-postcss'
 import dts from 'rollup-plugin-dts'
 
-//NEW
 import {terser} from 'rollup-plugin-terser'
 import peerDepsExternal from 'rollup-plugin-peer-deps-external'
 
@@ -26,30 +25,23 @@ export default [
       }
     ],
     plugins: [
-      // NEW
       peerDepsExternal(),
-
       resolve(),
       commonjs(),
       typescript({
         tsconfig: './tsconfig.json',
-        exclude: [
-          // Exclude test files
-          /\.test.((js|jsx|ts|tsx))$/,
-          // Exclude story files
-          /\.stories.((js|jsx|ts|tsx|mdx))$/
-        ]
+        exclude: [/\.test.((js|jsx|ts|tsx))$/, /\.stories.((js|jsx|ts|tsx|mdx))$/]
       }),
       postcss(),
-
-      // NEW
       terser()
-    ]
+    ],
+    context: 'window'
   },
   {
-    input: 'dist/esm/types/index.d.ts',
+    input: 'dist/esm/index.d.ts',
     output: [{file: 'dist/index.d.ts', format: 'esm'}],
     plugins: [dts()],
-    external: [/\.css$/]
+    external: [/\.css$/],
+    context: 'window'
   }
 ]

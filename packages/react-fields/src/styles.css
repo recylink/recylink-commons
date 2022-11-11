@@ -167,7 +167,8 @@
   background-color: #0078c8;
 }
 
-.recylink-select-check .recylink-select-selected-check {
+.recylink-select-check,
+.recylink-select-selected-check {
   position: absolute;
   content: '';
   border-radius: 4px;
