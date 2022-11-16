@@ -150,6 +150,45 @@
   position: relative;
 }
 
+.recylink-button-loading-component {
+  text-align: center;
+}
+.recylink-button-loading-component > div {
+  border-radius: 100%;
+  display: inline-block;
+  margin: 0px 5px;
+  animation-name: bouncedelay;
+  animation-duration: 1.4s;
+  animation-delay: 0s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  transform: scale(0);
+}
+.recylink-button-loading-component .recylink-button-loading-component1,
+.recylink-button-loading-component .recylink-button-loading-component2,
+.recylink-button-loading-component .recylink-button-loading-component3 {
+  height: 10px;
+  width: 10px;
+  background-color: #c1c1c1;
+}
+.recylink-button-loading-component .recylink-button-loading-component2 {
+  animation-delay: 0.16s;
+}
+.recylink-button-loading-component .recylink-button-loading-component3 {
+  animation-delay: 0.32s;
+}
+
+@keyframes bouncedelay {
+  0%,
+  80%,
+  100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
+
 @media only screen and (max-width: 768px) {
   .recylink-button,
   .recylink-button:active,

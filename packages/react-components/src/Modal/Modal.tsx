@@ -1,4 +1,4 @@
-import React, {useRef} from 'react'
+import React, {useRef, useState} from 'react'
 import {InferProps} from 'prop-types'
 import ReactDOM from 'react-dom'
 import {useOutsideClick} from '@recylink/react-hooks'
@@ -11,16 +11,19 @@ import './styles.css'
 
 const Modal = (props: InferProps<typeof ModalPropTypes>) => {
   const {showModal, setShowModal, modalContent}: InferProps<typeof ModalPropTypes> = props
+  const [loadingConfirm, setLoadingConfirm] = useState(false)
 
   const wrapperRef = useRef<HTMLDivElement>(null)
 
   useOutsideClick(wrapperRef, () => setShowModal(false))
 
   const onClickConfirm = async e => {
+    setLoadingConfirm(true)
     e.preventDefault()
     if (props.onConfirm) {
       await props.onConfirm()
     }
+    setLoadingConfirm(false)
     setShowModal(false)
   }
 

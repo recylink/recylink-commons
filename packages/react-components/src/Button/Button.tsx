@@ -3,6 +3,7 @@ import {InferProps} from 'prop-types'
 import keys from 'lodash.keys'
 import omit from 'lodash.omit'
 import {Link} from 'react-router-dom'
+import ButtonLoading from './ButtonLoading'
 import Tooltip from '../Tooltip'
 import Icon from '../Icon'
 import './styles.css'
@@ -95,7 +96,7 @@ const Button = forwardRef((props: InferProps<typeof ButtonPropTypes>, buttonRef)
 
   const renderButtonInner = () => {
     if (props.loading || loading) {
-      return props.loadingComponent || null
+      return props.loadingComponent || <ButtonLoading />
     }
     if (props.icon) {
       return (
