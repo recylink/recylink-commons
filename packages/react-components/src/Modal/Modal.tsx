@@ -42,6 +42,7 @@ const Modal = (props: InferProps<typeof ModalPropTypes>) => {
       use="function"
       label={props.confirmText}
       onClick={async e => await onClickConfirm(e)}
+      disabled={props.confirmDisabled}
     />
   )
 
