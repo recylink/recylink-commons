@@ -1,4 +1,4 @@
-import React, {useContext, useRef} from 'react'
+import React, {useRef} from 'react'
 import {InferProps} from 'prop-types'
 import ReactDOM from 'react-dom'
 import {useOutsideClick} from '@recylink/react-hooks'
@@ -10,18 +10,18 @@ import ModalPropTypes from './ModalPropTypes'
 import './styles.css'
 
 const Modal = (props: InferProps<typeof ModalPropTypes>) => {
-  const {handleModal, showModal, modalContent}: InferProps<typeof ModalPropTypes> = props
+  const {showModal, setShowModal, modalContent}: InferProps<typeof ModalPropTypes> = props
 
   const wrapperRef = useRef<HTMLDivElement>(null)
 
-  useOutsideClick(wrapperRef, () => handleModal?.())
+  useOutsideClick(wrapperRef, () => setShowModal(false))
 
   const onClickConfirm = async e => {
     e.preventDefault()
     if (props.onConfirm) {
       await props.onConfirm()
     }
-    handleModal?.()
+    setShowModal(false)
   }
 
   const onClickCancel = async e => {
@@ -29,7 +29,7 @@ const Modal = (props: InferProps<typeof ModalPropTypes>) => {
     if (props.onCancel) {
       await props.onCancel()
     }
-    handleModal?.()
+    setShowModal(false)
   }
 
   const confirmButton = () => (
@@ -69,6 +69,7 @@ const Modal = (props: InferProps<typeof ModalPropTypes>) => {
       <div className="overlay">
         <div className="modal" ref={wrapperRef}>
           <div className="modal-content">
+            <div className="modal-title">{props.title}</div>
             <SuspenseLoading>{modalContent}</SuspenseLoading>
           </div>
           {renderButtons()}

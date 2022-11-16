@@ -11,8 +11,9 @@
   align-items: center;
   justify-content: center;
 }
+
 .modal {
-  width: 500px;
+  width: fit-content;
   padding: 24px;
   background: #ffffff;
   border: 3px solid #0078c8;
@@ -24,6 +25,16 @@
   opacity: 1;
   visibility: visible;
   color: #222;
+  max-height: 90vh;
+}
+
+.modal-title {
+  font-size: 25px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  text-align: center;
+  max-width: 100%;
+  color: #0078c8;
 }
 
 .modal-content {

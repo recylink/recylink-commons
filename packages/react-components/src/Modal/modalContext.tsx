@@ -1,4 +1,4 @@
-import React, {createContext, useState} from 'react'
+import React, {createContext, useEffect, useState} from 'react'
 import Modal from './Modal'
 import {ModalContextInterface} from './ModalContextInterface'
 
@@ -10,8 +10,15 @@ const ModalProvider = ({children}) => {
   const [modalContent, setModalContent] = useState(<span />)
   const [modalProps, setModalProps] = useState({})
 
+  useEffect(() => {
+    if (!showModal) {
+      setModalContent(<span />)
+      setModalProps({})
+    }
+  }, [showModal])
+
   const handleModal = (content = null, props) => {
-    setShowModal(!showModal)
+    setShowModal(true)
     setModalProps(props)
     if (content) {
       setModalContent(content)
@@ -23,7 +30,7 @@ const ModalProvider = ({children}) => {
       <Modal
         {...modalProps}
         showModal={showModal}
-        handleModal={handleModal}
+        setShowModal={setShowModal}
         modalContent={modalContent}
       />
       {children}

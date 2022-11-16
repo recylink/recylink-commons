@@ -1,4 +1,4 @@
-import React, {useRef, useState, useEffect, useCallback} from 'react'
+import React, {useState, useEffect, useCallback, useMemo} from 'react'
 import PropTypes from 'prop-types'
 import InputMask from 'react-input-mask'
 import debounce from 'lodash.debounce'
@@ -9,7 +9,10 @@ const Text = (props: any) => {
   const {delay, onChange, toUpperCase} = props
   const [state, setState] = useState(props.value)
 
-  const delayedInput = useRef(debounce((changes: string) => onChange(changes), props.delay)).current
+  const delayedInput = useMemo(
+    () => debounce(changes => onChange(changes), props.delay),
+    [onChange, props.delay]
+  )
 
   const handleOnChange = useCallback(
     (value: string) => {
