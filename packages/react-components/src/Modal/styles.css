@@ -40,6 +40,8 @@
 .modal-content {
   margin-bottom: 15px;
   min-height: 30px;
+  max-height: 600px;
+  overflow-y: auto;
 }
 
 .buttonClose {

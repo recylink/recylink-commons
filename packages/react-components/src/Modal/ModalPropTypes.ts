@@ -8,8 +8,9 @@ export default {
   cancelText: PropTypes.string,
   onCancel: PropTypes.func,
 
-  showModal: PropTypes.bool,
+  isOpen: PropTypes.bool,
   handleModal: PropTypes.func,
-  setShowModal: PropTypes.func.isRequired,
-  modalContent: PropTypes.any
+  setOpenModal: PropTypes.func.isRequired,
+  modalContent: PropTypes.any,
+  setModalContent: PropTypes.func.isRequired
 }

@@ -4,8 +4,29 @@ import refreshJWT from './refreshJWT'
 import clean from './clean'
 
 import getJWT from './localStorage/getJWT'
-import getAdminJWT from './localStorage/getAdminJWT'
 import saveJWT from './localStorage/saveJWT'
-import saveAdminJWT from './localStorage/saveAdminJWT'
+import removeJWT from './localStorage/removeJWT'
 
-export {AuthClient, logout, refreshJWT, clean, getJWT, getAdminJWT, saveJWT, saveAdminJWT}
+import getAdminJWT from './localStorage/getAdminJWT'
+import saveAdminJWT from './localStorage/saveAdminJWT'
+import removeAdminJWT from './localStorage/removeAdminJWT'
+
+import getSession from './localStorage/getSession'
+import saveSession from './localStorage/saveSession'
+import removeSession from './localStorage/removeSession'
+
+export {
+  AuthClient,
+  logout,
+  refreshJWT,
+  clean,
+  getJWT,
+  saveJWT,
+  removeJWT,
+  getAdminJWT,
+  saveAdminJWT,
+  removeAdminJWT,
+  getSession,
+  saveSession,
+  removeSession
+}

@@ -1,12 +1,14 @@
-import saveJWT from './localStorage/saveJWT'
-import saveAdminJWT from './localStorage/saveAdminJWT'
 import getAdminJWT from './localStorage/getAdminJWT'
+import removeJWT from './localStorage/removeJWT'
+import removeAdminJWT from './localStorage/removeAdminJWT'
+import removeSession from './localStorage/removeSession'
 
 const clean = async () => {
-  await saveJWT(null)
+  await removeSession()
+  await removeJWT()
   const adminJWT = getAdminJWT()
   if (adminJWT) {
-    await saveAdminJWT(null)
+    await removeAdminJWT()
   }
   window.location.reload()
 }

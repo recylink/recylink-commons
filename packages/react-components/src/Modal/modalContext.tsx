@@ -6,19 +6,19 @@ let ModalContext
 const {Provider} = (ModalContext = createContext<ModalContextInterface>({} as any))
 
 const ModalProvider = ({children}) => {
-  const [showModal, setShowModal] = useState(false)
+  const [isOpen, setOpenModal] = useState(false)
   const [modalContent, setModalContent] = useState(<span />)
   const [modalProps, setModalProps] = useState({})
 
   useEffect(() => {
-    if (!showModal) {
+    if (!isOpen) {
       setModalContent(<span />)
       setModalProps({})
     }
-  }, [showModal])
+  }, [isOpen])
 
   const handleModal = (content = null, props) => {
-    setShowModal(true)
+    setOpenModal(true)
     setModalProps(props)
     if (content) {
       setModalContent(content)
@@ -26,12 +26,13 @@ const ModalProvider = ({children}) => {
   }
 
   return (
-    <Provider value={{showModal, handleModal, modalContent}}>
+    <Provider value={{isOpen, setOpenModal, handleModal, modalContent, setModalContent}}>
       <Modal
         {...modalProps}
-        showModal={showModal}
-        setShowModal={setShowModal}
+        isOpen={isOpen}
+        setOpenModal={setOpenModal}
         modalContent={modalContent}
+        setModalContent={setModalContent}
       />
       {children}
     </Provider>

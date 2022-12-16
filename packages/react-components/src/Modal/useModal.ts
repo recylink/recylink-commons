@@ -3,9 +3,9 @@ import {ModalContext} from './modalContext'
 import {ModalContextInterface} from './ModalContextInterface'
 
 const useModal = () => {
-  const {handleModal}: ModalContextInterface = useContext(ModalContext)
+  const {handleModal, isOpen, setModalContent}: ModalContextInterface = useContext(ModalContext)
 
-  return handleModal
+  return {handleModal, isOpen, setModalContent}
 }
 
 export default useModal

@@ -10,12 +10,13 @@ import ModalPropTypes from './ModalPropTypes'
 import './styles.css'
 
 const Modal = (props: InferProps<typeof ModalPropTypes>) => {
-  const {showModal, setShowModal, modalContent}: InferProps<typeof ModalPropTypes> = props
+  const {isOpen, setOpenModal, modalContent, setModalContent}: InferProps<typeof ModalPropTypes> =
+    props
   const [loadingConfirm, setLoadingConfirm] = useState(false)
 
   const wrapperRef = useRef<HTMLDivElement>(null)
 
-  useOutsideClick(wrapperRef, () => setShowModal(false))
+  useOutsideClick(wrapperRef, async e => await onClickCancel(e))
 
   const onClickConfirm = async e => {
     setLoadingConfirm(true)
@@ -24,15 +25,19 @@ const Modal = (props: InferProps<typeof ModalPropTypes>) => {
       await props.onConfirm()
     }
     setLoadingConfirm(false)
-    setShowModal(false)
+    setOpenModal(false)
+    setModalContent(<span />)
   }
 
   const onClickCancel = async e => {
-    e.preventDefault()
+    if (e) {
+      e.preventDefault()
+    }
     if (props.onCancel) {
       await props.onCancel()
     }
-    setShowModal(false)
+    setOpenModal(false)
+    setModalContent(<span />)
   }
 
   const confirmButton = () => (
@@ -43,6 +48,7 @@ const Modal = (props: InferProps<typeof ModalPropTypes>) => {
       label={props.confirmText}
       onClick={async e => await onClickConfirm(e)}
       disabled={props.confirmDisabled}
+      loading={loadingConfirm}
     />
   )
 
@@ -68,7 +74,7 @@ const Modal = (props: InferProps<typeof ModalPropTypes>) => {
     </ButtonsContainer>
   )
 
-  if (showModal) {
+  if (isOpen) {
     return ReactDOM.createPortal(
       <div className="overlay">
         <div className="modal" ref={wrapperRef}>
