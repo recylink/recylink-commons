@@ -1,3 +1,7 @@
+/**
+ *
+ * @returns {string}
+ */
 const getJWT = () => {
   try {
     return localStorage.getItem('recylink.jwt')

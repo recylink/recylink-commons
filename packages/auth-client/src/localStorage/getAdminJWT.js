@@ -1,3 +1,7 @@
+/**
+ *
+ * @returns {string}
+ */
 const getAdminJWT = () => {
   try {
     return localStorage.getItem('recylink.jwt_admin')
