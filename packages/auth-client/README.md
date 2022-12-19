@@ -5,7 +5,7 @@
 ## Usage
 
 ```
-const authClient = require('@recylink/auth-client');
+const {authClient} = require('@recylink/auth-client');
 
 // TODO: DEMONSTRATE API
 ```

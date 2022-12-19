@@ -1,9 +1,8 @@
-import getAdminJWT from './localStorage/getAdminJWT'
-import removeJWT from './localStorage/removeJWT'
-import removeAdminJWT from './localStorage/removeAdminJWT'
-import removeSession from './localStorage/removeSession'
-import removeAllPersonificationJWTs from './localStorage/removeAllPersonificationJWTs'
-import removeAllPersonificationSessions from './localStorage/removeAllPersonificationSessions'
+import {removeJWT} from './localStorage/JWT'
+import {getAdminJWT, removeAdminJWT} from './localStorage/adminJWT'
+import {removeSession} from './localStorage/session'
+import {removeAllPersonificationJWTs} from './localStorage/personificationJWT'
+import {removeAllPersonificationSessions} from './localStorage/personificationSession'
 
 const clean = async () => {
   await removeSession()

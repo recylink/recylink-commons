@@ -1,5 +1,5 @@
 import AuthClient from './AuthClient'
-import saveJWT from './localStorage/saveJWT'
+import {saveJWT} from './localStorage/JWT'
 
 /**
  * refreshJWT: async function that calls endpoint auth/refresh_jwt to refresh the user JWT in the localStorage

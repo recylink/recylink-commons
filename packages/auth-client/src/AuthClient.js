@@ -1,8 +1,7 @@
 import axios from 'axios'
 import baseURL from './baseURL'
 import clean from './clean'
-import getJWT from './localStorage/getJWT'
-import saveJWT from './localStorage/saveJWT'
+import {getJWT, saveJWT} from './localStorage/JWT'
 
 const buildAuthorization = jwtPayload => `Bearer ${jwtPayload}`
 
