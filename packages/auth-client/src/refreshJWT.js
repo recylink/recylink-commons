@@ -1,5 +1,7 @@
 import AuthClient from './AuthClient'
 import {saveJWT} from './localStorage/JWT'
+import {savePersonificationJWT} from './localStorage/personificationJWT'
+import {getPersonificationUserEmail} from './localStorage/getPersonificationUserEmail'
 
 /**
  * refreshJWT: async function that calls endpoint auth/refresh_jwt to refresh the user JWT in the localStorage
@@ -7,14 +9,25 @@ import {saveJWT} from './localStorage/JWT'
  * @returns {string} jwt
  */
 const refreshJWT = async () => {
-  const response = await AuthClient.post('auth/refresh_jwt')
+  const userEmail = getPersonificationUserEmail()
+  const body = {}
+
+  if (userEmail) {
+    body['userEmail'] = userEmail
+  }
+  const response = await AuthClient.post('auth/refresh_jwt', new URLSearchParams(body))
     .then(res => res.data)
     .catch(error => {
       throw error
     })
 
   const jwt = response?.jwt
-  await saveJWT(jwt)
+  if (userEmail) {
+    await savePersonificationJWT(userEmail, jwt)
+  } else {
+    await saveJWT(jwt)
+  }
+
   return jwt
 }
 

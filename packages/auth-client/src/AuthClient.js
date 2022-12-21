@@ -2,6 +2,8 @@ import axios from 'axios'
 import baseURL from './baseURL'
 import clean from './clean'
 import {getJWT, saveJWT} from './localStorage/JWT'
+import {getPersonificationJWT, savePersonificationJWT} from './localStorage/personificationJWT'
+import {getPersonificationUserEmail} from './localStorage/getPersonificationUserEmail'
 
 const buildAuthorization = jwtPayload => `Bearer ${jwtPayload}`
 
@@ -14,8 +16,14 @@ const AuthClient = axios.create({
 })
 
 AuthClient.interceptors.request.use(config => {
-  const jwtPayload = getJWT()
-  config.headers.Authorization = jwtPayload ? buildAuthorization(jwtPayload) : ''
+  const userEmail = getPersonificationUserEmail()
+  if (userEmail) {
+    const customJWT = getPersonificationJWT(userEmail)
+    config.headers.Authorization = customJWT ? buildAuthorization(customJWT) : ''
+  } else {
+    const jwtPayload = getJWT()
+    config.headers.Authorization = jwtPayload ? buildAuthorization(jwtPayload) : ''
+  }
   return config
 })
 
@@ -34,11 +42,17 @@ AuthClient.interceptors.response.use(
     if (resBaseURL === baseURL) {
       if (status === 303 && !config._retry) {
         config._retry = true
-        await AuthClient.post('auth/refresh_jwt')
+        const userEmail = getPersonificationUserEmail()
+
+        await AuthClient.post('auth/refresh_jwt', {}, config)
           .then(res => {
             if (res.status === 201) {
               const newJWTPayload = res.data?.jwt
-              saveJWT(newJWTPayload)
+              if (userEmail) {
+                savePersonificationJWT(userEmail, newJWTPayload)
+              } else {
+                saveJWT(newJWTPayload)
+              }
               config.headers.Authorization = buildAuthorization(newJWTPayload)
               return AuthClient(config)
             }

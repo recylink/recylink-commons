@@ -1,5 +1,6 @@
 import get from 'lodash/get'
 import unset from 'lodash/unset'
+import {getPersonificationUserEmail} from './getPersonificationUserEmail'
 
 /**
  * @param {string} userEmail
@@ -8,8 +9,14 @@ import unset from 'lodash/unset'
  */
 export const savePersonificationJWT = (userEmail, jwt) => {
   try {
-    const personificationJWTLocalStorage =
-      JSON.parse(localStorage.getItem('recylink.personificationjwtcollection')) || {}
+    if (!userEmail) {
+      throw new Error('userEmail required')
+    }
+    if (!jwt) {
+      throw new Error('jwt required')
+    }
+
+    const personificationJWTLocalStorage = getAllPersonificationJWTs()
 
     personificationJWTLocalStorage[userEmail] = jwt
 
@@ -17,7 +24,9 @@ export const savePersonificationJWT = (userEmail, jwt) => {
       'recylink.personificationjwtcollection',
       JSON.stringify(personificationJWTLocalStorage, null, 2)
     )
-  } catch (error) {}
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 /**
@@ -26,11 +35,43 @@ export const savePersonificationJWT = (userEmail, jwt) => {
  * @returns {string}
  */
 export const getPersonificationJWT = userEmail => {
+  if (!userEmail) {
+    return null
+  }
   try {
-    const personificationJWTLocalStorage =
-      JSON.parse(localStorage.getItem('recylink.personificationjwtcollection')) || {}
+    const personificationJWTLocalStorage = getAllPersonificationJWTs()
 
     const personificationJWT = get(personificationJWTLocalStorage, userEmail)
+
+    if (!personificationJWT) {
+      return null
+    }
+
+    return personificationJWT
+  } catch (e) {
+    return null
+  }
+}
+
+/**
+ *
+ * @returns {string}
+ */
+export const getCurrentPersonificationJWT = () => {
+  try {
+    const userEmail = getPersonificationUserEmail()
+
+    if (!userEmail) {
+      return null
+    }
+
+    const personificationJWTLocalStorage = getAllPersonificationJWTs()
+
+    const personificationJWT = get(personificationJWTLocalStorage, userEmail)
+
+    if (!personificationJWT) {
+      return null
+    }
 
     return personificationJWT
   } catch (e) {
@@ -52,8 +93,7 @@ export const getAllPersonificationJWTs = () => {
  */
 export const removePersonificationJWT = userEmail => {
   try {
-    const personificationJWTLocalStorage =
-      JSON.parse(localStorage.getItem('recylink.personificationjwtcollection')) || {}
+    const personificationJWTLocalStorage = getAllPersonificationJWTs()
 
     unset(personificationJWTLocalStorage, userEmail)
 

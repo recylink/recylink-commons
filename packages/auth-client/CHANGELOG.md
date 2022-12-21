@@ -3,12 +3,12 @@
 All notable changes will be documented in this file.
 NPM Publish adheres to [Semantic Versioning](http://semver.org/).
 
-## [v1.0.12] (2022-12-16)
+## [v1.1.1] (2022-12-16)
 
 - Added see all personification elements.
 - Refactor functions.
 
-## [v1.0.7] (2022-12-19)
+## [v1.1.0] (2022-12-19)
 
 - Added personification support to localStorage management of JWTs and Sessions for admins
 

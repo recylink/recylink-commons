@@ -1,6 +1,6 @@
 import get from 'lodash/get'
 import unset from 'lodash/unset'
-import {useMemo, useState} from 'react'
+import {getPersonificationUserEmail} from './getPersonificationUserEmail'
 
 /**
  * @param {string} userEmail
@@ -9,8 +9,14 @@ import {useMemo, useState} from 'react'
  */
 export const savePersonificationSession = (userEmail, session) => {
   try {
-    const personificationSessionLocalStorage =
-      JSON.parse(localStorage.getItem('recylink.personificationsessioncollection')) || {}
+    if (!userEmail) {
+      throw new Error('userEmail required')
+    }
+    if (!session) {
+      throw new Error('session required')
+    }
+
+    const personificationSessionLocalStorage = getAllPersonificationSessions()
 
     personificationSessionLocalStorage[userEmail] = session
 
@@ -20,7 +26,9 @@ export const savePersonificationSession = (userEmail, session) => {
     )
 
     return personificationSessionLocalStorage
-  } catch (error) {}
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 /**
@@ -28,11 +36,43 @@ export const savePersonificationSession = (userEmail, session) => {
  * @returns {object}
  */
 export const getPersonificationSession = userEmail => {
+  if (!userEmail) {
+    return null
+  }
   try {
-    const personificationSessionLocalStorage =
-      JSON.parse(localStorage.getItem('recylink.personificationsessioncollection')) || {}
+    const personificationSessionLocalStorage = getAllPersonificationSessions()
 
     const personificationSession = get(personificationSessionLocalStorage, userEmail)
+
+    if (!personificationSession) {
+      return null
+    }
+
+    return personificationSession
+  } catch (e) {
+    return null
+  }
+}
+
+/**
+ *
+ * @returns {string}
+ */
+export const getCurrentPersonificationSession = () => {
+  try {
+    const userEmail = getPersonificationUserEmail()
+
+    if (!userEmail) {
+      return null
+    }
+
+    const personificationSessionLocalStorage = getAllPersonificationSessions()
+
+    const personificationSession = get(personificationSessionLocalStorage, userEmail)
+
+    if (!personificationSession) {
+      return null
+    }
 
     return personificationSession
   } catch (e) {
@@ -45,7 +85,7 @@ export const getPersonificationSession = userEmail => {
  */
 export const getAllPersonificationSessions = () => {
   try {
-    return JSON.parse(localStorage.getItem('recylink.personificationsessioncollection'))
+    return JSON.parse(localStorage.getItem('recylink.personificationsessioncollection')) || {}
   } catch (e) {
     return null
   }
@@ -57,8 +97,7 @@ export const getAllPersonificationSessions = () => {
  */
 export const removePersonificationSession = userEmail => {
   try {
-    const personificationSessionLocalStorage =
-      JSON.parse(localStorage.getItem('recylink.personificationsessioncollection')) || {}
+    const personificationSessionLocalStorage = getAllPersonificationSessions()
 
     unset(personificationSessionLocalStorage, userEmail)
 
@@ -74,33 +113,3 @@ export const removePersonificationSession = userEmail => {
  */
 export const removeAllPersonificationSessions = () =>
   localStorage.removeItem('recylink.personificationsessioncollection')
-
-export const usePersonificationSessionStorage = ({userEmail}) => {
-  const [allSessions, setSessions] = useState(() => {
-    try {
-      return getAllPersonificationSessions()
-    } catch (error) {
-      return {}
-    }
-  })
-
-  // Return a wrapped version of useState's setter function that ...
-  // ... persists the new value to localStorage.
-  const setSession = userEmailParam => {
-    try {
-      const newSessionCollection = savePersonificationSession(userEmailParam)
-      setSessions(newSessionCollection)
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  const sessionResult = useMemo(() => {
-    if (userEmail) {
-      return getPersonificationSession(userEmail)
-    }
-    return getAllPersonificationSessions()
-  }, [allSessions, userEmail])
-
-  return [sessionResult, setSession]
-}
