@@ -3,7 +3,7 @@ import baseURL from './baseURL'
 import clean from './clean'
 import {getJWT, saveJWT} from './localStorage/JWT'
 import {getPersonificationJWT, savePersonificationJWT} from './localStorage/personificationJWT'
-import {getPersonificationUserEmail} from './localStorage/getPersonificationUserEmail'
+import {getPersonificationUserEmail} from './localStorage/personificationProfile'
 
 const buildAuthorization = jwtPayload => `Bearer ${jwtPayload}`
 
@@ -42,7 +42,7 @@ AuthClient.interceptors.response.use(
     if (resBaseURL === baseURL) {
       if (status === 303 && !config._retry) {
         config._retry = true
-        const userEmail = getPersonificationUserEmail()
+        const userEmail = personificationProfile()
 
         await AuthClient.post('auth/refresh_jwt', {}, config)
           .then(res => {

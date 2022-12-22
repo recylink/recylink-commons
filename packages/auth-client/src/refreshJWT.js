@@ -1,7 +1,7 @@
 import AuthClient from './AuthClient'
 import {saveJWT} from './localStorage/JWT'
 import {savePersonificationJWT} from './localStorage/personificationJWT'
-import {getPersonificationUserEmail} from './localStorage/getPersonificationUserEmail'
+import {getPersonificationUserEmail} from './localStorage/personificationProfile'
 
 /**
  * refreshJWT: async function that calls endpoint auth/refresh_jwt to refresh the user JWT in the localStorage

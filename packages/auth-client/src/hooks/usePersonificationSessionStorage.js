@@ -1,5 +1,5 @@
 import {useMemo, useState, useEffect} from 'react'
-import unset from 'lodash/unset'
+
 import {
   getAllPersonificationSessions,
   getPersonificationSession,
@@ -17,25 +17,22 @@ const usePersonificationSessionStorage = userEmail => {
   })
 
   useEffect(() => {
-    function storageEventHandler(event) {
-      if (event.key === 'recylink.personificationsessioncollection') {
-        setSessions(getAllPersonificationSessions())
-      }
-    }
-    window.addEventListener('storage', storageEventHandler)
+    const storageEventHandler = event => setSessions(getAllPersonificationSessions())
+
+    window.addEventListener('recylink.personificationsessioncollection', storageEventHandler)
     return () => {
-      window.removeEventListener('storage', storageEventHandler)
+      window.removeEventListener('recylink.personificationsessioncollection', storageEventHandler)
     }
   }, [])
 
   const setSession = (userEmailParam, sessionParam) => {
     try {
       if (sessionParam) {
-        setSessions({...allSessions, [userEmailParam]: sessionParam})
         savePersonificationSession(userEmailParam, sessionParam)
+        window.dispatchEvent(new CustomEvent('recylink.personificationsessioncollection'))
       } else {
-        setSessions(unset(allSessions, userEmailParam))
         removePersonificationSession(userEmailParam)
+        window.dispatchEvent(new CustomEvent('recylink.personificationsessioncollection'))
       }
     } catch (error) {
       console.log(error)
@@ -44,7 +41,7 @@ const usePersonificationSessionStorage = userEmail => {
 
   const sessionResult = useMemo(() => {
     if (userEmail) {
-      return getPersonificationSession(userEmail)
+      return getPersonificationSession(userEmail) || null
     }
     return allSessions
   }, [allSessions, userEmail])

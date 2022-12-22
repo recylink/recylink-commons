@@ -1,6 +1,6 @@
 import get from 'lodash/get'
 import unset from 'lodash/unset'
-import {getPersonificationUserEmail} from './getPersonificationUserEmail'
+import {getPersonificationUserEmail} from './personificationProfile'
 
 /**
  * @param {string} userEmail
@@ -81,7 +81,7 @@ export const getCurrentPersonificationJWT = () => {
 
 export const getAllPersonificationJWTs = () => {
   try {
-    return JSON.parse(localStorage.getItem('recylink.personificationjwtcollection'))
+    return JSON.parse(localStorage.getItem('recylink.personificationjwtcollection')) || {}
   } catch (e) {
     return null
   }

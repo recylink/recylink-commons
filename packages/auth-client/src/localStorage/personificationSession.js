@@ -1,6 +1,6 @@
 import get from 'lodash/get'
 import unset from 'lodash/unset'
-import {getPersonificationUserEmail} from './getPersonificationUserEmail'
+import {getPersonificationUserEmail} from './personificationProfile'
 
 /**
  * @param {string} userEmail

@@ -7,7 +7,10 @@ import {saveJWT, getJWT, removeJWT} from './localStorage/JWT'
 import {saveAdminJWT, getAdminJWT, removeAdminJWT} from './localStorage/adminJWT'
 import {getSession, saveSession, removeSession} from './localStorage/session'
 
-import {getPersonificationUserEmail} from './localStorage/getPersonificationUserEmail'
+import {
+  getPersonificationUserEmail,
+  isPersonificationActive
+} from './localStorage/personificationProfile'
 import {
   savePersonificationJWT,
   getPersonificationJWT,
@@ -47,6 +50,7 @@ export {
   removeSession,
   //
   getPersonificationUserEmail,
+  isPersonificationActive,
   //
   savePersonificationJWT,
   getPersonificationJWT,

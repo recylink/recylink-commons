@@ -1,5 +1,5 @@
 import {useMemo, useState, useEffect} from 'react'
-import unset from 'lodash/unset'
+
 import {
   getAllPersonificationJWTs,
   getPersonificationJWT,
@@ -17,25 +17,22 @@ const usePersonificationJWTStorage = userEmail => {
   })
 
   useEffect(() => {
-    function storageEventHandler(event) {
-      if (event.key === 'recylink.personificationJWTcollection') {
-        setJWTs(getAllPersonificationJWTs())
-      }
-    }
-    window.addEventListener('storage', storageEventHandler)
+    const storageEventHandler = event => setJWTs(getAllPersonificationJWTs())
+
+    window.addEventListener('recylink.personificationjwtcollection', storageEventHandler)
     return () => {
-      window.removeEventListener('storage', storageEventHandler)
+      window.removeEventListener('recylink.personificationjwtcollection', storageEventHandler)
     }
   }, [])
 
   const setJWT = (userEmailParam, JWTParam) => {
     try {
       if (JWTParam) {
-        setJWTs({...allJWTs, [userEmailParam]: JWTParam})
         savePersonificationJWT(userEmailParam, JWTParam)
+        window.dispatchEvent(new CustomEvent('recylink.personificationjwtcollection'))
       } else {
-        setJWTs(unset(allJWTs, userEmailParam))
         removePersonificationJWT(userEmailParam)
+        window.dispatchEvent(new CustomEvent('recylink.personificationjwtcollection'))
       }
     } catch (error) {
       console.log(error)
@@ -44,7 +41,7 @@ const usePersonificationJWTStorage = userEmail => {
 
   const JWTResult = useMemo(() => {
     if (userEmail) {
-      return getPersonificationJWT(userEmail)
+      return getPersonificationJWT(userEmail) || null
     }
     return allJWTs
   }, [allJWTs, userEmail])
