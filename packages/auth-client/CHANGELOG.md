@@ -3,6 +3,10 @@
 All notable changes will be documented in this file.
 NPM Publish adheres to [Semantic Versioning](http://semver.org/).
 
+## [v1.1.7] (2022-12-23)
+
+- Modified behavior of AuthClient response interceptor
+
 ## [v1.1.1] (2022-12-16)
 
 - Added see all personification elements.

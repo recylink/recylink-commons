@@ -1,5 +1,6 @@
 import AuthClient from './AuthClient'
 import logout from './logout'
+import logoutAs from './logoutAs'
 import refreshJWT from './refreshJWT'
 import clean from './clean'
 
@@ -34,6 +35,7 @@ import usePersonificationJWTStorage from './hooks/usePersonificationJWTStorage'
 export {
   AuthClient,
   logout,
+  logoutAs,
   refreshJWT,
   clean,
   //

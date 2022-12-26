@@ -14,14 +14,9 @@ export const isPersonificationActive = () => {
   }
 
   const session = getPersonificationSession(userEmail)
-
-  if (!session) {
-    return false
-  }
-
   const jwt = getPersonificationJWT(userEmail)
 
-  if (!jwt) {
+  if (!session && !jwt) {
     return false
   }
 
