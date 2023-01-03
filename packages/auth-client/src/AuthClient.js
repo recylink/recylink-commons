@@ -1,14 +1,20 @@
 import axios from 'axios'
+import get from 'lodash/get'
 import baseURL from './baseURL'
-import clean from './clean'
 import logout from './logout'
+import logoutAs from './logoutAs'
+import clean from './clean'
 import {getJWT, saveJWT} from './localStorage/JWT'
-import {getPersonificationJWT, savePersonificationJWT} from './localStorage/personificationJWT'
+import {
+  getPersonificationJWT,
+  removePersonificationJWT,
+  savePersonificationJWT
+} from './localStorage/personificationJWT'
+import {removePersonificationSession} from './localStorage/personificationSession'
 import {
   getPersonificationUserEmail,
   isPersonificationActive
 } from './localStorage/personificationProfile'
-import logoutAs from './logoutAs'
 
 const buildAuthorization = jwtPayload => `Bearer ${jwtPayload}`
 
@@ -37,8 +43,10 @@ AuthClient.interceptors.response.use(
     return response
   },
   async error => {
-    const {config, statusCode} = error
+    const {config} = error
+    const statusCode = get(error, 'response.data.statusCode', error.statusCode)
     const resBaseURL = error?.response?.config?.baseURL
+    const url = error?.response?.config?.url
     if (error.code === 'ERR_NETWORK') {
       await clean()
       return Promise.reject(error)
@@ -70,10 +78,22 @@ AuthClient.interceptors.response.use(
       ) {
         const isPersonificating = isPersonificationActive()
         if (isPersonificating) {
-          await logoutAs()
+          if (url !== 'auth/depersonification_user') {
+            await logoutAs()
+          } else {
+            const userEmail = getPersonificationUserEmail()
+
+            await removePersonificationJWT(userEmail)
+            await removePersonificationSession(userEmail)
+          }
         } else {
-          await logout()
+          if (url !== 'auth/logout') {
+            await logout()
+          } else {
+            await clean()
+          }
         }
+
         return Promise.reject(error)
       }
     }
