@@ -44,7 +44,7 @@ AuthClient.interceptors.response.use(
   },
   async error => {
     const {config} = error
-    const statusCode = get(error, 'response.data.statusCode', error.statusCode)
+    const statusCode = get(error, 'response.data.statusCode', error.response.status)
     const resBaseURL = error?.response?.config?.baseURL
     const url = error?.response?.config?.url
     if (error.code === 'ERR_NETWORK') {
