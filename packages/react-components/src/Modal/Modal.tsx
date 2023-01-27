@@ -18,15 +18,22 @@ const Modal = (props: InferProps<typeof ModalPropTypes>) => {
 
   useOutsideClick(wrapperRef, async e => await onClickCancel(e))
 
+  const onConfirm = async () => {
+    let result = true
+    if (props.onConfirm) {
+      result = await props.onConfirm()
+    }
+    if (result !== false) {
+      setOpenModal(false)
+      setModalContent(<span />)
+    }
+  }
+
   const onClickConfirm = async e => {
     setLoadingConfirm(true)
     e.preventDefault()
-    if (props.onConfirm) {
-      await props.onConfirm()
-    }
+    await onConfirm()
     setLoadingConfirm(false)
-    setOpenModal(false)
-    setModalContent(<span />)
   }
 
   const onClickCancel = async e => {
