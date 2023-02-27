@@ -36,12 +36,12 @@ const Modal = (props: InferProps<typeof ModalPropTypes>) => {
     setLoadingConfirm(false)
   }
 
-  const onClickCancel = async e => {
+  const onClickCancel = e => {
     if (e) {
       e.preventDefault()
     }
     if (props.onCancel) {
-      await props.onCancel()
+      props.onCancel()
     }
     setOpenModal(false)
     setModalContent(<span />)
@@ -69,7 +69,7 @@ const Modal = (props: InferProps<typeof ModalPropTypes>) => {
         type="button"
         use="function"
         label={props.cancelText}
-        onClick={async e => await onClickCancel(e)}
+        onClick={async e => (e)}
       />
     )
   }
