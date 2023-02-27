@@ -69,7 +69,7 @@ const Modal = (props: InferProps<typeof ModalPropTypes>) => {
         type="button"
         use="function"
         label={props.cancelText}
-        onClick={async e => (e)}
+        onClick={e => (e)}
       />
     )
   }
