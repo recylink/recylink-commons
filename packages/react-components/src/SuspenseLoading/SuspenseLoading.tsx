@@ -7,9 +7,14 @@ const SuspenseLoadingPropTypes = {
   className: PropTypes.string,
   fallback: PropTypes.node,
   onRender: PropTypes.func
+  // delay: PropTypes.number
 }
 
 const SuspenseLoading = (props: InferProps<typeof SuspenseLoadingPropTypes>) => {
+  // const {delay} = props
+
+  // const [isShown, setIsShown] = useState(delay === 0)
+
   const renderFallback = () => {
     if (props.fallback) {
       return props.fallback
@@ -18,9 +23,19 @@ const SuspenseLoading = (props: InferProps<typeof SuspenseLoadingPropTypes>) => 
     }
   }
 
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setIsShown(true)
+  //   }, delay)
+  // }, [delay])
+
+  const renderChildren = () => {
+    return props.children
+  }
+
   return (
     <Suspense fallback={renderFallback()}>
-      {props.children}
+      {renderChildren()}
       {props.onRender?.()}
     </Suspense>
   )

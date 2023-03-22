@@ -1,4 +1,5 @@
 import AuthClient from './AuthClient'
+// import {getCsrfToken} from './localStorage/csrfToken'
 import clean from './clean'
 
 /**
@@ -6,7 +7,10 @@ import clean from './clean'
  * @returns {void}
  */
 const logout = async () => {
-  await AuthClient.post('auth/logout')
+  await AuthClient.post(
+    'auth/logout'
+    // , {}, {headers: {'X-CSRF-TOKEN': getCsrfToken()}}
+  ) //Usar este endpoint requiere adjuntar el Header de CSRF para validar la cookie
     .then(res => res.data)
     .catch(error => {
       throw error

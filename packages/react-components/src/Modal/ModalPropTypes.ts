@@ -7,6 +7,14 @@ export default {
   onConfirm: PropTypes.func,
   cancelText: PropTypes.string,
   onCancel: PropTypes.func,
+  contentClassName: PropTypes.string,
+  className: PropTypes.string,
+
+  disabled: PropTypes.bool,
+  buttonType: PropTypes.string,
+  buttonClassName: PropTypes.string,
+  buttonIconLibrary: PropTypes.string,
+  buttonIconName: PropTypes.string,
 
   isOpen: PropTypes.bool,
   handleModal: PropTypes.func,

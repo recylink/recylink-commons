@@ -1,4 +1,5 @@
 import {removeJWT} from './localStorage/JWT'
+// import {removeCsrfToken} from './localStorage/csrfToken'
 import {removeAdminJWT} from './localStorage/adminJWT'
 import {removeSession} from './localStorage/session'
 import {removeAllPersonificationJWTs} from './localStorage/personificationJWT'

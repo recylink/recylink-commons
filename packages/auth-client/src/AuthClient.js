@@ -15,6 +15,8 @@ import {
   getPersonificationUserEmail,
   isPersonificationActive
 } from './localStorage/personificationProfile'
+// import {getCsrfToken} from './localStorage/csrfToken'
+// import {getPersonificationCsrfToken} from './localStorage/personificationCsrfToken'
 
 const buildAuthorization = jwtPayload => `Bearer ${jwtPayload}`
 
@@ -54,7 +56,15 @@ AuthClient.interceptors.response.use(
     if (resBaseURL === baseURL) {
       if (statusCode === 303 && !config._retry) {
         config._retry = true
+
+        //El CSRF a usar dependerá de si estamos personificando
+        //Usar este endpoint requiere del uso del CSRF
         const userEmail = getPersonificationUserEmail()
+        // if (userEmail) {
+        //   config.headers['X-CSRF-TOKEN'] = getPersonificationCsrfToken(userEmail)
+        // } else {
+        //   config.headers['X-CSRF-TOKEN'] = getCsrfToken()
+        // }
 
         await AuthClient.post('auth/refresh_jwt', {}, config)
           .then(res => {
@@ -73,11 +83,14 @@ AuthClient.interceptors.response.use(
             throw error
           })
       } else if (
+        //Si retorna un 401 o un 403 con un internal code especifico de "kickOut"; iniciamos la lógica para expulsar al cliente del sistema
         statusCode === 401 ||
-        (statusCode === 403 && error?.response?.data?.info?.internalCode === 'kickOut')
+        (statusCode === 403 && error?.response?.data?.info?.internalCode === 'kickOut') ||
+        (statusCode === 503 && error?.response?.data?.info?.internalCode === 'kickOut')
       ) {
         const isPersonificating = isPersonificationActive()
         if (isPersonificating) {
+          //Si es un cliente que esta personificando
           if (url !== 'auth/depersonification_user') {
             await logoutAs()
           } else {
@@ -87,7 +100,9 @@ AuthClient.interceptors.response.use(
             await removePersonificationSession(userEmail)
           }
         } else {
+          //Si es un cliente normal
           if (url !== 'auth/logout') {
+            //Para prevenir bucle, donde el propio endpoint "auth/logout" no puede llevar a estas condiciones
             await logout()
           } else {
             await clean()
