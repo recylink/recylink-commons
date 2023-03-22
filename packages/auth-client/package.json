@@ -1,6 +1,6 @@
 {
   "name": "@recylink/auth-client",
-  "version": "1.1.15",
+  "version": "1.1.16",
   "description": "Axios Client for Auth",
   "author": "diegoolavarria <olavarriaubeda.diego@gmail.com>",
   "homepage": "https://github.com/recylink/recylink-commons#readme",
@@ -18,7 +18,7 @@
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
-    "build": "webpack --mode production"
+    "build": "rm -rf dist && webpack --mode production"
   },
   "bugs": {
     "url": "https://github.com/recylink/recylink-commons/issues"

@@ -49,7 +49,7 @@ AuthClient.interceptors.response.use(
     const statusCode = get(error, 'response.data.statusCode', error.response.status)
     const resBaseURL = error?.response?.config?.baseURL
     const url = error?.response?.config?.url
-    if (error.code === 'ERR_NETWORK') {
+    if (error.code === 'ERR_NETWORK' || error.code === 'ERR_BAD_RESPONSE') {
       await clean()
       return Promise.reject(error)
     }
