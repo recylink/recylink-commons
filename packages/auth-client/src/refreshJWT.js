@@ -2,7 +2,7 @@ import AuthClient from './AuthClient'
 import {saveJWT} from './localStorage/JWT'
 import {savePersonificationJWT} from './localStorage/personificationJWT'
 import {getPersonificationUserEmail} from './localStorage/personificationProfile'
-// import {getCsrfToken} from './localStorage/csrfToken'
+import {getCsrfToken} from './localStorage/csrfToken'
 import {getPersonificationCsrfToken} from './localStorage/personificationCsrfToken'
 
 /**
@@ -13,9 +13,9 @@ import {getPersonificationCsrfToken} from './localStorage/personificationCsrfTok
 const refreshJWT = async () => {
   const userEmail = getPersonificationUserEmail()
   const body = {}
-  // const headers = {
-  //   'X-CSRF-TOKEN': getCsrfToken()
-  // }
+  const headers = {
+    'X-CSRF-TOKEN': getCsrfToken()
+  }
 
   if (userEmail) {
     body['userEmail'] = userEmail
@@ -24,8 +24,8 @@ const refreshJWT = async () => {
   const response = await AuthClient.post(
     //Usar este endpoint requiere adjuntar el valor de CSRF. El CSRF a usar dependerá si estamos personificando
     'auth/refresh_jwt',
-    new URLSearchParams(body)
-    // {headers}
+    new URLSearchParams(body),
+    {headers}
   )
     .then(res => res.data)
     .catch(error => {

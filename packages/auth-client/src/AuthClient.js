@@ -15,8 +15,8 @@ import {
   getPersonificationUserEmail,
   isPersonificationActive
 } from './localStorage/personificationProfile'
-// import {getCsrfToken} from './localStorage/csrfToken'
-// import {getPersonificationCsrfToken} from './localStorage/personificationCsrfToken'
+import {getCsrfToken} from './localStorage/csrfToken'
+import {getPersonificationCsrfToken} from './localStorage/personificationCsrfToken'
 
 const buildAuthorization = jwtPayload => `Bearer ${jwtPayload}`
 
@@ -60,11 +60,11 @@ AuthClient.interceptors.response.use(
         //El CSRF a usar dependerá de si estamos personificando
         //Usar este endpoint requiere del uso del CSRF
         const userEmail = getPersonificationUserEmail()
-        // if (userEmail) {
-        //   config.headers['X-CSRF-TOKEN'] = getPersonificationCsrfToken(userEmail)
-        // } else {
-        //   config.headers['X-CSRF-TOKEN'] = getCsrfToken()
-        // }
+        if (userEmail) {
+          config.headers['X-CSRF-TOKEN'] = getPersonificationCsrfToken(userEmail)
+        } else {
+          config.headers['X-CSRF-TOKEN'] = getCsrfToken()
+        }
 
         await AuthClient.post('auth/refresh_jwt', {}, config)
           .then(res => {
