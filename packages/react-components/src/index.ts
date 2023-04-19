@@ -7,7 +7,7 @@ import Icon from './Icon'
 import IconsContainer from './IconsContainer'
 import SuspenseLoading from './SuspenseLoading'
 import ViewportSuspenseLoading from './ViewportSuspenseLoading'
-
+import {ToastContext, ToastProvider, useToast} from './Toast'
 export {
   Label,
   Button,
@@ -20,5 +20,8 @@ export {
   Modal,
   ModalContext,
   ModalProvider,
-  useModal
+  useModal,
+  ToastContext, 
+  ToastProvider, 
+  useToast
 }
