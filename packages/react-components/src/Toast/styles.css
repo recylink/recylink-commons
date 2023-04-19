@@ -1,43 +1,22 @@
-.notificationContainer {
+.toast-container {
   font-size: 14px;
   box-sizing: border-box;
   position: fixed;
   z-index: 20;
 }
 
-.topRight {
+.toast-position-top-right {
   top: 36px;
   right: 6px;
   transition: transform 0.6s ease-in-out;
   animation: toast-in-right 0.7s;
 }
 
-.bottomRight {
-  bottom: 12px;
-  right: 12px;
-  transition: transform 0.6s ease-in-out;
-  animation: toast-in-right 0.7s;
-}
-
-.hide {
+.hide-toast {
   animation: toast-out-right 0.7s;
 }
 
-.topLeft {
-  top: 12px;
-  left: 12px;
-  transition: transform 0.6s ease-in;
-  animation: toast-in-left 0.7s;
-}
-
-.bottomLeft {
-  bottom: 12px;
-  left: 12px;
-  transition: transform 0.6s ease-in;
-  animation: toast-in-left 0.7s;
-}
-
-.notification {
+.toast {
   background: #fff;
   transition: 0.3s ease;
   position: relative;
@@ -54,15 +33,19 @@
   opacity: 0.9;
   background-position: 15px;
   background-repeat: no-repeat;
+  height: 50px;
+  width: 365px;
+  color: #fff;
+  padding: 20px 15px 10px 10px;
 }
 
-.notification:hover {
+.toast:hover {
   box-shadow: 0 0 12px #fff;
   opacity: 1;
   cursor: pointer;
 }
 
-.notificationTitle {
+.toast-title {
   font-weight: 700;
   font-size: 16px;
   text-align: left;
@@ -72,7 +55,7 @@
   height: 18px;
 }
 
-.notificationMessage {
+.toast-message {
   margin: 0;
   text-align: left;
   height: 18px;
@@ -82,24 +65,17 @@
   white-space: nowrap;
 }
 
-.notificationImage {
+.toast-image {
   float: left;
   margin-right: 15px;
 }
 
-.icon {
+.toast-icon {
   width: 30px;
   height: 30px;
 }
 
-.toast {
-  height: 50px;
-  width: 365px;
-  color: #fff;
-  padding: 20px 15px 10px 10px;
-}
-
-.buttonClose {
+.toast-close-button {
   background-color: transparent !important;
   color: #fff !important;
   position: relative;
@@ -140,11 +116,3 @@
   }
 }
 
-@keyframes toast-in-left {
-  from {
-    transform: translateX(-100%);
-  }
-  to {
-    transform: translateX(0);
-  }
-}

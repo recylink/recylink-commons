@@ -33,7 +33,7 @@ const ToastProvider = ({children}) => {
   return (
     <Provider value={{addToast}}>
       {createPortal(
-        <div className={`notificationContainer bottomRight`}>
+        <div className={`toast-container toast-position-top-right`}>
           {toastList.list.map((toast:any) => (
             <Toast
             key={toast.id}
