@@ -1,5 +1,5 @@
 import React, {useCallback, useMemo} from 'react'
-import ReactSelect, {components} from 'react-select'
+import ReactSelect from 'react-select'
 import PropTypes from 'prop-types'
 import {Icon, Label} from '@recylink/react-components'
 import {useDeepEffect} from '@recylink/react-hooks'
@@ -83,16 +83,18 @@ const Select = props => {
   }
 
   const DropdownIndicator = selectProps => {
-    if (selectProps.options.length > 3) {
-      return (
-        <div
-          className="recylink-select-icon-container"
-          {...(selectProps.isFocused ? {style: {color: '#999999'}} : {})}>
-          <Icon icon="FiCode" library="fi" className="recylink-select-icon" />
-        </div>
-      )
-    }
-    return <components.DropdownIndicator {...selectProps} />
+    const className =
+      selectProps.options.length > 3
+        ? 'recylink-select-icon-multi rotate-90'
+        : 'recylink-select-icon'
+    const icon = selectProps.options.length > 3 ? 'FiCode' : 'FiChevronDown'
+    return (
+      <div
+        className="recylink-select-icon-container"
+        {...(selectProps.isFocused ? {style: {color: '#999999'}} : {})}>
+        <Icon icon={icon} library="fi" className={className} />
+      </div>
+    )
   }
 
   const Option = selectProps => {

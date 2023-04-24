@@ -21,7 +21,7 @@ export {
   ModalContext,
   ModalProvider,
   useModal,
-  ToastContext, 
-  ToastProvider, 
+  ToastContext,
+  ToastProvider,
   useToast
 }

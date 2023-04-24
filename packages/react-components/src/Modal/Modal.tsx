@@ -1,6 +1,6 @@
 import React, {useRef, useState} from 'react'
 import {InferProps} from 'prop-types'
-import ReactDOM from 'react-dom'
+import {createPortal} from 'react-dom'
 import {useOutsideClick} from '@recylink/react-hooks'
 import Button from '../Button'
 import ButtonsContainer from '../ButtonsContainer'
@@ -82,7 +82,7 @@ const Modal = (props: InferProps<typeof ModalPropTypes>) => {
   )
 
   if (isOpen) {
-    return ReactDOM.createPortal(
+    return createPortal(
       <div className="overlay">
         <div className="modal" ref={wrapperRef}>
           <div className="modal-content">

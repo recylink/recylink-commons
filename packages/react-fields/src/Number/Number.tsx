@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import NumberFormat from 'react-number-format'
+import {NumericFormat} from 'react-number-format'
 import isNil from 'lodash.isnil'
 import {Label} from '@recylink/react-components'
 import '../styles.css'
@@ -43,7 +43,7 @@ const Number = (props: any) => {
         isRequiredLabel={props.isRequiredLabel}
       />
       <div className="recylink-input-container">
-        <NumberFormat
+        <NumericFormat
           className={getClassName()}
           placeholder={props.placeholder}
           value={!isNil(props.value) ? props.value : ''}

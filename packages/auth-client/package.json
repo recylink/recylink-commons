@@ -1,6 +1,6 @@
 {
   "name": "@recylink/auth-client",
-  "version": "1.1.17",
+  "version": "1.2.2",
   "description": "Axios Client for Auth",
   "author": "diegoolavarria <olavarriaubeda.diego@gmail.com>",
   "homepage": "https://github.com/recylink/recylink-commons#readme",

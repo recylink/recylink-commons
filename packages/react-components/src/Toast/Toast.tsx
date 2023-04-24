@@ -1,20 +1,28 @@
 import React, {useState, useEffect} from 'react'
-import Icon from '../Icon'
-import Button from '../Button'
-import { InferProps } from 'prop-types'
+import {InferProps} from 'prop-types'
 import ToastPropTypes from './ToastPropTypes'
+import Button from '../Button'
+import Icon from '../Icon'
 
 import './styles.css'
 
 const types = {
-  danger: { title: 'Error', color: '#f03a47', icon: 'FiXCircle' },
-  warning: { title: 'Advertencia', color: '#fa7505', icon: 'FiAlertCircle' },
-  news: { title: 'Información', color: '#0078c8', icon: 'FiInfo' },
-  success: { title: 'Ok', color: '#27AE60', icon: 'FiCheckCircle' }
+  danger: {title: 'Error', color: '#f03a47', icon: 'FiXCircle'},
+  warning: {title: 'Advertencia', color: '#fa7505', icon: 'FiAlertCircle'},
+  news: {title: 'Información', color: '#0078c8', icon: 'FiInfo'},
+  success: {title: 'Ok', color: '#27AE60', icon: 'FiCheckCircle'}
 }
 
 const Toast = (props: InferProps<typeof ToastPropTypes>) => {
-  const { id, title, description, type, autoDelete, autoDeleteTime, deleteToast }: InferProps<typeof ToastPropTypes> = props
+  const {
+    id,
+    title,
+    description,
+    type,
+    autoDelete,
+    autoDeleteTime,
+    deleteToast
+  }: InferProps<typeof ToastPropTypes> = props
   const [hide, setHide] = useState(false)
 
   const toastType = types[type]
@@ -35,18 +43,17 @@ const Toast = (props: InferProps<typeof ToastPropTypes>) => {
     return () => clearTimeout(call)
   }, [autoDelete, deleteToast, hide])
 
-
   return (
     <>
       <div
         className={`toast toast-position-top-right ${hide ? 'hide-toast' : ''}`}
-        style={{ backgroundColor: toastType.color }}>
+        style={{backgroundColor: toastType.color}}>
         <Button
           type="icon"
           iconLibrary="fi"
           iconName={'FiX'}
           className={'toast-close-button'}
-          onClick={(e) => deleteToast(id)}
+          onClick={e => deleteToast(id)}
           use="function"
         />
         <div className={'toast-image'}>
@@ -57,8 +64,8 @@ const Toast = (props: InferProps<typeof ToastPropTypes>) => {
           <p className={'toast-message'}>{description}</p>
         </div>
       </div>
-    </>)
-
+    </>
+  )
 }
 
 Toast.propTypes = ToastPropTypes
