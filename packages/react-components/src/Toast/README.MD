@@ -2,6 +2,30 @@
 
 El componente Toast muestra notificaciones en la pantalla.
 
+## HTML
+
+Agrega un elemento con id "toast-root" en el index.html de tu proyecto.
+
+```html
+<div id="toast-root"></div>
+```
+
+## App > index.js (React)
+
+Importa el provider del componente en el index de la aplicación react con al siguiente línea.
+
+```javascript
+import {ToastProvider} from 'App/components/Toast'
+```
+
+Posteriormente usa el provider para envolver <Pages/> con el provider del componente.
+
+```javascript
+<ToastProvider>
+  <Pages />
+</ToastProvider>
+```
+
 ## Import
 
 Para utilizarlo en React, primero debe importarlo:
