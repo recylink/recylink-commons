@@ -1,7 +1,7 @@
 import React, {createContext, useState} from 'react'
 import {ToastContextInterface} from './ToastContextInterface'
 import {createPortal} from 'react-dom'
-import cloneDeep from 'lodash/cloneDeep'
+import clonedeep from 'lodash.clonedeep'
 import Toast from './Toast'
 import './styles.css'
 
@@ -19,10 +19,10 @@ const ToastProvider = ({children}) => {
   }
 
   const deleteToast = (id: string) => {
-    setToastList((currentList: { list: any[]; counter: any }) => {
+    setToastList((currentList: {list: any[]; counter: any}) => {
       const toastIndex = currentList.list.findIndex(t => t.id === id)
       if (toastIndex > -1) {
-        const newToastList = cloneDeep(currentList.list)
+        const newToastList = clonedeep(currentList.list)
         newToastList.splice(toastIndex, 1)
         return {list: newToastList, counter: currentList.counter}
       }
@@ -34,13 +34,13 @@ const ToastProvider = ({children}) => {
     <Provider value={{addToast}}>
       {createPortal(
         <div className={`toast-container toast-position-top-right`}>
-          {toastList.list.map((toast:any) => (
+          {toastList.list.map((toast: any) => (
             <Toast
-            key={toast.id}
-            id={toast.id}
-            {...toast.props}
-            deleteToast={() => deleteToast(toast.id)}
-          />
+              key={toast.id}
+              id={toast.id}
+              {...toast.props}
+              deleteToast={() => deleteToast(toast.id)}
+            />
           ))}
         </div>,
         document.querySelector('#toast-root')

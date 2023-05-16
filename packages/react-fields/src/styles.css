@@ -122,7 +122,6 @@
 .recylink-select-icon {
   height: 20px;
   color: inherit;
-  transform: rotate(90deg);
 }
 
 .recylink-select-props-icon-container {
@@ -191,6 +190,11 @@
 .autocomplete {
   cursor: text;
 }
+
+.rotate-90 {
+  transform: rotate(90deg);
+}
+
 .css-1e8xuqs:hover {
   background-color: rgba(60, 60, 60, 0.5) !important;
   color: #fff !important;
