@@ -26,7 +26,7 @@ const TooltipPropTypes = {
 }
 
 const Tooltip = (props: InferProps<typeof TooltipPropTypes>) => {
-  const id = uniqueId('os-tooltip')
+  const id = uniqueId('recylink-tooltip')
 
   const getContent = () =>
     props.content && isString(props.content)

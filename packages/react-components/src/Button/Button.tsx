@@ -112,7 +112,11 @@ const Button = forwardRef((props: InferProps<typeof ButtonPropTypes>, buttonRef)
   }
 
   const renderButtonType = () => (
-    <span id={props.id || undefined} className={getClassName()} style={props.style || {}}>
+    <span
+      id={props.id || undefined}
+      className={getClassName()}
+      style={props.style || {}}
+      data-gaclickid={props.gaclickid}>
       {renderButtonInner()}
     </span>
   )
@@ -130,6 +134,7 @@ const Button = forwardRef((props: InferProps<typeof ButtonPropTypes>, buttonRef)
         library={props.iconLibrary}
         icon={props.iconName}
         onClick={async (e: any) => await click(e)}
+        gaclickid={props.gaclickid}
       />
     )
   }
@@ -225,7 +230,9 @@ Button.defaultProps = {
   onClick: () => {},
   noLoading: false,
   type: 'button',
-  use: 'function'
+  use: 'function',
+
+  gaclickid: undefined
 }
 Button.displayName = 'Button'
 export default Button

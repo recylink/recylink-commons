@@ -44,7 +44,8 @@ export default [
 
       // NEW
       terser()
-    ]
+    ],
+    context: 'window'
   },
   {
     input: 'dist/esm/index.d.ts',

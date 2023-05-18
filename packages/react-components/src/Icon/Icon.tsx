@@ -1,6 +1,7 @@
 import React, {useCallback, useEffect, useState} from 'react'
 import PropTypes, {InferProps} from 'prop-types'
 import get from 'lodash.get'
+import uniqueId from 'lodash.uniqueid'
 import SuspenseLoading from '../SuspenseLoading'
 import icons from './icons'
 import './styles.css'
@@ -10,13 +11,20 @@ const IconPropTypes = {
   icon: PropTypes.string.isRequired,
   className: PropTypes.string,
   onClick: PropTypes.func,
-  suspenseClassName: PropTypes.string
+  suspenseClassName: PropTypes.string,
+  gaclickid: PropTypes.string
 }
 
-const RenderIcon = ({library, icon, className, onClick}: InferProps<typeof IconPropTypes>) => {
-  const [renderIcon, setRenderIcon] = useState(<span />)
+const RenderIcon = ({
+  library,
+  icon,
+  className,
+  onClick,
+  gaclickid
+}: InferProps<typeof IconPropTypes>) => {
+  const id = uniqueId('recylink-icon')
 
-  const onCLickIcon = useCallback(
+  const onClickIcon = useCallback(
     e => {
       e.stopPropagation()
       if (onClick) {
@@ -27,14 +35,21 @@ const RenderIcon = ({library, icon, className, onClick}: InferProps<typeof IconP
   )
 
   useEffect(() => {
-    const IconComponent = get(icons, `${library}.${icon}`)
-    if (!IconComponent) {
-      console.error('No icon or library found')
+    const el = document.getElementById(id)
+    if (el && gaclickid) {
+      el.setAttribute('gaclickid', gaclickid)
+      el.querySelector('svg path')?.setAttribute('gaclickid', gaclickid)
     }
-    setRenderIcon(<IconComponent className={className} onClick={onCLickIcon} />)
-  }, [icon, library, className, onCLickIcon])
+  }, [gaclickid])
 
-  return renderIcon
+  const IconComponent = get(icons, `${library}.${icon}`)
+
+  if (!IconComponent) {
+    console.error('No icon or library found')
+    return <span />
+  }
+
+  return <IconComponent id={id} className={className} onClick={onClickIcon} />
 }
 
 const Icon = props => (

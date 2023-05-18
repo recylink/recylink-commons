@@ -29,6 +29,8 @@ export default {
   iconName: PropTypes.string,
   iconLibrary: PropTypes.string,
 
+  gaclickid: PropTypes.string,
+
   type: PropTypes.string.isRequired,
   use: PropTypes.string.isRequired
 }

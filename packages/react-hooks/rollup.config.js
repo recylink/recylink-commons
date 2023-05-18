@@ -31,15 +31,19 @@ export default [
 
       resolve(),
       commonjs(),
-      typescript({tsconfig: './tsconfig.json'}),
+      typescript({
+        tsconfig: './tsconfig.json',
+        exclude: [/\.test.((js|jsx|ts|tsx))$/, /\.stories.((js|jsx|ts|tsx|mdx))$/]
+      }),
       postcss(),
 
       // NEW
       terser()
-    ]
+    ],
+    context: 'window'
   },
   {
-    input: 'dist/esm/types/index.d.ts',
+    input: 'dist/esm/index.d.ts',
     output: [{file: 'dist/index.d.ts', format: 'esm'}],
     plugins: [dts()],
     external: [/\.css$/],
