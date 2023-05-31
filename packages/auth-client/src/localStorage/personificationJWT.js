@@ -2,6 +2,14 @@ import get from 'lodash/get'
 import unset from 'lodash/unset'
 import {getPersonificationUserEmail} from './personificationProfile'
 
+export const getAllPersonificationJWTs = () => {
+  try {
+    return JSON.parse(localStorage.getItem('recylink.personificationjwtcollection')) || {}
+  } catch (e) {
+    return null
+  }
+}
+
 /**
  * @param {string} userEmail
  * @param {string} jwt
@@ -74,14 +82,6 @@ export const getCurrentPersonificationJWT = () => {
     }
 
     return personificationJWT
-  } catch (e) {
-    return null
-  }
-}
-
-export const getAllPersonificationJWTs = () => {
-  try {
-    return JSON.parse(localStorage.getItem('recylink.personificationjwtcollection')) || {}
   } catch (e) {
     return null
   }

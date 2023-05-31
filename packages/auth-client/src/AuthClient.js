@@ -10,13 +10,17 @@ import {
   removePersonificationJWT,
   savePersonificationJWT
 } from './localStorage/personificationJWT'
-import {removePersonificationSession} from './localStorage/personificationSession'
+import {
+  getPersonificationSession,
+  removePersonificationSession
+} from './localStorage/personificationSession'
 import {
   getPersonificationUserEmail,
   isPersonificationActive
 } from './localStorage/personificationProfile'
 import {getCsrfToken} from './localStorage/csrfToken'
 import {getPersonificationCsrfToken} from './localStorage/personificationCsrfToken'
+import {getSession} from './localStorage/session'
 
 const buildAuthorization = jwtPayload => `Bearer ${jwtPayload}`
 
@@ -30,12 +34,24 @@ const AuthClient = axios.create({
 
 AuthClient.interceptors.request.use(config => {
   const userEmail = getPersonificationUserEmail()
+  const nonce = new Date().getTime()
+
   if (userEmail) {
     const customJWT = getPersonificationJWT(userEmail)
+    const personificationSession = getPersonificationSession(userEmail)
+
     config.headers.Authorization = customJWT ? buildAuthorization(customJWT) : ''
+    config.headers['X-ORION-NONCE'] = nonce
+    config.headers['X-ORION-PUBLICKEY'] = personificationSession
+      ? personificationSession.publicKey
+      : ''
   } else {
     const jwtPayload = getJWT()
+    const session = getSession()
+
     config.headers.Authorization = jwtPayload ? buildAuthorization(jwtPayload) : ''
+    config.headers['X-ORION-NONCE'] = nonce
+    config.headers['X-ORION-PUBLICKEY'] = session ? session.publicKey : ''
   }
   return config
 })
