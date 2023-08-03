@@ -58,7 +58,7 @@ export default function ({
           padding: '5px 6px 0px 12px;',
           height: 'auto',
           transition: 'all 0ms',
-          width: '100%',
+          width: '300px',
           flexWrap: 'unset',
           overflowX: 'auto',
           ...valueContainerStyle,
