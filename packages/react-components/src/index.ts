@@ -8,6 +8,9 @@ import IconsContainer from './IconsContainer'
 import SuspenseLoading from './SuspenseLoading'
 import ViewportSuspenseLoading from './ViewportSuspenseLoading'
 import {ToastContext, ToastProvider, useToast} from './Toast'
+
+import { RecylinkProvider } from './RecylinkProvider';
+
 export {
   Label,
   Button,
@@ -23,5 +26,7 @@ export {
   useModal,
   ToastContext,
   ToastProvider,
-  useToast
+  useToast,
+
+  RecylinkProvider
 }

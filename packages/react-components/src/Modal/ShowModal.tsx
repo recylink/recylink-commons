@@ -80,6 +80,7 @@ ShowModal.propTypes = {
   children: PropTypes.node,
   disabled: PropTypes.bool,
   confirmDisabled: PropTypes.bool,
+  cancelDisabled: PropTypes.bool,
   contentClassName: PropTypes.string,
   className: PropTypes.string,
   bottomLeft: PropTypes.node,

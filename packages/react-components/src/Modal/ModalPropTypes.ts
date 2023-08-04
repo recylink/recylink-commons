@@ -6,6 +6,7 @@ export default {
   confirmDisabled: PropTypes.bool,
   onConfirm: PropTypes.func,
   cancelText: PropTypes.string,
+  cancelDisabled: PropTypes.bool,
   onCancel: PropTypes.func,
   contentClassName: PropTypes.string,
   className: PropTypes.string,
@@ -20,5 +21,6 @@ export default {
   handleModal: PropTypes.func,
   setOpenModal: PropTypes.func.isRequired,
   modalContent: PropTypes.any,
-  setModalContent: PropTypes.func.isRequired
+  setModalContent: PropTypes.func.isRequired,
+  setModalProps: PropTypes.func
 }

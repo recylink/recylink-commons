@@ -17,7 +17,7 @@ const ModalProvider = ({children}) => {
     }
   }, [isOpen])
 
-  const handleModal = (content = null, props) => {
+ const handleModal = (content = null, props) => {
     setOpenModal(true)
     setModalProps(props)
     if (content) {
@@ -26,7 +26,7 @@ const ModalProvider = ({children}) => {
   }
 
   return (
-    <Provider value={{isOpen, setOpenModal, handleModal, modalContent, setModalContent}}>
+    <Provider value={{isOpen, setOpenModal, handleModal, modalContent, setModalContent, setModalProps}}>
       <Modal
         {...modalProps}
         isOpen={isOpen}

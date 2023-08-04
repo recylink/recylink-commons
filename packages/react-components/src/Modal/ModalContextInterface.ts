@@ -4,4 +4,5 @@ export interface ModalContextInterface {
   handleModal: (...args: any[]) => any
   modalContent: any
   setModalContent: (...args: any[]) => any
+  setModalProps: (modalProps: any) => any
 }

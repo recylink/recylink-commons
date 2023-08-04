@@ -13,10 +13,16 @@ const Modal = (props: InferProps<typeof ModalPropTypes>) => {
   const {isOpen, setOpenModal, modalContent, setModalContent}: InferProps<typeof ModalPropTypes> =
     props
   const [loadingConfirm, setLoadingConfirm] = useState(false)
+  const [loadingCancel, setLoadingCancel] = useState(false)
 
   const wrapperRef = useRef<HTMLDivElement>(null)
 
-  useOutsideClick(wrapperRef, async e => await onClickCancel(e))
+  const closeAndEmptyModal = () => {
+    setOpenModal(false)
+    setModalContent(<span />)
+  }
+
+  useOutsideClick(wrapperRef, () => closeAndEmptyModal())
 
   const onConfirm = async () => {
     let result = true
@@ -24,27 +30,36 @@ const Modal = (props: InferProps<typeof ModalPropTypes>) => {
       result = await props.onConfirm()
     }
     if (result !== false) {
-      setOpenModal(false)
-      setModalContent(<span />)
+      closeAndEmptyModal()
+    }
+  }
+
+  const onCancel = async () => {
+    let result = true
+    if (props.onCancel) {
+      result = await props.onCancel()
+    }
+    if (result !== false) {
+      closeAndEmptyModal()
     }
   }
 
   const onClickConfirm = async e => {
     setLoadingConfirm(true)
-    e.preventDefault()
+    if (e) {
+      e.preventDefault()
+    }
     await onConfirm()
     setLoadingConfirm(false)
   }
 
   const onClickCancel = async e => {
+    setLoadingCancel(true)
     if (e) {
       e.preventDefault()
     }
-    if (props.onCancel) {
-      await props.onCancel()
-    }
-    setOpenModal(false)
-    setModalContent(<span />)
+    await onCancel()
+    setLoadingCancel(false)
   }
 
   const confirmButton = () => (
@@ -70,6 +85,8 @@ const Modal = (props: InferProps<typeof ModalPropTypes>) => {
         use="function"
         label={props.cancelText}
         onClick={async e => await onClickCancel(e)}
+        disabled={props.cancelDisabled}
+        loading={loadingCancel}
       />
     )
   }
