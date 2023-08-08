@@ -5,7 +5,6 @@ export default {
   tooltip: PropTypes.string,
   to: PropTypes.string,
   href: PropTypes.string,
-  linkButton: PropTypes.bool,
   label: PropTypes.any,
   children: PropTypes.any,
   primary: PropTypes.bool,

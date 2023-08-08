@@ -20,7 +20,7 @@ export interface ButtonInterface {
   loadingComponent?: ReactNode
   fullWidth?: boolean
   icon?: any
-  onClick: (...args: any[]) => any
+  onClick: ((...args: any | any[]) => any | void | Promise<any>| Promise<void>)
   state?: object
   noLoading?: boolean
   containerClassName?: string

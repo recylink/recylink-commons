@@ -1,6 +1,6 @@
 {
   "name": "@recylink/react-hooks",
-  "version": "1.1.9",
+  "version": "1.2.1",
   "description": "Recylink hooks",
   "author": "diegoolavarria <olavarriaubeda.diego@gmail.com>",
   "homepage": "https://github.com/diegoolavarria/recylink-commons#readme",
@@ -20,10 +20,11 @@
     "start": "node src/index.js",
     "prebuild": "rm -rf dist",
     "build": "rm -rf types && tsc",
-    "prepublish": "rollup -c && tsc",
+    "prepublish": "rm -rf dist && rollup -c && tsc",
     "rollup": "rm -rf dist && rollup -c",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "webpack": "webpack --mode production"
   },
   "bugs": {
     "url": "https://github.com/recylink/recylink-commons/issues"
@@ -57,7 +58,9 @@
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-terser": "^7.0.2",
-    "typescript": "^4.6.4"
+    "typescript": "^4.6.4",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
   },
   "peerDependencies": {
     "prop-types": "^15.8.1",

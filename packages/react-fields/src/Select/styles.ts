@@ -8,10 +8,10 @@ export default function ({
   multiValueContainerStyle,
   multiValueLabelStyle,
   menuListStyle
-}) {
+}: any) {
   const style = {
-    container: (provided, state) => ({...provided, transition: 'all 0ms', width: '100%'}),
-    control: (provided, state) => {
+    container: (provided: any) => ({...provided, transition: 'all 0ms', width: '100%'}),
+    control: (provided: any, state: any) => {
       let style = {
         ...provided,
         height: state.isMulti ? 'auto' : '36px',
@@ -29,7 +29,7 @@ export default function ({
       }
       return style
     },
-    option: (provided, state) => {
+    option: (provided: any, state: any) => {
       const {data} = state
       let optionStyle = {...provided, fontSize: '14px', padding: '8px 12px', lineHeight: '16px'}
       if (state.isSelected) {
@@ -40,18 +40,18 @@ export default function ({
       }
       return {...optionStyle, color: '#111'}
     },
-    indicatorContainer: provided => ({...provided, padding: '0px 4px'}),
+    indicatorContainer: (provided: any) => ({...provided, padding: '0px 4px'}),
     indicatorSeparator: () => ({display: 'none'}),
-    clearIndicator: provided => ({...provided, padding: ' 6px 8px', cursor: 'pointer'}),
-    dropdownIndicator: provided => ({...provided, padding: '7px 8px', cursor: 'pointer'}),
-    placeholder: (provided, state) => {
+    clearIndicator: (provided: any) => ({...provided, padding: ' 6px 8px', cursor: 'pointer'}),
+    dropdownIndicator: (provided: any) => ({...provided, padding: '7px 8px', cursor: 'pointer'}),
+    placeholder: (provided: any, state: any) => {
       let style = {...provided, fontSize: 14, color: '#c0c1c6', margin: 0}
       if (state.isDisabled) {
         return {...style, color: '#cccccc'}
       }
       return style
     },
-    valueContainer: (provided, state) => {
+    valueContainer: (provided: any, state: any) => {
       if (state.isMulti) {
         return {
           ...provided,
@@ -73,8 +73,8 @@ export default function ({
         }
       }
     },
-    singleValue: provided => ({...provided, fontSize: '14px', margin: 0}),
-    multiValue: (provided, state) => ({
+    singleValue: (provided: any) => ({...provided, fontSize: '14px', margin: 0}),
+    multiValue: (provided: any, state: any) => ({
       ...provided,
       backgroundColor: state.children === 'Eliminado' ? 'var(--red)' : 'var(--blue)',
       color: '#fff',
@@ -83,11 +83,11 @@ export default function ({
       minWidth: 'auto',
       ...multiValueStyle
     }),
-    multiValueContainer: provided => ({
+    multiValueContainer: (provided: any) => ({
       ...provided,
       ...multiValueContainerStyle
     }),
-    multiValueLabel: provided => ({
+    multiValueLabel: (provided: any) => ({
       ...provided,
       borderRadius: '4px',
       padding: '0px 4px 0px 8px',
@@ -98,8 +98,8 @@ export default function ({
       color: '#fff',
       ...multiValueLabelStyle
     }),
-    multiValueRemove: provided => ({...provided, cursor: 'pointer'}),
-    menu: (provided, state) => ({
+    multiValueRemove: (provided: any) => ({...provided, cursor: 'pointer'}),
+    menu: (provided: any) => ({
       ...provided,
       top: '97%',
       margin: 0,
@@ -113,7 +113,7 @@ export default function ({
       borderRadius: '0px 0px 4px 4px',
       zIndex: 2
     }),
-    menuList: provided => ({
+    menuList: (provided: any) => ({
       ...provided,
       maxHeight: '108px',
       padding: 0,

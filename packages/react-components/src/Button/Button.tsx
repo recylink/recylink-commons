@@ -8,6 +8,7 @@ import Tooltip from '../Tooltip'
 import Icon from '../Icon'
 import './styles.css'
 import ButtonPropTypes from './ButtonPropTypes'
+import { ButtonInterface } from './ButtonInterface'
 
 const debounce = (func: Function, time: number, immediate?: boolean) => {
   var timeout: any
@@ -24,7 +25,25 @@ const debounce = (func: Function, time: number, immediate?: boolean) => {
   }
 }
 
-const Button = forwardRef((props: InferProps<typeof ButtonPropTypes>, buttonRef) => {
+const defaultProps = {
+  className: undefined,
+  primary: undefined,
+  default: undefined,
+  danger: undefined,
+  big: undefined,
+  style: {},
+  disabled: undefined,
+  fullWidth: undefined,
+  state: {},
+  onClick: async (e) => {console.log(e)},
+  noLoading: undefined,
+  type: 'button',
+  use: 'function',
+
+  gaclickid: undefined
+}
+
+const Button = forwardRef((props: InferProps<typeof ButtonPropTypes> & ButtonInterface, buttonRef) => {
   const [loading, setLoading] = useState(false)
   const [isMounted, setMounted] = useState(true)
 
@@ -130,7 +149,7 @@ const Button = forwardRef((props: InferProps<typeof ButtonPropTypes>, buttonRef)
     }
     return (
       <Icon
-        className={`recylink-icon-button ${props.className}`}
+        className={`recylink-icon-button ${props.className || ''}`}
         library={props.iconLibrary}
         icon={props.iconName}
         onClick={async (e: any) => await click(e)}
@@ -218,21 +237,6 @@ const Button = forwardRef((props: InferProps<typeof ButtonPropTypes>, buttonRef)
 })
 
 Button.propTypes = ButtonPropTypes
-Button.defaultProps = {
-  linkButton: false,
-  primary: false,
-  danger: false,
-  big: false,
-  style: {},
-  disabled: false,
-  fullWidth: false,
-  state: {},
-  onClick: () => {},
-  noLoading: false,
-  type: 'button',
-  use: 'function',
-
-  gaclickid: undefined
-}
+Button.defaultProps = defaultProps
 Button.displayName = 'Button'
 export default Button

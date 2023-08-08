@@ -64,7 +64,6 @@ const Modal = (props: InferProps<typeof ModalPropTypes>) => {
 
   const confirmButton = () => (
     <Button
-      primary
       type="button"
       use="function"
       label={props.confirmText}
