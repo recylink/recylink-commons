@@ -14,6 +14,7 @@
 
 .modal {
   width: fit-content;
+  overflow-y: auto;
   padding: 24px;
   background: #ffffff;
   border: 3px solid #0078c8;
