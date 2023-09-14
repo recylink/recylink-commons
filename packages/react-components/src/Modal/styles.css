@@ -27,6 +27,7 @@
   visibility: visible;
   color: #222;
   max-height: 90vh;
+  max-width: 90%;
 }
 
 .modal-title {

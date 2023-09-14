@@ -1,9 +1,6 @@
-import React, {useEffect} from 'react'
+import React, {lazy, useCallback, useEffect, useState} from 'react'
 import {InferProps} from 'prop-types'
-// import loadable from "@loadable/component"
 import get from 'lodash.get'
-import uniqueId from 'lodash.uniqueid'
-// import { IconType } from "react-icons/lib"
 import IconPropTypes from './IconPropTypes'
 import icons from './icons'
 import './styles.css'
@@ -17,16 +14,22 @@ const RenderIcon = ({
   icon,
   className,
   onClick,
-  gaclickid
+  gaclickid,
+  id
 }: InferProps<typeof IconPropTypes> & typeof defaultProps) => {
-  const id = uniqueId('recylink-icon')
+  const [renderIcon, setRenderIcon] = useState(<span />)
 
-  const onClickIcon = e => {
-      e.stopPropagation()
+  const onClickIcon = useCallback(
+    e => {
       if (onClick) {
+        e.preventDefault()
+        e.stopPropagation()
         onClick(e)
       }
-    }
+    },
+    [onClick]
+  )
+
 
   useEffect(() => {
     const el = document.getElementById(id)
@@ -34,20 +37,32 @@ const RenderIcon = ({
       el.setAttribute('gaclickid', gaclickid)
       el.querySelector('svg path')?.setAttribute('gaclickid', gaclickid)
     }
-  }, [gaclickid])
+  }, [gaclickid, id])
 
-  const IconComponent = get(icons, `${library}.${icon}`)
 
-  // const IconComponent: IconType = loadable(() => import(`./icons/${library}/index.js`), {
-  //   resolveComponent: (el: JSX.Element) => el[icon as keyof JSX.Element]
-  // });
+  const getIconComponent = useCallback(
+    async (library, icon) => {
+      const importFunction = get(icons, `${library}.${icon}`)
+      if (!importFunction) {
+        return
+      }
+      const Icon = lazy(() =>
+        importFunction().catch(error => {
+          console.log({error})
+        })
+      )
+      if (Icon) {
+        setRenderIcon(<Icon id={id} className={className} onClick={onClickIcon} />)
+      }
+    },
+    [className, onClickIcon, id]
+  )
 
-  if (!IconComponent) {
-    console.error('No icon or library found')
-    return <span />
-  }
+  useEffect(() => {
+    getIconComponent(library, icon)
+  }, [getIconComponent, library, icon])
 
-  return <IconComponent id={id} className={className} onClick={onClickIcon} />
+  return renderIcon
 }
 
 RenderIcon.propTypes = IconPropTypes

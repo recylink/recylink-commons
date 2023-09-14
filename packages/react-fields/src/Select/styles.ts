@@ -55,7 +55,7 @@ export default function ({
       if (state.isMulti) {
         return {
           ...provided,
-          padding: '5px 6px 0px 12px;',
+          padding: state.hasValue ? '5px 6px 0px 12px;' : '0px 6px 0px 12px;',
           height: 'auto',
           transition: 'all 0ms',
           width: '300px',

@@ -6,5 +6,6 @@ export default {
   className: PropTypes.string,
   onClick: PropTypes.func,
   suspenseClassName: PropTypes.string,
-  gaclickid: PropTypes.string
+  gaclickid: PropTypes.string,
+  id: PropTypes.string
 }

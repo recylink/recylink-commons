@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 export default {
   fieldName: PropTypes.string,
   onChange: PropTypes.func.isRequired,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
+  value: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
   passProps: PropTypes.object,
   errorMessage: PropTypes.node,
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),

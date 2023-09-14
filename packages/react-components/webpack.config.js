@@ -6,7 +6,7 @@ module.exports = {
   entry: path.join(__dirname, 'src', 'index.ts'),
   target: 'web',
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.jsx', '.css']
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.css', '.esm', '.mjs'],
   },
   module: {
     rules: [

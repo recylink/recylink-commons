@@ -1,15 +1,16 @@
-import React, { ComponentProps, ComponentType, FC, Fragment, PropsWithChildren } from 'react';
+import React, {   FC, Fragment, PropsWithChildren } from 'react';
 import { ModalProvider } from './Modal';
 import { ToastProvider } from './Toast';
+import { DayjsProvider } from './dayjs/DayjsContext';
 
 type CurrentComponentProps = {
   children: React.ReactNode
 }
 
-const combineProviders = (...components: FC<CurrentComponentProps>[]): FC => {
+const combineProviders = (...components: (FC<CurrentComponentProps>)[]): FC => {
   return components.reduce(
     (AccumulatedComponents, CurrentComponent) => {
-      return ({ children }: PropsWithChildren): JSX.Element => {
+      return ({ children }: PropsWithChildren<any>): JSX.Element => {
         return (
           <AccumulatedComponents>
             <CurrentComponent>{children}</CurrentComponent>
@@ -17,13 +18,14 @@ const combineProviders = (...components: FC<CurrentComponentProps>[]): FC => {
         );
       };
     },
-    ({ children }: PropsWithChildren)  => <Fragment>{children}</Fragment>,
+    ({ children }: PropsWithChildren<any>)  => <Fragment>{children}</Fragment>,
   );
 };
 
 
 
 const providers = [
+  DayjsProvider,
   ModalProvider,
   ToastProvider,
 ]
