@@ -5,12 +5,15 @@ import {Icon, Label} from '@recylink/react-components'
 import {useDeepEffect} from '@recylink/react-hooks'
 import isEqual from 'lodash.isequal'
 import isNil from 'lodash.isnil'
-import {OptionInterface} from './interfaces'
 import SelectPropTypes from './SelectPropTypes'
 import selectStyles from './styles'
 import '../styles.css'
 
-const defaultProps = {
+type SelectFieldProps = InferProps<typeof SelectPropTypes> 
+
+type SelectFieldOptionProps = InferProps<{ value: string; label: string; }>
+
+const defaultProps: SelectFieldProps = {
   fieldName: undefined,
   label: undefined,
   options: [],
@@ -33,7 +36,7 @@ const defaultProps = {
   multi: false
 }
 
-const Select = (props: InferProps<typeof SelectPropTypes> & typeof defaultProps) => {
+const Select = (props: SelectFieldProps & typeof defaultProps) => {
   const {value, options, multi, extraOptions, filter, onChange} = props
 
   const getOptions = useMemo(() => {
@@ -48,13 +51,13 @@ const Select = (props: InferProps<typeof SelectPropTypes> & typeof defaultProps)
   }, [options, filter, extraOptions])
 
   const calculateValue = useCallback(
-    (value?: string | string[]) => {
+    (value?: string | string[]): SelectFieldOptionProps | SelectFieldOptionProps[] | null => {
       if (!isNil(value)) {
         if (multi) {
           const selectedOptions = (value as string[] || [])
             .filter(optionValue => getOptions.find(o => o.value === optionValue))
             .reduce((acc, optionValue) => {
-              const option = (options || []).find((option: OptionInterface) => option.value === optionValue)
+              const option = (options || []).find((option: SelectFieldOptionProps) => option.value === optionValue) ;
               if (option) {
                 acc.push(option)
               }
@@ -62,12 +65,12 @@ const Select = (props: InferProps<typeof SelectPropTypes> & typeof defaultProps)
             }, [])
           return selectedOptions.filter(option => !!option)
         } else {
-          const selectedOption = options.find((option: OptionInterface) => option.value === value)
+          const selectedOption = options.find((option: SelectFieldOptionProps) => option.value === value)
           if (filter.includes(value)) {
             return null
           }
           if (isNil(selectedOption)) return null
-          return selectedOption
+          return [selectedOption];
         }
       } else {
         return null
@@ -86,7 +89,7 @@ const Select = (props: InferProps<typeof SelectPropTypes> & typeof defaultProps)
     if (multi && filter) {
       if (!isNil(value)) {
         const calculatedValue = calculateValue(value as string[])
-        if (calculatedValue && !isEqual(calculatedValue.map((v: OptionInterface) => v.value), value)) {
+        if (calculatedValue && Array.isArray(calculatedValue) && !isEqual(calculatedValue.map((v: SelectFieldOptionProps) => v.value), value)) {
           return onChange(calculatedValue.filter(v => !filter.includes(v)))
         }
       }
@@ -98,7 +101,7 @@ const Select = (props: InferProps<typeof SelectPropTypes> & typeof defaultProps)
       props.onBrandedSelect(params.isBranded)
     }
     if (multi) {
-      onChange(params.map((item: OptionInterface) => item.value))
+      onChange(params.map((item: SelectFieldOptionProps) => item.value))
     } else {
       if (params && !isNil(params.value)) {
         onChange(params.value)

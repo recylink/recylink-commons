@@ -6,9 +6,10 @@ import Icon from './Icon'
 import IconsContainer from './IconsContainer'
 import SuspenseLoading from './SuspenseLoading'
 import ViewportSuspenseLoading from './ViewportSuspenseLoading'
-import {Modal, ModalContext, ModalProvider, useModal} from './Modal'
-import {ToastContext, ToastProvider, useToast} from './Toast'
-import {DayjsContext, DayjsProvider, dayjs, setDayjs } from './dayjs';
+import { Modal, ModalContext, ModalProvider, useModal} from './Modal'
+import { ToastContext, ToastProvider, useToast} from './Toast'
+import { DayjsContext, DayjsProvider, dayjs, setDayjs } from './dayjs';
+import { WorkersContext, WorkersProvider, useWorkers } from './Workers';
 
 import { RecylinkProvider } from './RecylinkProvider';
 
@@ -40,6 +41,10 @@ export {
   DayjsProvider,
   dayjs,
   setDayjs,
+
+  WorkersContext,
+  WorkersProvider,
+  useWorkers,
 
   RecylinkProvider
 }

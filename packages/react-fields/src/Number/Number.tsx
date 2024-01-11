@@ -1,13 +1,14 @@
 import React from 'react'
 import {InferProps} from 'prop-types'
+import {Label} from '@recylink/react-components'
 import {NumericFormat, PatternFormat} from 'react-number-format'
 import isNil from 'lodash.isnil'
-import {Label} from '@recylink/react-components'
 import NumberPropTypes from './NumberPropTypes'
 import '../styles.css'
-import { NumberInterface } from './NumberInterface'
 
-const defaultProps = {
+type NumberFieldProps = InferProps<typeof NumberPropTypes>
+
+const defaultProps: NumberFieldProps = {
   value: null,
   label: undefined,
   placeholder: undefined,
@@ -17,7 +18,7 @@ const defaultProps = {
   mask: undefined
 }
 
-const Number = (props: InferProps<typeof NumberPropTypes> & NumberInterface) => {
+const Number = (props: NumberFieldProps & typeof defaultProps) => {
   const onChange = (value: number) => props.onChange(value)
 
   const onFocus = () => {

@@ -1,17 +1,16 @@
 {
   "compilerOptions": {
-    // Default
     "target": "ES2015",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
+    "strictNullChecks": false,
     "skipLibCheck": true,
 
-    // Added
     "jsx": "react",
     "module": "ESNext",
     "declaration": true,
-    // "declarationDir": "types",
+    "declarationDir": "dist/esm",
     "sourceMap": true,
     "outDir": "dist",
     "moduleResolution": "node",

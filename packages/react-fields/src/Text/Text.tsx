@@ -5,9 +5,10 @@ import debounce from 'lodash.debounce'
 import {Label} from '@recylink/react-components'
 import TextPropTypes from './TextPropTypes'
 import '../styles.css'
-import { TextInterface } from './TextInterface'
 
-const defaultProps = {
+type TextFieldProps = InferProps<typeof TextPropTypes>
+
+const defaultProps: TextFieldProps = {
   label: undefined,
   fieldType: 'text',
   value: '',
@@ -15,7 +16,6 @@ const defaultProps = {
   onFocus: () => {},
   onBlur: () => {},
   onChange: () => {},
-  allowedCharacters: '',
   delay: 0,
   mask: undefined,
   placeholder: undefined,
@@ -23,7 +23,7 @@ const defaultProps = {
   maxLength: undefined
 }
 
-const Text = (props: InferProps<typeof TextPropTypes> & TextInterface) => {
+const Text = (props: TextFieldProps & typeof defaultProps) => {
   const {delay, onChange, toUpperCase} = props
   const [state, setState] = useState(props.value)
 
@@ -96,17 +96,17 @@ const Text = (props: InferProps<typeof TextPropTypes> & TextInterface) => {
     }
     return (
       <input
-          className={getClassName()}
-          type={props.fieldType}
-          value={state || ''}
-          placeholder={props.placeholder}
-          onChange={(event: any) => handleOnChange(event.target.value)}
-          disabled={props.disabled}
-          maxLength={props.maxLength}
-          onFocus={props.onFocus}
-          onBlur={props.onBlur}
-          {...props.passProps}
-        />
+        className={getClassName()}
+        type={props.fieldType}
+        value={state || ''}
+        placeholder={props.placeholder}
+        onChange={(event: any) => handleOnChange(event.target.value)}
+        disabled={props.disabled}
+        maxLength={props.maxLength}
+        onFocus={props.onFocus}
+        onBlur={props.onBlur}
+        {...props.passProps}
+      />
     )
   }
 

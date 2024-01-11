@@ -4,6 +4,8 @@
   opacity: 1 !important;
   padding: 15px 16px;
   box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.1), 0 1px 4px 0 rgba(0, 0, 0, 0.2);
+  background-color: #0078c8;
+  color: #ffffff;
 }
 .recylink-tooltip-title,
 .recylink-tooltip-content {

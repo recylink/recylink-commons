@@ -22,7 +22,11 @@ const Modal = (props: InferProps<typeof ModalPropTypes>) => {
     setModalContent(<span />)
   }
 
-  useOutsideClick(wrapperRef, () => closeAndEmptyModal())
+  useOutsideClick(wrapperRef, () => {
+    if (!props.disableOutsideClick) {
+      closeAndEmptyModal()
+    }
+  })
 
   const onConfirm = async () => {
     let result = true
@@ -62,16 +66,20 @@ const Modal = (props: InferProps<typeof ModalPropTypes>) => {
     setLoadingCancel(false)
   }
 
-  const confirmButton = () => (
-    <Button
-      type="button"
-      use="function"
-      label={props.confirmText}
-      onClick={async e => await onClickConfirm(e)}
-      disabled={props.confirmDisabled}
-      loading={loadingConfirm}
-    />
-  )
+  const confirmButton = () => {
+    
+    return (
+      <Button
+        className={props.confirmButtonClassName}
+        type="button"
+        use="function"
+        label={props.confirmText}
+        onClick={async e => await onClickConfirm(e)}
+        disabled={props.confirmDisabled}
+        loading={loadingConfirm}
+      />
+    )
+  }
 
   const cancelButton = () => {
     if (!props.cancelText) {
@@ -79,7 +87,7 @@ const Modal = (props: InferProps<typeof ModalPropTypes>) => {
     }
     return (
       <Button
-        danger
+        className={props.cancelButtonClassName}
         type="button"
         use="function"
         label={props.cancelText}

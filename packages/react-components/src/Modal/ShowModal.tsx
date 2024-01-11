@@ -36,7 +36,8 @@ function ShowModal(props) {
       title: props.title,
       onConfirm: async () => await submit(),
       confirmText: props.confirmText,
-      confirmDisabled: props.confirmDisabled
+      confirmDisabled: props.confirmDisabled,
+      disableOutsideClick: props.disableOutsideClick
     })
   }
 
@@ -83,6 +84,7 @@ ShowModal.propTypes = {
   cancelDisabled: PropTypes.bool,
   contentClassName: PropTypes.string,
   className: PropTypes.string,
+  disableOutsideClick: PropTypes.bool,
   bottomLeft: PropTypes.node,
 
   buttonType: PropTypes.string,
