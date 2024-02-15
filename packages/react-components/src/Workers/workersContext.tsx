@@ -1,5 +1,7 @@
-import React, { PropsWithChildren, createContext, useState } from 'react';
+import React, { PropsWithChildren, createContext, useRef } from 'react';
+import omit from 'lodash/omit';
 import {
+  AddEventListenerInput,
   GetWorkerOutput,
   SetWorkerInput,
   WorkerMethods,
@@ -12,32 +14,38 @@ const { Provider } = (WorkersContext = createContext<WorkersContextInterface>(
 ));
 
 const WorkersProvider = ({ children }: PropsWithChildren<any>): JSX.Element => {
-  const [workers, setWorkers] = useState<any>({});
-  const [workingWorkers, setWorkingWorkers] = useState<any>({});
+  const workers = useRef<any>({});
+  const workingWorkers = useRef<any>({});
 
   const setWorkerLoading = (workerId: string, isWorking: boolean) => {
-    setWorkingWorkers((prevWorkingWorkers: any) => ({
-      ...prevWorkingWorkers,
+    workingWorkers.current = {
+      ...workingWorkers.current,
       [workerId]: isWorking,
-    }));
+    };
   };
 
   const getWorker = (workerId: string): GetWorkerOutput | undefined =>
-    workers[workerId]
+    workers.current[workerId]
       ? {
-          worker: workers[workerId],
-          loading: workingWorkers[workerId] || false,
+          worker: workers.current[workerId],
+          loading: workingWorkers.current[workerId] || false,
         }
       : undefined;
 
+  const terminateWorker = (workerId: string) => {
+    if (workerId) {
+      if (workers.current[workerId]) {
+        workers.current[workerId].terminate();
+      }
+    }
+    setWorkerLoading(workerId, false);
+  };
+
   const removeWorker = (workerId: string) => {
     if (workerId) {
-      if (workers[workerId]) {
-        setWorkers((prevWorkers: any) => {
-          const newWorkers = { ...prevWorkers };
-          delete newWorkers[workerId];
-          return newWorkers;
-        });
+      if (workers.current[workerId]) {
+        workers.current[workerId].terminate();
+        workers.current = omit(workers.current, workerId);
       }
       setWorkerLoading(workerId, false);
     }
@@ -63,42 +71,60 @@ const WorkersProvider = ({ children }: PropsWithChildren<any>): JSX.Element => {
 
       originalPostMessage(finalMessage);
       if (methods?.postMessage?.event) {
+        console.log('postMessage');
+
         methods.postMessage.event(finalMessage);
       }
     };
   };
 
   const setWorkerAddEventListeners = (
+    workerId: string,
     worker: Worker,
-    methods: WorkerMethods | undefined,
+    eventListeners?: AddEventListenerInput[],
   ): void => {
-    worker.addEventListener('message', (event) => {
-      if (methods) {
-        if (methods.addEventListener) {
-          if (methods.addEventListener.type === 'message') {
-            methods.addEventListener.event(event);
-          }
+    const eventListenersByType = (eventListeners || []).reduce(
+      (acc, eventListener: AddEventListenerInput) => ({
+        ...acc,
+        [eventListener.type]: eventListener,
+      }),
+      {},
+    );
+
+    for (const eventKey of ['error', 'message', 'messageerror']) {
+      const eventListener = eventListenersByType[eventKey];
+
+      worker.addEventListener(eventKey, (event) => {
+        if (eventListener) {
+          console.log({ eventListener });
+
+          eventListener.event(event);
         }
-      }
-    });
+      });
+    }
   };
 
-  const setWorker = ({ workerId, worker, methods }: SetWorkerInput) => {
-    if (worker) {
+  const setWorker = ({
+    workerId,
+    worker,
+    methods,
+    eventListeners,
+  }: SetWorkerInput): Worker => {
+    if (worker && !workers[workerId]) {
       setWorkerPostMessage(workerId, worker, methods);
-      setWorkerAddEventListeners(worker, methods);
+      setWorkerAddEventListeners(workerId, worker, eventListeners);
 
-      setWorkers((currentWorkers: any) => ({
-        ...currentWorkers,
+      workers.current = {
+        ...workers.current,
         [workerId]: worker,
-      }));
+      };
     }
 
     return worker;
   };
 
   return (
-    <Provider value={{ getWorker, setWorker, removeWorker }}>
+    <Provider value={{ getWorker, setWorker, removeWorker, terminateWorker }}>
       {children}
     </Provider>
   );

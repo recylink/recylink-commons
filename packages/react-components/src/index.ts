@@ -8,8 +8,25 @@ import SuspenseLoading from './SuspenseLoading'
 import ViewportSuspenseLoading from './ViewportSuspenseLoading'
 import { Modal, ModalContext, ModalProvider, useModal} from './Modal'
 import { ToastContext, ToastProvider, useToast} from './Toast'
-import { DayjsContext, DayjsProvider, dayjs, setDayjs } from './dayjs';
 import { WorkersContext, WorkersProvider, useWorkers } from './Workers';
+import {
+  DayjsContext,
+  DayjsProvider,
+  dayjs,
+  setDayjs,
+  Dayjs,
+  utc,
+  relativeTime,
+  timezone,
+  localeData,
+  dayOfYear,
+  isToday,
+  weekday,
+  toObject,
+  duration,
+  customParseFormat,
+  esLocale
+} from './dayjs';
 
 import { RecylinkProvider } from './RecylinkProvider';
 
@@ -41,6 +58,18 @@ export {
   DayjsProvider,
   dayjs,
   setDayjs,
+  Dayjs,
+  utc,
+  relativeTime,
+  timezone,
+  localeData,
+  dayOfYear,
+  isToday,
+  weekday,
+  toObject,
+  duration,
+  customParseFormat,
+  esLocale,
 
   WorkersContext,
   WorkersProvider,

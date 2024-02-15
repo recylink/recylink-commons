@@ -1,20 +1,34 @@
-import {useEffect, useRef} from 'react'
-import isEqual from 'lodash/isEqual'
+import { useEffect, useRef } from 'react';
+import isEqual from 'lodash/isEqual';
 
-const useDeepEffect = (fn: Function, params: Array<any>) => {
-  const isFirst = useRef(true)
-  const prevParams = useRef(params)
+const useDeepEffect = (
+  fn: (...args: any[]) => unknown,
+  params: Array<any>,
+  cleanUp?: (...args: any[]) => unknown,
+): void => {
+  const isFirst = useRef(true);
+  const prevParams = useRef(params);
 
   useEffect(() => {
-    const isSame = prevParams.current.every((obj, index) => isEqual(obj, params[index]))
+    return () => {
+      if (cleanUp) {
+        cleanUp();
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    const isSame = prevParams.current.every((obj, index) =>
+      isEqual(obj, params[index]),
+    );
 
     if (isFirst.current || !isSame) {
-      fn()
+      fn();
     }
 
-    isFirst.current = false
-    prevParams.current = params
-  }, [params, fn])
-}
+    isFirst.current = false;
+    prevParams.current = params;
+  }, [params, fn]);
+};
 
-export default useDeepEffect
+export default useDeepEffect;

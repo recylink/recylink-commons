@@ -12,19 +12,20 @@ export interface PostMessageInput {
 export interface WorkerMethods {
   postMessage?: PostMessageInput;
   terminate?: () => void;
-  addEventListener?: AddEventListenerInput;
 }
 
 export interface SetWorkerWithWorkerIdInput {
   workerId?: string;
   worker: Worker;
   methods?: WorkerMethods;
+  eventListeners?: AddEventListenerInput[];
 }
 
 export interface SetWorkerInput {
   workerId: string;
   worker: Worker;
   methods?: WorkerMethods;
+  eventListeners?: AddEventListenerInput[];
 }
 
 export interface GetWorkerOutput {
@@ -36,4 +37,5 @@ export interface WorkersContextInterface {
   getWorker: (workerId: string) => GetWorkerOutput | undefined;
   setWorker: (setWorkerParams: SetWorkerInput) => Worker;
   removeWorker: (workerId: string) => void;
+  terminateWorker: (workerId: string) => void;
 }

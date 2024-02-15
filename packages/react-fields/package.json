@@ -1,6 +1,6 @@
 {
   "name": "@recylink/react-fields",
-  "version": "1.4.5",
+  "version": "1.4.8",
   "description": "Recylink fields",
   "author": "diegoolavarria <olavarriaubeda.diego@gmail.com>",
   "homepage": "https://github.com/diegoolavarria/recylink-commons#readme",
@@ -36,7 +36,7 @@
   },
   "gitHead": "cca989f324d3dc67c38947717c002e580f812b5f",
   "dependencies": {
-    "@recylink/react-components": "^1.7.2",
+    "@recylink/react-components": "^1.7.3",
     "@recylink/react-hooks": "^1.2.2",
     "lodash.debounce": "^4.0.8",
     "lodash.isequal": "^4.5.0",

@@ -3,7 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [1.3.5](https://github.com/recylink/recylink-commons/compare/@recylink/react-components@1.3.4...@recylink/react-components@1.3.5) (2022-08-29)
+## [1.7.5](https://github.com/recylink/recylink-commons/compare/@recylink/react-components@1.7.4...@recylink/react-components@1.7.5) (2024-02-15)
+
+### Features
+
+* **Workers:** Changes in workers provider functions
+
+
+
+
+## [1.7.3](https://github.com/recylink/recylink-commons/compare/@recylink/react-components@1.7.2...@recylink/react-components@1.7.3) (2023-01-20)
+
+### Features
+
+* **dayjs:** Added exports for plugins and Dayjs class ([1a09d70](https://github.com/recylink/recylink-commons/commit/1a09d708ec4f32b207488fe43644dc32149aca6a))
+
+
+
+
+
+#### [1.3.5](https://github.com/recylink/recylink-commons/compare/@recylink/react-components@1.3.4...@recylink/react-components@1.3.5) (2022-08-29)
 
 **Note:** Version bump only for package @recylink/react-components
 
