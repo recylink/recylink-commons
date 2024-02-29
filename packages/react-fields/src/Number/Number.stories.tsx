@@ -1,30 +1,22 @@
-import React, {useState} from 'react'
-import {Story, Meta} from '@storybook/react'
+import {Meta, StoryObj} from '@storybook/react'
 import Number from './Number'
 
-export default {
-  title: 'Number',
+const meta: Meta<typeof Number> = {
   component: Number,
-  parameters: {}
-} as Meta
+  tags: ['autodocs'],
+  argTypes: {},
+};
 
-const Template: Story = () => {
-  const [state, setValue] = useState<number>(3)
+export default meta;
+type Story = StoryObj<typeof Number>;
 
-  const onChange = (change: number) => setValue(change)
 
-  return (
-    <>
-      <Number
-        label="Number Field example"
-        placeholder="Placeholder example"
-        value={state}
-        onChange={e => onChange(e)}
-      />
-      value: {state}
-    </>
-  )
-}
+export const Default: Story = {
+  args: {
+    label:"Number Field example",
+        placeholder: "Placeholder example",
+        value: null,
+        onChange: (e: any) => console.log(e),
 
-export const Default: Story = Template.bind({})
-// Default.parameters = {}
+  },
+};
