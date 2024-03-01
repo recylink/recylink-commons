@@ -306,7 +306,6 @@
   margin-right: 4px;
 }
 .recylink-checkbox-right {
-  margin-left: 4px;
   margin-right: 8px;
 }
 .recylink-checkbox-span,
@@ -373,7 +372,6 @@
 }
 .recylink-checkbox-disabled,
 .recylink-checkbox-label {
-  margin-left: 5px;
   vertical-align: top;
   font-size: 14px;
   font-weight: normal;
@@ -447,6 +445,9 @@
     left: -1px;
   }
   .recylink-checkbox-span {
+    margin-left: -4px;
+  }
+  .recylink-checkbox-span-disabled {
     margin-left: -4px;
   }
 }
