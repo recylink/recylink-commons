@@ -9,6 +9,7 @@
     "lerna": "^4.0.0"
   },
   "scripts": {
+    "version": "lerna version",
     "bootstrap": "lerna bootstrap",
     "clean": "lerna run clean",
     "watch": "lerna run --parallel watch",
