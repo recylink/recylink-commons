@@ -3,8 +3,9 @@ import {Story, ComponentMeta} from '@storybook/react'
 import Button from './Button'
 import ButtonPropTypes from './ButtonPropTypes'
 import {InferProps} from 'prop-types'
+import { ButtonInterface } from './ButtonInterface'
 
-type ButtonPropsInterface = InferProps<typeof ButtonPropTypes>
+// type ButtonPropsInterface = InferProps<typeof ButtonPropTypes>
 
 export default {
   title: 'RecylinkReactComponents/Button',
@@ -12,7 +13,7 @@ export default {
   tags: ['autodocs'],
 } as ComponentMeta<typeof Button>
 
-const Template: Story<ButtonPropsInterface> = args => <Button {...args} />
+const Template: Story<ButtonInterface> = args => <Button {...args} />
 
 export const TestButton = Template.bind({})
 TestButton.args = {

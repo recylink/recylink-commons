@@ -1,47 +1,24 @@
-import React, {useCallback, useEffect, useState} from 'react'
-import PropTypes, {InferProps} from 'prop-types'
-import get from 'lodash.get'
+import React from 'react'
+import {InferProps} from 'prop-types'
+import uniqueId from 'lodash.uniqueid'
+import IconPropTypes from './IconPropTypes'
+import RenderIcon from './RenderIcon'
 import SuspenseLoading from '../SuspenseLoading'
-import icons from './icons'
-import './styles.css'
 
-const IconPropTypes = {
-  library: PropTypes.string.isRequired,
-  icon: PropTypes.string.isRequired,
-  className: PropTypes.string,
-  onClick: PropTypes.func,
-  suspenseClassName: PropTypes.string
+const defaultProps = {
+  className: ''
 }
 
-const RenderIcon = ({library, icon, className, onClick}: InferProps<typeof IconPropTypes>) => {
-  const [renderIcon, setRenderIcon] = useState(<span />)
-
-  const onCLickIcon = useCallback(
-    e => {
-      e.stopPropagation()
-      if (onClick) {
-        onClick(e)
-      }
-    },
-    [onClick]
+const Icon = (props: InferProps<typeof IconPropTypes> & typeof defaultProps) => {
+  const id = uniqueId('recylink-icon')
+  
+  return (
+    <SuspenseLoading className={props.suspenseClassName}>
+      <RenderIcon id={id} {...props} />
+    </SuspenseLoading>
   )
-
-  useEffect(() => {
-    const IconComponent = get(icons, `${library}.${icon}`)
-    if (!IconComponent) {
-      console.error('No icon or library found')
-    }
-    setRenderIcon(<IconComponent className={className} onClick={onCLickIcon} />)
-  }, [icon, library, className, onCLickIcon])
-
-  return renderIcon
 }
-
-const Icon = props => (
-  <SuspenseLoading className={props.suspenseClassName}>
-    <RenderIcon {...props} />
-  </SuspenseLoading>
-)
 
 Icon.propTypes = IconPropTypes
+Icon.defaultProps = defaultProps
 export default React.memo(Icon)

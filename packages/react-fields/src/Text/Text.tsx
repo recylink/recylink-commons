@@ -1,11 +1,29 @@
 import React, {useState, useEffect, useCallback, useMemo} from 'react'
-import PropTypes from 'prop-types'
+import {InferProps} from 'prop-types'
 import InputMask from 'react-input-mask'
 import debounce from 'lodash.debounce'
 import {Label} from '@recylink/react-components'
+import TextPropTypes from './TextPropTypes'
 import '../styles.css'
 
-const Text = (props: any) => {
+type TextFieldProps = InferProps<typeof TextPropTypes>
+
+const defaultProps: TextFieldProps = {
+  label: undefined,
+  fieldType: 'text',
+  value: '',
+  onEnter: () => {},
+  onFocus: () => {},
+  onBlur: () => {},
+  onChange: () => {},
+  delay: 0,
+  mask: undefined,
+  placeholder: undefined,
+  disabled: undefined,
+  maxLength: undefined
+}
+
+const Text = (props: TextFieldProps & typeof defaultProps) => {
   const {delay, onChange, toUpperCase} = props
   const [state, setState] = useState(props.value)
 
@@ -58,6 +76,40 @@ const Text = (props: any) => {
     return 'recylink-input'
   }
 
+  const renderField = () => {
+    if (props.mask) {
+      return (
+        <InputMask
+          mask={props.mask}
+          className={getClassName()}
+          type={props.fieldType}
+          value={state || ''}
+          placeholder={props.placeholder}
+          onChange={(event: any) => handleOnChange(event.target.value)}
+          disabled={props.disabled}
+          onFocus={props.onFocus}
+          onBlur={props.onBlur}
+          maskChar={props.maskChar}
+          {...props.passProps}
+        />
+      )
+    }
+    return (
+      <input
+        className={getClassName()}
+        type={props.fieldType}
+        value={state || ''}
+        placeholder={props.placeholder}
+        onChange={(event: any) => handleOnChange(event.target.value)}
+        disabled={props.disabled}
+        maxLength={props.maxLength}
+        onFocus={props.onFocus}
+        onBlur={props.onBlur}
+        {...props.passProps}
+      />
+    )
+  }
+
   return (
     <>
       <Label
@@ -68,20 +120,7 @@ const Text = (props: any) => {
         isRequiredLabel={props.isRequiredLabel}
       />
       <div className="recylink-input-container">
-        <InputMask
-          mask={props.mask}
-          className={getClassName()}
-          type={props.fieldType}
-          value={state || ''}
-          placeholder={props.placeholder}
-          onChange={(event: any) => handleOnChange(event.target.value)}
-          disabled={props.disabled}
-          maxLength={props.maxLength}
-          onFocus={props.onFocus}
-          onBlur={props.onBlur}
-          maskChar={props.maskChar}
-          {...props.passProps}
-        />
+        {renderField()}
         <div className="recylink-description">{props.description}</div>
         <div className="recylink-input-error">{props.errorMessage}</div>
       </div>
@@ -89,38 +128,6 @@ const Text = (props: any) => {
   )
 }
 
-Text.propTypes = {
-  value: PropTypes.string,
-  onChange: PropTypes.func,
-  className: PropTypes.string,
-  fieldType: PropTypes.string,
-  passProps: PropTypes.object,
-  placeholder: PropTypes.node,
-  errorMessage: PropTypes.node,
-  disabled: PropTypes.bool,
-  description: PropTypes.node,
-  onEnter: PropTypes.func,
-  onFocus: PropTypes.func,
-  onBlur: PropTypes.func,
-  maxLength: PropTypes.string,
-  mask: PropTypes.string,
-  toUpperCase: PropTypes.bool,
-  delay: PropTypes.number,
-  maskChar: PropTypes.bool,
-  label: PropTypes.node,
-  isOptional: PropTypes.bool,
-  isOptionalLabel: PropTypes.string,
-  isRequired: PropTypes.bool,
-  isRequiredLabel: PropTypes.string
-}
-Text.defaultProps = {
-  fieldType: 'text',
-  value: '',
-  onEnter: () => {},
-  onFocus: () => {},
-  onBlur: () => {},
-  onChange: () => {},
-  allowedCharacters: '',
-  delay: 0
-}
+Text.propTypes = TextPropTypes
+Text.defaultProps = defaultProps
 export default Text

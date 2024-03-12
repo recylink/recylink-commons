@@ -1,19 +1,46 @@
 import React, {useCallback, useMemo} from 'react'
-import ReactSelect, {components} from 'react-select'
-import PropTypes from 'prop-types'
+import ReactSelect from 'react-select'
+import {InferProps} from 'prop-types'
 import {Icon, Label} from '@recylink/react-components'
 import {useDeepEffect} from '@recylink/react-hooks'
 import isEqual from 'lodash.isequal'
 import isNil from 'lodash.isnil'
-
+import SelectPropTypes from './SelectPropTypes'
 import selectStyles from './styles'
 import '../styles.css'
 
-const Select = props => {
+type SelectFieldProps = InferProps<typeof SelectPropTypes> 
+
+type SelectFieldOptionProps = InferProps<{ value: string; label: string; }>
+
+const defaultProps: SelectFieldProps = {
+  fieldName: undefined,
+  label: undefined,
+  options: [],
+  extraOptions: [],
+  isClearable: false,
+  isSearchable: false,
+  disabled: false,
+  filter: [],
+  style: {},
+  noOptionsMessage: 'Sin opciones',
+  brandedStyle: {},
+  onBrandedSelect: () => {},
+  onBlur: () => {},
+  menuListStyle: {},
+  containerStyle: {},
+  components: {},
+  closeMenuOnSelect: false,
+  hideSelectedOptions: false,
+  blurInputOnSelect: false,
+  multi: false
+}
+
+const Select = (props: SelectFieldProps & typeof defaultProps) => {
   const {value, options, multi, extraOptions, filter, onChange} = props
 
   const getOptions = useMemo(() => {
-    let returnOptions = options || []
+    let returnOptions: any[] = options || []
     if (extraOptions.length) {
       returnOptions.concat(extraOptions)
     }
@@ -24,13 +51,13 @@ const Select = props => {
   }, [options, filter, extraOptions])
 
   const calculateValue = useCallback(
-    value => {
+    (value?: string | string[]): SelectFieldOptionProps | SelectFieldOptionProps[] | null => {
       if (!isNil(value)) {
         if (multi) {
-          const selectedOptions = (value || [])
+          const selectedOptions = (value as string[] || [])
             .filter(optionValue => getOptions.find(o => o.value === optionValue))
             .reduce((acc, optionValue) => {
-              const option = (options || []).find(option => option.value === optionValue)
+              const option = (options || []).find((option: SelectFieldOptionProps) => option.value === optionValue) ;
               if (option) {
                 acc.push(option)
               }
@@ -38,12 +65,12 @@ const Select = props => {
             }, [])
           return selectedOptions.filter(option => !!option)
         } else {
-          const selectedOption = options.find(option => option.value === value)
+          const selectedOption = options.find((option: SelectFieldOptionProps) => option.value === value)
           if (filter.includes(value)) {
             return null
           }
           if (isNil(selectedOption)) return null
-          return selectedOption
+          return [selectedOption];
         }
       } else {
         return null
@@ -59,20 +86,22 @@ const Select = props => {
   }, [filter, onChange, multi])
 
   useDeepEffect(() => {
-    if (multi && filter && value) {
-      const calculatedValue = calculateValue(value).map(v => v.value)
-      if (!isEqual(calculatedValue, value)) {
-        return onChange(calculatedValue.filter(v => !filter.includes(v)))
+    if (multi && filter) {
+      if (!isNil(value)) {
+        const calculatedValue = calculateValue(value as string[])
+        if (calculatedValue && Array.isArray(calculatedValue) && !isEqual(calculatedValue.map((v: SelectFieldOptionProps) => v.value), value)) {
+          return onChange(calculatedValue.filter(v => !filter.includes(v)))
+        }
       }
     }
   }, [filter, multi, calculateValue, value, onChange])
 
-  const onChangeSelect = params => {
+  const onChangeSelect = (params: any) => {
     if (params) {
       props.onBrandedSelect(params.isBranded)
     }
     if (multi) {
-      onChange(params.map(item => item.value))
+      onChange(params.map((item: SelectFieldOptionProps) => item.value))
     } else {
       if (params && !isNil(params.value)) {
         onChange(params.value)
@@ -82,20 +111,22 @@ const Select = props => {
     }
   }
 
-  const DropdownIndicator = selectProps => {
-    if (selectProps.options.length > 3) {
-      return (
-        <div
-          className="recylink-select-icon-container"
-          {...(selectProps.isFocused ? {style: {color: '#999999'}} : {})}>
-          <Icon icon="FiCode" library="fi" className="recylink-select-icon" />
-        </div>
-      )
-    }
-    return <components.DropdownIndicator {...selectProps} />
+  const DropdownIndicator = (selectProps: any) => {
+    const className =
+      selectProps.options.length > 3
+        ? 'recylink-select-icon-multi rotate-90'
+        : 'recylink-select-icon'
+    const icon = selectProps.options.length > 3 ? 'FiCode' : 'FiChevronDown'
+    return (
+      <div
+        className="recylink-select-icon-container"
+        {...(selectProps.isFocused ? {style: {color: '#999999'}} : {})}>
+        <Icon icon={icon} library="fi" className={className} />
+      </div>
+    )
   }
 
-  const Option = selectProps => {
+  const Option = (selectProps: any) => {
     const {label, innerRef, innerProps, isSelected} = selectProps
     return (
       <div ref={innerRef} className="recylink-select-option" {...innerProps}>
@@ -115,7 +146,7 @@ const Select = props => {
   }
 
   const renderIcon = () => {
-    if (props.icon) {
+    if (props.icon && props.iconLibrary) {
       return (
         <div className="recylink-select-props-icon-container">
           <Icon
@@ -170,7 +201,7 @@ const Select = props => {
           isClearable={props.isClearable}
           isDisabled={props.disabled}
           name={props.fieldName}
-          value={calculateValue(value)}
+          value={calculateValue(value as string | string[])}
           onChange={params => onChangeSelect(params)}
           options={getOptions}
           placeholder={props.placeholder || 'Seleccionar...'}
@@ -188,65 +219,7 @@ const Select = props => {
   )
 }
 
-Select.propTypes = {
-  fieldName: PropTypes.string,
-  onChange: PropTypes.func,
-  value: PropTypes.any,
-  passProps: PropTypes.object,
-  errorMessage: PropTypes.node,
-  label: PropTypes.node,
-  description: PropTypes.node,
-  placeholder: PropTypes.any,
-  multi: PropTypes.bool,
-  disabled: PropTypes.bool,
-  options: PropTypes.array,
-  isClearable: PropTypes.bool,
-  isSearchable: PropTypes.bool,
-  extraOptions: PropTypes.array,
-  filter: PropTypes.array,
-  icon: PropTypes.string,
-  style: PropTypes.object,
-  noOptionsMessage: PropTypes.node,
-  brandedStyle: PropTypes.object,
-  onBrandedSelect: PropTypes.func,
-  onInputChange: PropTypes.func,
-  inputValue: PropTypes.string,
-  components: PropTypes.object,
-  onBlur: PropTypes.func,
-  closeMenuOnSelect: PropTypes.bool,
-  hideSelectedOptions: PropTypes.bool,
-  blurInputOnSelect: PropTypes.bool,
-  menuListStyle: PropTypes.object,
-  containerStyle: PropTypes.object,
-  containerClassName: PropTypes.string,
-  multiValueStyle: PropTypes.object,
-  multiValueContainerStyle: PropTypes.object,
-  multiValueLabelStyle: PropTypes.object,
-  valueContainerStyle: PropTypes.object,
-  iconLibrary: PropTypes.string,
-  isOptional: PropTypes.bool,
-  isOptionalLabel: PropTypes.string,
-  isRequired: PropTypes.bool,
-  isRequiredlabel: PropTypes.string
-}
-Select.defaultProps = {
-  options: [],
-  extraOptions: [],
-  isClearable: false,
-  isSearchable: false,
-  filter: [],
-  style: {},
-  noOptionsMessage: 'Sin opciones',
-  brandedStyle: {},
-  onBrandedSelect: () => {},
-  onBlur: () => {},
-  menuListStyle: {},
-  containerStyle: {},
-  components: {},
-  closeMenuOnSelect: false,
-  hideSelectedOptions: false,
-  blurInputOnSelect: false,
-  iconLibrary: 'fi',
-}
 
+Select.propTypes = SelectPropTypes
+Select.defaultProps = defaultProps
 export default Select

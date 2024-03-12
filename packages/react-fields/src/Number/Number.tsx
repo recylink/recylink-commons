@@ -1,11 +1,24 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import NumberFormat from 'react-number-format'
-import isNil from 'lodash.isnil'
+import {InferProps} from 'prop-types'
 import {Label} from '@recylink/react-components'
+import {NumericFormat, PatternFormat} from 'react-number-format'
+import isNil from 'lodash.isnil'
+import NumberPropTypes from './NumberPropTypes'
 import '../styles.css'
 
-const Number = (props: any) => {
+type NumberFieldProps = InferProps<typeof NumberPropTypes>
+
+const defaultProps: NumberFieldProps = {
+  value: null,
+  label: undefined,
+  placeholder: undefined,
+  disabled: undefined,
+  prefix: undefined,
+  suffix: undefined,
+  mask: undefined
+}
+
+const Number = (props: NumberFieldProps & typeof defaultProps) => {
   const onChange = (value: number) => props.onChange(value)
 
   const onFocus = () => {
@@ -33,6 +46,42 @@ const Number = (props: any) => {
     return 'recylink-input'
   }
 
+  const renderField = () => {
+    if (props.format) {
+      return (
+        <PatternFormat
+          className={getClassName()}
+          placeholder={props.placeholder}
+          value={!isNil(props.value) ? props.value : ''}
+          onValueChange={(value: any) => onChange(value.floatValue)}
+          format={props.format}
+          mask={props.mask}
+          disabled={props.disabled}
+          prefix={props.prefix}
+          onFocus={() => onFocus()}
+          onBlur={() => onBlur()}
+          {...props.passProps}
+        />
+      )
+    }
+    return (
+      <NumericFormat
+        className={getClassName()}
+        placeholder={props.placeholder}
+        value={!isNil(props.value) ? props.value : ''}
+        onValueChange={(value: any) => onChange(value.floatValue)}
+        thousandSeparator={props.thousandSeparator || '.'}
+        decimalSeparator={props.decimalSeparator || ','}
+        disabled={props.disabled}
+        prefix={props.prefix}
+        suffix={props.suffix && ' ' + props.suffix}
+        onFocus={() => onFocus()}
+        onBlur={() => onBlur()}
+        {...props.passProps}
+      />
+    )
+  }
+
   return (
     <>
       <Label
@@ -43,47 +92,13 @@ const Number = (props: any) => {
         isRequiredLabel={props.isRequiredLabel}
       />
       <div className="recylink-input-container">
-        <NumberFormat
-          className={getClassName()}
-          placeholder={props.placeholder}
-          value={!isNil(props.value) ? props.value : ''}
-          onValueChange={(value: any) => onChange(value.floatValue)}
-          thousandSeparator={props.thousandSeparator || '.'}
-          decimalSeparator={props.decimalSeparator || ','}
-          format={props.format}
-          mask={props.mask}
-          disabled={props.disabled}
-          prefix={props.prefix}
-          suffix={props.suffix && ' ' + props.suffix}
-          onFocus={() => onFocus()}
-          onBlur={() => onBlur()}
-          {...props.passProps}
-        />
+        {renderField()}
         <div className="recylink-input-error">{props.errorMessage}</div>
       </div>
     </>
   )
 }
 
-Number.propTypes = {
-  label: PropTypes.any,
-  value: PropTypes.number,
-  onChange: PropTypes.func,
-  className: PropTypes.string,
-  errorMessage: PropTypes.any,
-  format: PropTypes.string,
-  thousandSeparator: PropTypes.string,
-  decimalSeparator: PropTypes.string,
-  placeholder: PropTypes.string,
-  mask: PropTypes.string,
-  prefix: PropTypes.string,
-  suffix: PropTypes.string,
-  passProps: PropTypes.object,
-  disabled: PropTypes.bool,
-  isOptional: PropTypes.bool,
-  isOptionalLabel: PropTypes.string,
-  isRequired: PropTypes.bool,
-  isRequiredLabel: PropTypes.string
-}
-Number.defaultProps = {value: null}
+Number.propTypes = NumberPropTypes
+Number.defaultProps = defaultProps
 export default Number

@@ -3,6 +3,17 @@ import unset from 'lodash/unset'
 import {getPersonificationUserEmail} from './personificationProfile'
 
 /**
+ * @returns {object}
+ */
+export const getAllPersonificationSessions = () => {
+  try {
+    return JSON.parse(localStorage.getItem('recylink.personificationsessioncollection')) || {}
+  } catch (e) {
+    return null
+  }
+}
+
+/**
  * @param {string} userEmail
  * @param {object} session
  * @returns {void}
@@ -75,17 +86,6 @@ export const getCurrentPersonificationSession = () => {
     }
 
     return personificationSession
-  } catch (e) {
-    return null
-  }
-}
-
-/**
- * @returns {object}
- */
-export const getAllPersonificationSessions = () => {
-  try {
-    return JSON.parse(localStorage.getItem('recylink.personificationsessioncollection')) || {}
   } catch (e) {
     return null
   }

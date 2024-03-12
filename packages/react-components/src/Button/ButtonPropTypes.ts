@@ -5,7 +5,6 @@ export default {
   tooltip: PropTypes.string,
   to: PropTypes.string,
   href: PropTypes.string,
-  linkButton: PropTypes.bool,
   label: PropTypes.any,
   children: PropTypes.any,
   primary: PropTypes.bool,
@@ -28,6 +27,8 @@ export default {
   small: PropTypes.bool,
   iconName: PropTypes.string,
   iconLibrary: PropTypes.string,
+
+  gaclickid: PropTypes.string,
 
   type: PropTypes.string.isRequired,
   use: PropTypes.string.isRequired

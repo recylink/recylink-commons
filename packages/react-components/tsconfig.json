@@ -1,15 +1,16 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "ES2015",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
+    "strictNullChecks": false,
     "skipLibCheck": true,
 
     "jsx": "react",
     "module": "ESNext",
     "declaration": true,
-    "declarationDir": "types",
+    "declarationDir": "dist/esm",
     "sourceMap": true,
     "outDir": "dist",
     "moduleResolution": "node",

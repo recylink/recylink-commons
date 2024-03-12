@@ -19,8 +19,8 @@ export default {
 
 const Template: ComponentStory<typeof ButtonsContainer> = args => (
   <ButtonsContainer {...args}>
-    <Button label="Button 1" primary />
-    <Button label="Button 2" danger />
+    <Button label="Button 1" primary type="button" use="function" onClick={() => {}} />
+    <Button label="Button 2" danger type="button" use="function" onClick={() => {}} />
   </ButtonsContainer>
 )
 

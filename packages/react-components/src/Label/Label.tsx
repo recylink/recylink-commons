@@ -1,15 +1,7 @@
 import React from 'react'
-import PropTypes, {InferProps} from 'prop-types'
+import {InferProps} from 'prop-types'
+import LabelPropTypes from './LabelPropTypes'
 import './styles.css'
-
-const LabelPropTypes = {
-  label: PropTypes.string,
-  isOptional: PropTypes.bool,
-  isOptionalLabel: PropTypes.string,
-  isRequired: PropTypes.bool,
-  isRequiredLabel: PropTypes.string,
-  labelClassName: PropTypes.string
-}
 
 const Label = (props: InferProps<typeof LabelPropTypes>) => {
   const {label, isOptional, isOptionalLabel, isRequired, isRequiredLabel} = props
@@ -46,5 +38,5 @@ const Label = (props: InferProps<typeof LabelPropTypes>) => {
 }
 
 Label.propTypes = LabelPropTypes
-Label.defaultProps = {isOptionalLabel: 'optional', isRequiredLabel: '*'}
+Label.defaultProps = {isOptionalLabel: 'Opcional', isRequiredLabel: '*'}
 export default Label

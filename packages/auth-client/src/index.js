@@ -5,6 +5,7 @@ import refreshJWT from './refreshJWT'
 import clean from './clean'
 
 import {saveJWT, getJWT, removeJWT} from './localStorage/JWT'
+import {saveCsrfToken, getCsrfToken, removeCsrfToken} from './localStorage/csrfToken'
 import {saveAdminJWT, getAdminJWT, removeAdminJWT} from './localStorage/adminJWT'
 import {getSession, saveSession, removeSession} from './localStorage/session'
 
@@ -28,6 +29,11 @@ import {
   removePersonificationSession,
   removeAllPersonificationSessions
 } from './localStorage/personificationSession'
+import {
+  savePersonificationCsrfToken,
+  getCurrentPersonificationCsrfToken,
+  getPersonificationCsrfToken
+} from './localStorage/personificationCsrfToken'
 
 import usePersonificationSessionStorage from './hooks/usePersonificationSessionStorage'
 import usePersonificationJWTStorage from './hooks/usePersonificationJWTStorage'
@@ -42,6 +48,10 @@ export {
   getJWT,
   saveJWT,
   removeJWT,
+  //
+  getCsrfToken,
+  saveCsrfToken,
+  removeCsrfToken,
   //
   getAdminJWT,
   saveAdminJWT,
@@ -61,6 +71,10 @@ export {
   removePersonificationJWT,
   removeAllPersonificationJWTs,
   usePersonificationJWTStorage,
+  //
+  savePersonificationCsrfToken,
+  getCurrentPersonificationCsrfToken,
+  getPersonificationCsrfToken,
   //
   savePersonificationSession,
   getPersonificationSession,

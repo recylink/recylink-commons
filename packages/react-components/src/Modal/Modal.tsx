@@ -1,6 +1,6 @@
 import React, {useRef, useState} from 'react'
 import {InferProps} from 'prop-types'
-import ReactDOM from 'react-dom'
+import {createPortal} from 'react-dom'
 import {useOutsideClick} from '@recylink/react-hooks'
 import Button from '../Button'
 import ButtonsContainer from '../ButtonsContainer'
@@ -13,10 +13,20 @@ const Modal = (props: InferProps<typeof ModalPropTypes>) => {
   const {isOpen, setOpenModal, modalContent, setModalContent}: InferProps<typeof ModalPropTypes> =
     props
   const [loadingConfirm, setLoadingConfirm] = useState(false)
+  const [loadingCancel, setLoadingCancel] = useState(false)
 
   const wrapperRef = useRef<HTMLDivElement>(null)
 
-  useOutsideClick(wrapperRef, async e => await onClickCancel(e))
+  const closeAndEmptyModal = () => {
+    setOpenModal(false)
+    setModalContent(<span />)
+  }
+
+  useOutsideClick(wrapperRef, () => {
+    if (!props.disableOutsideClick) {
+      closeAndEmptyModal()
+    }
+  })
 
   const onConfirm = async () => {
     let result = true
@@ -24,40 +34,52 @@ const Modal = (props: InferProps<typeof ModalPropTypes>) => {
       result = await props.onConfirm()
     }
     if (result !== false) {
-      setOpenModal(false)
-      setModalContent(<span />)
+      closeAndEmptyModal()
+    }
+  }
+
+  const onCancel = async () => {
+    let result = true
+    if (props.onCancel) {
+      result = await props.onCancel()
+    }
+    if (result !== false) {
+      closeAndEmptyModal()
     }
   }
 
   const onClickConfirm = async e => {
     setLoadingConfirm(true)
-    e.preventDefault()
+    if (e) {
+      e.preventDefault()
+    }
     await onConfirm()
     setLoadingConfirm(false)
   }
 
-  const onClickCancel = e => {
+  const onClickCancel = async e => {
+    setLoadingCancel(true)
     if (e) {
       e.preventDefault()
     }
-    if (props.onCancel) {
-      props.onCancel()
-    }
-    setOpenModal(false)
-    setModalContent(<span />)
+    await onCancel()
+    setLoadingCancel(false)
   }
 
-  const confirmButton = () => (
-    <Button
-      primary
-      type="button"
-      use="function"
-      label={props.confirmText}
-      onClick={async e => await onClickConfirm(e)}
-      disabled={props.confirmDisabled}
-      loading={loadingConfirm}
-    />
-  )
+  const confirmButton = () => {
+    
+    return (
+      <Button
+        className={props.confirmButtonClassName}
+        type="button"
+        use="function"
+        label={props.confirmText}
+        onClick={async e => await onClickConfirm(e)}
+        disabled={props.confirmDisabled}
+        loading={loadingConfirm}
+      />
+    )
+  }
 
   const cancelButton = () => {
     if (!props.cancelText) {
@@ -65,11 +87,13 @@ const Modal = (props: InferProps<typeof ModalPropTypes>) => {
     }
     return (
       <Button
-        danger
+        className={props.cancelButtonClassName}
         type="button"
         use="function"
         label={props.cancelText}
-        onClick={e => (e)}
+        onClick={async e => await onClickCancel(e)}
+        disabled={props.cancelDisabled}
+        loading={loadingCancel}
       />
     )
   }
@@ -82,7 +106,7 @@ const Modal = (props: InferProps<typeof ModalPropTypes>) => {
   )
 
   if (isOpen) {
-    return ReactDOM.createPortal(
+    return createPortal(
       <div className="overlay">
         <div className="modal" ref={wrapperRef}>
           <div className="modal-content">

@@ -7,5 +7,5 @@ module.exports = {
     }
   },
 
-  extends: ['plugin:storybook/recommended']
+  extends: ['plugin:storybook/recommended', 'plugin:storybook/recommended']
 }

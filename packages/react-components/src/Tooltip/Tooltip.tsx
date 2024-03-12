@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes, {InferProps} from 'prop-types'
-import ReactTooltip, {Place} from 'react-tooltip'
+import {Tooltip as ReactTooltip} from 'react-tooltip'
 import isString from 'lodash.isstring'
 import uniqueId from 'lodash.uniqueid'
 import './styles.css'
@@ -10,7 +10,6 @@ const TooltipPropTypes = {
   title: PropTypes.string,
   content: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
   place: PropTypes.oneOf(['top', 'right', 'bottom', 'left'] as const).isRequired,
-  offset: PropTypes.object,
   type: PropTypes.oneOf(['dark', 'success', 'warning', 'error', 'info', 'light'] as const)
     .isRequired,
   containerClassName: PropTypes.string,
@@ -18,7 +17,7 @@ const TooltipPropTypes = {
   contentClassName: PropTypes.string,
   delayHide: PropTypes.number,
 
-  border: PropTypes.bool,
+  border: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   backgroundColor: PropTypes.string,
   textColor: PropTypes.string,
   borderColor: PropTypes.string,
@@ -26,7 +25,7 @@ const TooltipPropTypes = {
 }
 
 const Tooltip = (props: InferProps<typeof TooltipPropTypes>) => {
-  const id = uniqueId('os-tooltip')
+  const id = uniqueId('recylink-tooltip')
 
   const getContent = () =>
     props.content && isString(props.content)
@@ -46,8 +45,7 @@ const Tooltip = (props: InferProps<typeof TooltipPropTypes>) => {
 
   return (
     <div
-      data-tip=""
-      data-for={id}
+      data-tooltip-id={id}
       className={`recylink-tooltip-container ${props.containerClassName}`}>
       {props.children}
       {props.content && (
@@ -55,16 +53,11 @@ const Tooltip = (props: InferProps<typeof TooltipPropTypes>) => {
           <ReactTooltip
             id={id}
             place={props.place}
-            offset={props.offset || undefined}
-            type={props.type}
+            variant={props.type}
             delayHide={props.delayHide || undefined}
             className={`recylink-tooltip ${props.className}`}
-            effect="solid"
-            getContent={() => renderContent()}
+            render={() => renderContent()}
             border={props.border || undefined}
-            backgroundColor={props.backgroundColor || undefined}
-            textColor={props.textColor || undefined}
-            borderColor={props.borderColor || undefined}
             arrowColor={props.arrowColor || undefined}
           />
         </div>
@@ -76,9 +69,7 @@ const Tooltip = (props: InferProps<typeof TooltipPropTypes>) => {
 Tooltip.propTypes = TooltipPropTypes
 Tooltip.defaultProps = {
   className: '',
-  backgroundColor: 'var(--blue)',
-  textColor: '#fff',
-  borderColor: 'var(--blue)',
-  arrowColor: 'var(--blue)'
+  containerClassName: '',
+  arrowColor: '#0078c8'
 }
 export default Tooltip

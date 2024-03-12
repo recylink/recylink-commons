@@ -9,6 +9,7 @@ const ViewportSuspenseLoadingPropTypes = {
   onRender: PropTypes.func,
   onView: PropTypes.func,
   fallback: PropTypes.node
+  // delay: PropTypes.number
 }
 
 const ViewportSuspenseLoading = (props: InferProps<typeof ViewportSuspenseLoadingPropTypes>) => {
