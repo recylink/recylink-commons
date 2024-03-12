@@ -223,7 +223,7 @@ Select.propTypes = {
   multiValueContainerStyle: PropTypes.object,
   multiValueLabelStyle: PropTypes.object,
   valueContainerStyle: PropTypes.object,
-
+  iconLibrary: PropTypes.string,
   isOptional: PropTypes.bool,
   isOptionalLabel: PropTypes.string,
   isRequired: PropTypes.bool,
@@ -245,7 +245,8 @@ Select.defaultProps = {
   components: {},
   closeMenuOnSelect: false,
   hideSelectedOptions: false,
-  blurInputOnSelect: false
+  blurInputOnSelect: false,
+  iconLibrary: 'fi',
 }
 
 export default Select

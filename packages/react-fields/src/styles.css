@@ -1,3 +1,17 @@
+:root {
+  --white: #ffffff;
+  --blue: #0078c8;
+  --light-blue: #56ccf2;
+  --red: #f03a47;
+  --alternative-red: #eb5757;
+  --green: #00b42d;
+  --dark-green: #00873a;
+  --alternative-green: #27ae60;
+  --yellow: #f7d108;
+  --light-yellow: #f2994a;
+  --grey: #e9e9eb;
+  --dark-grey: #94969e;
+}
 .recylink-input-container {
   height: 36px;
   display: block;
