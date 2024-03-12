@@ -5,7 +5,16 @@ import ButtonsContainer from './ButtonsContainer'
 
 export default {
   title: 'RecylinkReactComponents/ButtonsContainer',
-  component: ButtonsContainer
+  component: ButtonsContainer,
+  tags: ['autodocs'],
+  argTypes: {
+    position: {
+      options: ['left', 'right'],
+      control: {
+        type: 'radio',
+      }
+    }
+  }
 } as ComponentMeta<typeof ButtonsContainer>
 
 const Template: ComponentStory<typeof ButtonsContainer> = args => (
@@ -21,3 +30,4 @@ export const TestButtonContainerRight = Template.bind({})
 TestButtonContainerRight.args = {
   position: 'right'
 }
+

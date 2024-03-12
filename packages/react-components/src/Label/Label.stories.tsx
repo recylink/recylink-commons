@@ -20,13 +20,20 @@ OptionalLabel.args = {
 
 export const RequiredLabel = Template.bind({})
 RequiredLabel.args = {
-  label: 'This is required!',
+  label: 'This is required',
   isRequired: true
 }
 
 export const RequiredLabelModified = Template.bind({})
 RequiredLabelModified.args = {
-  label: 'Field!',
+  label: 'Label Field',
   isRequired: true,
   isRequiredLabel: 'This is a required field!'
+}
+
+export const OptionalLabelModified = Template.bind({})
+OptionalLabelModified.args = {
+  label: 'Label Field',
+  isOptional: true,
+  isOptionalLabel: 'This is an optional field'
 }
