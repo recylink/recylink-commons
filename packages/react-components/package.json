@@ -2,7 +2,10 @@
   "name": "@recylink/react-components",
   "version": "1.7.6",
   "description": "Recylink components",
-  "author": "diegoolavarria <olavarriaubeda.diego@gmail.com>",
+  "author": {
+    "name": "diegoolavarria",
+    "email": "olavarriaubeda.diego@gmail.com"
+  },
   "homepage": "https://github.com/diegoolavarria/recylink-commons#readme",
   "license": "MIT",
   "main": "dist/cjs",
@@ -11,7 +14,10 @@
   "files": [
     "dist"
   ],
-  "repository": "https://github.com/recylink/recylink-commons",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/recylink/recylink-commons.git"
+  },
   "publishConfig": {
     "@diegoolavarria:registry": "https://npm.pkg.github.com/diegoolavarria"
   },
@@ -24,7 +30,8 @@
     "rollup": "rm -rf dist && rollup -c",
     "webpack": "rm -rf dist && webpack",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "chromatic": "npx chromatic --project-token=chpt_3f3903872afd74d"
   },
   "bugs": {
     "url": "https://github.com/recylink/recylink-commons/issues"
