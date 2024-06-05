@@ -71,6 +71,7 @@ const Modal = (props: InferProps<typeof ModalPropTypes>) => {
     return (
       <Button
         className={props.confirmButtonClassName}
+        primary={props.confirmPrimary ? true : false}
         type="button"
         use="function"
         label={props.confirmText}

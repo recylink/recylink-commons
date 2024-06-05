@@ -12,7 +12,7 @@ export default {
   onCancel: PropTypes.func,
   contentClassName: PropTypes.string,
   disableOutsideClick: PropTypes.bool,
-
+  confirmPrimary: PropTypes.bool,
   isOpen: PropTypes.bool,
   handleModal: PropTypes.func,
   setOpenModal: PropTypes.func.isRequired,
