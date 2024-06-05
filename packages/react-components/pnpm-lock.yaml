@@ -36,8 +36,8 @@ dependencies:
     specifier: ^15.8.1
     version: 15.8.1
   react-tooltip:
-    specifier: ^5.25.1
-    version: 5.26.3(react-dom@18.2.0)(react@18.2.0)
+    specifier: ^5.26.4
+    version: 5.26.4(react-dom@18.2.0)(react@18.2.0)
 
 devDependencies:
   '@babel/core':
@@ -8295,8 +8295,8 @@ packages:
       react: 18.2.0
     dev: true
 
-  /react-tooltip@5.26.3(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-MpYAws8CEHUd/RC4GaDCdoceph/T4KHM5vS5Dbk8FOmLMvvIht2ymP2htWdrke7K6lqPO8rz8+bnwWUIXeDlzg==}
+  /react-tooltip@5.26.4(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-5WyDrsfw1+6qNVSr3IjqElqJ+cCwE8+44b+HpJ8qRLv7v0a3mcKf8wvv+NfgALFS6QpksGFqTLV2JQ60c+okZQ==}
     peerDependencies:
       react: '>=16.14.0'
       react-dom: '>=16.14.0'

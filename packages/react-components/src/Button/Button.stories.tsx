@@ -62,3 +62,10 @@ LoadingButton.args = {
   label: 'Loading Button',
   loading: true
 }
+
+export const DisabledOnlyTextButton = Template.bind({})
+DisabledOnlyTextButton.args = {
+  label: 'Disabled Button',
+  disabled: true,
+  onlyText: true
+}
