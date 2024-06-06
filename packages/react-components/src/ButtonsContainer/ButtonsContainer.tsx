@@ -10,8 +10,9 @@ const ButtonsContainerPropTypes = {
 const ButtonsContainer = ({children, position}: InferProps<typeof ButtonsContainerPropTypes>) => {
   if (position === 'right') {
     return <div className="recylink-buttons-container-right">{children}</div>
+  } else if (position === "space-between") {
+    return <div className="recylink-buttons-container-space-between">{children}</div>
   }
-
   return <div className="recylink-buttons-container">{children}</div>
 }
 
