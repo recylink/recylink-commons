@@ -2,7 +2,10 @@
   "name": "@recylink/react-fields",
   "version": "1.4.8",
   "description": "Recylink fields",
-  "author": "diegoolavarria <olavarriaubeda.diego@gmail.com>",
+  "author": {
+    "name": "diegoolavarria",
+    "email": "olavarriaubeda.diego@gmail.com"
+  },
   "homepage": "https://github.com/diegoolavarria/recylink-commons#readme",
   "license": "MIT",
   "main": "dist/cjs",
@@ -16,7 +19,10 @@
     "recylink",
     "fields"
   ],
-  "repository": "https://github.com/recylink/recylink-commons",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/recylink/recylink-commons.git"
+  },
   "publishConfig": {
     "@diegoolavarria:registry": "https://npm.pkg.github.com/diegoolavarria"
   },
@@ -29,7 +35,8 @@
     "rollup": "rm -rf dist && rollup -c",
     "webpack": "webpack --mode production",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "chromatic": "npx chromatic --project-token=chpt_36a2bd6c06b377c"
   },
   "bugs": {
     "url": "https://github.com/recylink/recylink-commons/issues"
