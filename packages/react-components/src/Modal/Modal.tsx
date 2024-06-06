@@ -6,7 +6,6 @@ import Button from '../Button'
 import ButtonsContainer from '../ButtonsContainer'
 import SuspenseLoading from '../SuspenseLoading'
 import ModalPropTypes from './ModalPropTypes'
-
 import './styles.css'
 
 const Modal = (props: InferProps<typeof ModalPropTypes>) => {
@@ -66,9 +65,7 @@ const Modal = (props: InferProps<typeof ModalPropTypes>) => {
     setLoadingCancel(false)
   }
 
-  const confirmButton = () => {
-    
-    return (
+  const confirmButton = () =>( 
       <Button
         className={props.confirmButtonClassName}
         type="button"
@@ -77,9 +74,8 @@ const Modal = (props: InferProps<typeof ModalPropTypes>) => {
         onClick={async e => await onClickConfirm(e)}
         disabled={props.confirmDisabled}
         loading={loadingConfirm}
-      />
-    )
-  }
+      />)
+  
 
   const cancelButton = () => {
     if (!props.cancelText) {
@@ -122,5 +118,5 @@ const Modal = (props: InferProps<typeof ModalPropTypes>) => {
 }
 
 Modal.propTypes = ModalPropTypes
-Modal.defaultProps = {confirmText: 'Aceptar'}
+Modal.defaultProps = {confirmText: 'Aceptar', confirmButtonClassName: 'recylink-button-ghost'}
 export default Modal

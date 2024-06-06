@@ -1,13 +1,13 @@
-.recylink-buttons-container,
-.recylink-buttons-container-right {
+.recylink-icon-buttons-container,
+.recylink-icon-buttons-container-right {
   display: block;
 }
-.recylink-buttons-container-right {
+.recylink-icon-buttons-container-right {
   text-align: right;
 }
-.recylink-buttons-container .recylink-button-container:not(:last-child) {
+.recylink-icon-buttons-container .recylink-button-container:not(:last-child) {
   margin-right: 10px;
 }
-.recylink-buttons-container-right .recylink-button-container:not(:first-child) {
+.recylink-icon-buttons-container-right .recylink-button-container:not(:first-child) {
   margin-left: 10px;
 }

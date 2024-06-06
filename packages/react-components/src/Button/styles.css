@@ -2,9 +2,6 @@
   margin: unset;
   text-decoration: none;
 }
-.recylink-button-container:last-child {
-  margin-right: auto;
-}
 
 .recylink-icon-button {
   height: 14px;

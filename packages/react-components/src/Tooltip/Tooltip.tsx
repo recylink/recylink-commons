@@ -16,7 +16,6 @@ const TooltipPropTypes = {
   className: PropTypes.string,
   contentClassName: PropTypes.string,
   delayHide: PropTypes.number,
-
   border: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   backgroundColor: PropTypes.string,
   textColor: PropTypes.string,
@@ -54,6 +53,7 @@ const Tooltip = (props: InferProps<typeof TooltipPropTypes>) => {
             id={id}
             place={props.place}
             variant={props.type}
+            style={{ backgroundColor: props.backgroundColor, color: props.textColor}}
             delayHide={props.delayHide || undefined}
             className={`recylink-tooltip ${props.className}`}
             render={() => renderContent()}
@@ -70,6 +70,8 @@ Tooltip.propTypes = TooltipPropTypes
 Tooltip.defaultProps = {
   className: '',
   containerClassName: '',
-  arrowColor: '#0078c8'
+  arrowColor: '#0078c8',
+  backgroundColor: '#0078c8',
+  textColor: '#fff',
 }
 export default Tooltip

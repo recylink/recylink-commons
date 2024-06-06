@@ -9,7 +9,8 @@ import { ButtonInterface } from './ButtonInterface'
 
 export default {
   title: 'RecylinkReactComponents/Button',
-  component: Button
+  component: Button,
+  tags: ['autodocs'],
 } as ComponentMeta<typeof Button>
 
 const Template: Story<ButtonInterface> = args => <Button {...args} />
@@ -48,4 +49,23 @@ export const TooltipButton = Template.bind({})
 TooltipButton.args = {
   label: 'Button with Tooltip',
   tooltip: 'Tooltip Text'
+}
+
+export const DisabledButton = Template.bind({})
+DisabledButton.args = {
+  label: 'Disabled Button',
+  disabled: true
+}
+
+export const LoadingButton = Template.bind({}) 
+LoadingButton.args = {
+  label: 'Loading Button',
+  loading: true
+}
+
+export const DisabledOnlyTextButton = Template.bind({})
+DisabledOnlyTextButton.args = {
+  label: 'Disabled Button',
+  disabled: true,
+  onlyText: true
 }
