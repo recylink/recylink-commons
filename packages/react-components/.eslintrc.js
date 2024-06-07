@@ -16,7 +16,7 @@ module.exports = {
       version: 'detect'
     }
   },
-  extends: ['plugin:storybook/recommended', 'eslint:recommended', 'plugin:react/recommended', 'plugin:react-hooks/recommended'],
+  extends: ['plugin:storybook/recommended', 'eslint:recommended', 'plugin:react/recommended', 'plugin:react-hooks/recommended', 'plugin:storybook/recommended'],
   plugins: ['react', 'react-hooks'],
   ignorePatterns: ['.eslintrc.js', 'node_modules*/'],
   rules: {

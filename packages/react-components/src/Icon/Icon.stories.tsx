@@ -5,7 +5,8 @@ import Icon from './Icon'
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: 'RecylinkReactComponents/Icon',
-  component: Icon
+  component: Icon,
+  tags: ['autodocs'],
 } as ComponentMeta<typeof Icon>
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
@@ -22,5 +23,5 @@ export const OnClickIcon = Template.bind({})
 OnClickIcon.args = {
   library: 'fi',
   icon: 'FiX',
-  onClick: () => console.log('Clicked')
+  onClick: () => alert('Clicked')
 }
