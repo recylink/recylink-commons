@@ -3,6 +3,10 @@
 All notable changes will be documented in this file.
 NPM Publish adheres to [Semantic Versioning](http://semver.org/).
 
+## [v1.2.5] (2024-06-12)
+
+- Added support for "instruction" property
+
 ## [v1.2.5] (2022-12-23)
 
 - Added headers for Monolith support

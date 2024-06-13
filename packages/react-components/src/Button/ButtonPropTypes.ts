@@ -27,6 +27,7 @@ export default {
   small: PropTypes.bool,
   iconName: PropTypes.string,
   iconLibrary: PropTypes.string,
+  onlyText: PropTypes.bool,
 
   gaclickid: PropTypes.string,
 

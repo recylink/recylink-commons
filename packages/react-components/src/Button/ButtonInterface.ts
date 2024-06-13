@@ -30,4 +30,5 @@ export interface ButtonInterface {
   iconLibrary?: string
   type: string
   use: string
+  onlyText?: boolean
 }

@@ -1,26 +1,26 @@
 import axios from 'axios'
 import get from 'lodash/get'
 import baseURL from './baseURL'
-import logout from './logout'
-import logoutAs from './logoutAs'
 import clean from './clean'
 import {getJWT, saveJWT} from './localStorage/JWT'
+import {getCsrfToken} from './localStorage/csrfToken'
+import {getPersonificationCsrfToken} from './localStorage/personificationCsrfToken'
 import {
   getPersonificationJWT,
   removePersonificationJWT,
   savePersonificationJWT
 } from './localStorage/personificationJWT'
 import {
-  getPersonificationSession,
-  removePersonificationSession
-} from './localStorage/personificationSession'
-import {
   getPersonificationUserEmail,
   isPersonificationActive
 } from './localStorage/personificationProfile'
-import {getCsrfToken} from './localStorage/csrfToken'
-import {getPersonificationCsrfToken} from './localStorage/personificationCsrfToken'
+import {
+  getPersonificationSession,
+  removePersonificationSession
+} from './localStorage/personificationSession'
 import {getSession} from './localStorage/session'
+import logout from './logout'
+import logoutAs from './logoutAs'
 
 const buildAuthorization = jwtPayload => `Bearer ${jwtPayload}`
 
@@ -61,14 +61,16 @@ AuthClient.interceptors.response.use(
     return response
   },
   async error => {
-    const {config} = error
-    const statusCode = get(error, 'response.data.statusCode', error.response.status)
-    const resBaseURL = error?.response?.config?.baseURL
-    const url = error?.response?.config?.url
     if (error.code === 'ERR_NETWORK' || error.code === 'ERR_BAD_RESPONSE') {
       await clean()
       return Promise.reject(error)
     }
+
+    const {config} = error
+
+    const statusCode = get(error, 'response.data.statusCode', error.response.status)
+    const resBaseURL = error?.response?.config?.baseURL
+    const url = error?.response?.config?.url
     if (resBaseURL === baseURL) {
       if (statusCode === 303 && !config._retry) {
         config._retry = true
@@ -101,8 +103,12 @@ AuthClient.interceptors.response.use(
       } else if (
         //Si retorna un 401 o un 403 con un internal code especifico de "kickOut"; iniciamos la lógica para expulsar al cliente del sistema
         statusCode === 401 ||
-        (statusCode === 403 && error?.response?.data?.info?.internalCode === 'kickOut') ||
-        (statusCode === 503 && error?.response?.data?.info?.internalCode === 'kickOut')
+        (statusCode === 403 &&
+          (error?.response?.data?.info?.internalCode === 'kickOut' ||
+            error?.response?.data?.instruction === 'kickOut')) ||
+        (statusCode === 503 &&
+          (error?.response?.data?.info?.internalCode === 'kickOut' ||
+            error?.response?.data?.instruction === 'kickOut'))
       ) {
         const isPersonificating = isPersonificationActive()
         if (isPersonificating) {

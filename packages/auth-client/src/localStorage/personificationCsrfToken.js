@@ -1,6 +1,14 @@
 import get from 'lodash/get'
 import {getPersonificationUserEmail} from './personificationProfile'
 
+export const getAllPersonificationCsrfTokens = () => {
+  try {
+    return JSON.parse(localStorage.getItem('recylink.personificationcsrftokencollection')) || {}
+  } catch (e) {
+    return null
+  }
+}
+
 /**
  * @param {string} userEmail
  * @param {string} csrfToken
@@ -73,14 +81,6 @@ export const getCurrentPersonificationCsrfToken = () => {
     }
 
     return personificationCsrfToken
-  } catch (e) {
-    return null
-  }
-}
-
-export const getAllPersonificationCsrfTokens = () => {
-  try {
-    return JSON.parse(localStorage.getItem('recylink.personificationcsrftokencollection')) || {}
   } catch (e) {
     return null
   }
