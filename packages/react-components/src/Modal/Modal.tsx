@@ -83,7 +83,7 @@ const Modal = (props: InferProps<typeof ModalPropTypes>) => {
     }
     return (
       <Button
-        className={`modal-button-margin-right ${props.cancelButtonClassName}`}
+        className={props.cancelButtonClassName}
         type="button"
         use="function"
         label={props.cancelText}
