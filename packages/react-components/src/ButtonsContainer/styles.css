@@ -15,7 +15,7 @@
 .recylink-buttons-container-space-between .recylink-button-container:not(:last-child) {
   margin-right: 10px;
 }
-.recylink-buttons-container-right .recylink-button-container:not(:first-child)
+.recylink-buttons-container-right .recylink-button-container:not(:first-child),
 .recylink-buttons-container-space-between .recylink-button-container:not(:first-child) {
   margin-left: 10px;
 }
