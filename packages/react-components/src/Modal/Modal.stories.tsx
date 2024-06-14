@@ -33,7 +33,7 @@ export const Example = () => {
           onClick={() =>
             handleModal(
               <div>
-                <h1>Modal Content</h1>
+                <h1>Modal</h1>
                 <p>Modal Content</p>
               </div>,
               {confirmText: 'Confirmar',
@@ -57,7 +57,7 @@ export const DefaultButtons = () => {
           onClick={() =>
             handleModal(
               <div>
-                <h1>Modal Content</h1>
+                <h1>Modal</h1>
                 <p>Modal Content</p>
               </div>,
               {confirmText: 'Confirmar',
