@@ -83,7 +83,7 @@ const Modal = (props: InferProps<typeof ModalPropTypes>) => {
     }
     return (
       <Button
-        className={props.cancelButtonClassName}
+        className={`modal-button-margin-right ${props.cancelButtonClassName}`}
         type="button"
         use="function"
         label={props.cancelText}
@@ -118,5 +118,5 @@ const Modal = (props: InferProps<typeof ModalPropTypes>) => {
 }
 
 Modal.propTypes = ModalPropTypes
-Modal.defaultProps = {confirmText: 'Aceptar', confirmButtonClassName: 'recylink-button-ghost'}
+Modal.defaultProps = {confirmText: 'Aceptar', cancelButtonClassName: 'recylink-button-ghost'}
 export default Modal

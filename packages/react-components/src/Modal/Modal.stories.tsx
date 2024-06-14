@@ -45,3 +45,26 @@ export const Example = () => {
         />
   )
 }
+
+export const DefaultButtons = () => {
+  const {handleModal} = useModal()
+  return (
+    <Button
+          primary
+          type="button"
+          use="function"
+          label="Open Modal"
+          onClick={() =>
+            handleModal(
+              <div>
+                <h1>Modal Content</h1>
+                <p>Modal Content</p>
+              </div>,
+              {confirmText: 'Confirmar',
+              onConfirm: () => alert('Confirmado'),
+              cancelText: 'Cancelar'}
+            )
+          }
+        />
+  )
+}
