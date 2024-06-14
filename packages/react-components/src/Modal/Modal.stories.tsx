@@ -33,11 +33,34 @@ export const Example = () => {
           onClick={() =>
             handleModal(
               <div>
-                <h1>Modal Content</h1>
+                <h1>Modal</h1>
                 <p>Modal Content</p>
               </div>,
               {confirmText: 'Confirmar',
               confirmButtonClassName: 'recylink-button-primary',
+              onConfirm: () => alert('Confirmado'),
+              cancelText: 'Cancelar'}
+            )
+          }
+        />
+  )
+}
+
+export const DefaultButtons = () => {
+  const {handleModal} = useModal()
+  return (
+    <Button
+          primary
+          type="button"
+          use="function"
+          label="Open Modal"
+          onClick={() =>
+            handleModal(
+              <div>
+                <h1>Modal</h1>
+                <p>Modal Content</p>
+              </div>,
+              {confirmText: 'Confirmar',
               onConfirm: () => alert('Confirmado'),
               cancelText: 'Cancelar'}
             )

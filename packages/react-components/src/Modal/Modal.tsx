@@ -118,5 +118,5 @@ const Modal = (props: InferProps<typeof ModalPropTypes>) => {
 }
 
 Modal.propTypes = ModalPropTypes
-Modal.defaultProps = {confirmText: 'Aceptar', confirmButtonClassName: 'recylink-button-ghost'}
+Modal.defaultProps = {confirmText: 'Aceptar', cancelButtonClassName: 'recylink-button-ghost'}
 export default Modal
