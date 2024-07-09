@@ -68,7 +68,7 @@ AuthClient.interceptors.response.use(
 
     const {config} = error
 
-    const statusCode = get(error, 'response.data.statusCode', error.response.status)
+    const statusCode = get(error, 'response.data.status', error.response.status)
     const resBaseURL = error?.response?.config?.baseURL
     const url = error?.response?.config?.url
     if (resBaseURL === baseURL) {
