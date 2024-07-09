@@ -3,7 +3,11 @@
 All notable changes will be documented in this file.
 NPM Publish adheres to [Semantic Versioning](http://semver.org/).
 
-## [v1.2.5] (2024-06-12)
+## [v1.2.6] (2024-07-09)
+
+- Fix to get correct status value from Axios response
+
+## [v1.2.6] (2024-06-12)
 
 - Added support for "instruction" property
 
