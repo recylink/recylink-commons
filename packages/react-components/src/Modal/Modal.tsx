@@ -9,7 +9,7 @@ import ModalPropTypes from './ModalPropTypes'
 import './styles.css'
 
 const Modal = (props: InferProps<typeof ModalPropTypes>) => {
-  const {isOpen, setOpenModal, modalContent, setModalContent}: InferProps<typeof ModalPropTypes> =
+  const {isOpen, setOpenModal, modalContent, setModalContent, positionContainerButtons}: InferProps<typeof ModalPropTypes> =
     props
   const [loadingConfirm, setLoadingConfirm] = useState(false)
   const [loadingCancel, setLoadingCancel] = useState(false)
@@ -95,7 +95,7 @@ const Modal = (props: InferProps<typeof ModalPropTypes>) => {
   }
 
   const renderButtons = () => (
-    <ButtonsContainer position="right">
+    <ButtonsContainer position={positionContainerButtons} className={props.buttonsContainerClassName}>
       {cancelButton()}
       {confirmButton()}
     </ButtonsContainer>
@@ -104,7 +104,7 @@ const Modal = (props: InferProps<typeof ModalPropTypes>) => {
   if (isOpen) {
     return createPortal(
       <div className="overlay">
-        <div className="modal" ref={wrapperRef}>
+        <div className={`modal ${props.modalContainerClassName || ''}`} ref={wrapperRef}>
           <div className="modal-content">
             <div className="modal-title">{props.title}</div>
             <SuspenseLoading>{modalContent}</SuspenseLoading>
