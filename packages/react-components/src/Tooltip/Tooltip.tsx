@@ -70,8 +70,8 @@ Tooltip.propTypes = TooltipPropTypes
 Tooltip.defaultProps = {
   className: '',
   containerClassName: '',
-  arrowColor: '#0078c8',
-  backgroundColor: '#0078c8',
+  arrowColor: '#0069A6',
+  backgroundColor: '#0069A6',
   textColor: '#fff',
 }
 export default Tooltip

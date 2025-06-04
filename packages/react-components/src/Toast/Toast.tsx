@@ -9,7 +9,7 @@ import './styles.css'
 const types = {
   danger: {title: 'Error', color: '#f03a47', icon: 'FiXCircle'},
   warning: {title: 'Advertencia', color: '#fa7505', icon: 'FiAlertCircle'},
-  news: {title: 'Información', color: '#0078c8', icon: 'FiInfo'},
+  news: {title: 'Información', color: '#0069A6', icon: 'FiInfo'},
   success: {title: 'Ok', color: '#27AE60', icon: 'FiCheckCircle'}
 }
 

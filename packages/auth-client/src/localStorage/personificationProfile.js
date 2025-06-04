@@ -3,7 +3,7 @@ import {getPersonificationJWT} from './personificationJWT'
 import {useEffect, useState} from 'react'
 
 export const getPersonificationUserEmail = () => {
-  let params = new URL(document.location).searchParams
+  const params = new URLSearchParams(window.location.search)
   return params.get('persn_email')?.replace(' ', '+')
 }
 

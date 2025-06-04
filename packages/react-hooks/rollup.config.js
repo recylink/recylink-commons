@@ -3,9 +3,9 @@ const commonjs = require('@rollup/plugin-commonjs')
 const typescript = require('@rollup/plugin-typescript')
 const postcss = require('rollup-plugin-postcss')
 const dts = require('rollup-plugin-dts').default
+const terser = require('@rollup/plugin-terser')
 
 //NEW
-const {terser} = require('rollup-plugin-terser')
 const peerDepsExternal = require('rollup-plugin-peer-deps-external')
 
 const packageJson = require('./package.json')

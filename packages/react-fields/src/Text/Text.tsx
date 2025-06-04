@@ -5,6 +5,7 @@ import debounce from 'lodash.debounce'
 import {Label} from '@recylink/react-components'
 import TextPropTypes from './TextPropTypes'
 import '../styles.css'
+import { useDeepEffect } from '@recylink/react-hooks'
 
 type TextFieldProps = InferProps<typeof TextPropTypes>
 
@@ -45,7 +46,7 @@ const Text = (props: TextFieldProps & typeof defaultProps) => {
     [onChange, toUpperCase, delay, delayedInput]
   )
 
-  useEffect(() => {
+  useDeepEffect(() => {
     if (state !== props.value) {
       if (state) {
         if (!props.value && !delay) {
@@ -61,7 +62,7 @@ const Text = (props: TextFieldProps & typeof defaultProps) => {
         }
       }
     }
-  }, [props.value, handleOnChange, state, delay])
+  }, [props.value, handleOnChange, delay])
 
   const getClassName = () => {
     if (props.className) {
