@@ -17,5 +17,8 @@ export default {
   setOpenModal: PropTypes.func.isRequired,
   modalContent: PropTypes.any,
   setModalContent: PropTypes.func.isRequired,
-  setModalProps: PropTypes.func
+  setModalProps: PropTypes.func,
+  modalContainerClassName: PropTypes.string,
+  buttonsContainerClassName: PropTypes.string,
+  positionContainerButtons: PropTypes.oneOf(['right', 'space-between', '']),
 }
