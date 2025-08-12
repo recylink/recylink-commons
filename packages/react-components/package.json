@@ -81,6 +81,7 @@
   "dependencies": {
     "@react-icons/all-files": "^4.1.0",
     "@recylink/react-hooks": "^1.2.4",
+    "@tanstack/react-table": "^8.21.3",
     "dayjs": "^1.11.10",
     "lodash.clonedeep": "^4.5.0",
     "lodash.get": "^4.4.2",

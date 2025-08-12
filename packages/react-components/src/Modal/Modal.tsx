@@ -65,7 +65,11 @@ const Modal = (props: InferProps<typeof ModalPropTypes>) => {
     setLoadingCancel(false)
   }
 
-  const confirmButton = () =>( 
+  const confirmButton = () =>{
+    if (!props.confirmText) {
+      return null
+    }
+    return ( 
       <Button
         className={props.confirmButtonClassName}
         type="button"
@@ -74,7 +78,7 @@ const Modal = (props: InferProps<typeof ModalPropTypes>) => {
         onClick={async e => await onClickConfirm(e)}
         disabled={props.confirmDisabled}
         loading={loadingConfirm}
-      />)
+      />)}
   
 
   const cancelButton = () => {

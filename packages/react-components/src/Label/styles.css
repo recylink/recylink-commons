@@ -2,10 +2,14 @@
   line-height: 22px;
   letter-spacing: -0.1px;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 400;
   font-stretch: normal;
-  font-style: normal;
+  font-style: regular;
   display: table;
+  font-family: 'Inter', sans-serif;
+  line-height: 111.00000000000001%;
+  letter-spacing: 0%;
+  color: #313334;
 }
 
 .recylink-label:first-child {

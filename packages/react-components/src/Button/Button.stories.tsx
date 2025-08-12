@@ -69,3 +69,9 @@ DisabledOnlyTextButton.args = {
   disabled: true,
   onlyText: true
 }
+
+export const OutlineButton = Template.bind({})
+OutlineButton.args = {
+  label: 'Outline Button',
+  outline: true
+}

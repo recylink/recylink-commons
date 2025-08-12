@@ -39,7 +39,7 @@ const defaultProps = {
   noLoading: undefined,
   type: 'button',
   use: 'function',
-
+  outline: undefined,
   gaclickid: undefined
 }
 
@@ -96,6 +96,8 @@ const Button = forwardRef((props: InferProps<typeof ButtonPropTypes> & ButtonInt
         classes.push('recylink-button-ghost')
       } else if (props.link) {
         classes.push('recylink-button-link')
+      } else if (props.outline) {
+        classes.push('recylink-button-outline')
       }
     }
     if (props.big) {

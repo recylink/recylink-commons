@@ -68,3 +68,27 @@ export const DefaultButtons = () => {
         />
   )
 }
+
+export const WithCustomButtons = () => {
+  const {handleModal, setOpenModal} = useModal()
+  return (
+    <Button
+          primary
+          type="button"
+          use="function"
+          label="Open Modal"
+          onClick={() => handleModal(
+            <div>
+              <div onClick={() => setOpenModal(false)}>Click to close</div>
+              <p>Modal Content</p>
+            </div>,
+            {
+            cancelText: null,
+            confirmText: null,
+            confirmDisabled: true,
+            cancelDisabled: true,
+        }
+          )}
+        />
+  )
+}

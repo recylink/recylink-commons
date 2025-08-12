@@ -2,6 +2,7 @@ import {Meta, StoryObj} from '@storybook/react'
 import Number from './Number'
 
 const meta: Meta<typeof Number> = {
+  title: 'RecylinkReactFields/Number',
   component: Number,
   tags: ['autodocs'],
   argTypes: {},

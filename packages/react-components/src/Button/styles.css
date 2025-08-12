@@ -57,7 +57,9 @@
 .recylink-button:active,
 .recylink-button-small:active {
   transform: translateY(1px);
-  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+  box-shadow:
+    0 4px 6px rgba(50, 50, 93, 0.11),
+    0 1px 3px rgba(0, 0, 0, 0.08);
   background: #bebec5;
 }
 
@@ -75,7 +77,7 @@
 
 .recylink-button-primary {
   color: #fff;
-  background: #0069A6;
+  background: #0069a6;
 }
 .recylink-button-primary:hover {
   background: #008deb;
@@ -116,7 +118,7 @@
 
 .recylink-button-link {
   background-color: #fff;
-  color: #0069A6;
+  color: #0069a6;
 }
 .recylink-button-link:hover {
   background-color: #f2f9fd;
@@ -145,6 +147,18 @@
 .recylink-prop-icon-button {
   margin-right: 10px;
   position: relative;
+}
+
+.recylink-button-outline {
+  border: 1px solid #0069a6;
+  color: #0069a6;
+  background-color: #fff;
+}
+.recylink-button-outline:hover {
+  background-color: #e5f3ff;
+}
+.recylink-button-outline:active {
+  background-color: #99cfff;
 }
 
 .recylink-button-loading-component {
