@@ -1,3 +1,4 @@
+import {FontFamily} from './../theme'
 export default function ({
   errorMessage,
   icon,
@@ -16,10 +17,18 @@ export default function ({
         ...provided,
         height: state.isMulti ? 'auto' : '36px',
         minHeight: '36px',
-        transition: 'all 0ms'
+        transition: 'all 0ms',
+        borderColor: '#E6EDF2'
       }
       if (state.menuIsOpen) {
-        return {...style, borderRadius: '4px 4px 0px 0px', borderColor: 'var(--blue)'}
+        return {
+          ...style,
+          borderRadius: '4px 4px 0px 0px',
+          borderColor: '#99CFFF',
+          borderWidth: '3px',
+          borderStyle: 'solid',
+          boxShadow: 'none'
+        }
       }
       if (state.isDisabled) {
         return {...style, backgroundColor: '#bfc0c5'}
@@ -31,21 +40,33 @@ export default function ({
     },
     option: (provided: any, state: any) => {
       const {data} = state
-      let optionStyle = {...provided, fontSize: '14px', padding: '8px 12px', lineHeight: '16px'}
+      let optionStyle = {
+        ...provided,
+        fontSize: '14px',
+        padding: '8px 12px',
+        lineHeight: '16px'
+      }
       if (state.isSelected) {
-        return {...optionStyle, backgroundColor: 'var(--blue)'}
+        return {...optionStyle, backgroundColor: '#E5F3FF', color: '#007FF1'}
       }
       if (data.isBranded) {
         return {...optionStyle, ...brandedStyle}
       }
-      return {...optionStyle, color: '#111'}
+      return {...optionStyle, color: '#424242'}
     },
     indicatorContainer: (provided: any) => ({...provided, padding: '0px 4px'}),
     indicatorSeparator: () => ({display: 'none'}),
     clearIndicator: (provided: any) => ({...provided, padding: ' 6px 8px', cursor: 'pointer'}),
     dropdownIndicator: (provided: any) => ({...provided, padding: '7px 8px', cursor: 'pointer'}),
     placeholder: (provided: any, state: any) => {
-      let style = {...provided, fontSize: 14, color: '#c0c1c6', margin: 0}
+      let style = {
+        ...provided,
+        fontSize: 14,
+        color: '#c0c1c6',
+        margin: 0,
+        fontWeight: 400,
+        fontFamily: 'Inter'
+      }
       if (state.isDisabled) {
         return {...style, color: '#cccccc'}
       }
@@ -101,15 +122,15 @@ export default function ({
     multiValueRemove: (provided: any) => ({...provided, cursor: 'pointer'}),
     menu: (provided: any) => ({
       ...provided,
-      top: '97%',
+      top: '92%',
       margin: 0,
       boxShadow: 'none',
-      borderLeft: 'solid 2px var(--blue)',
-      borderRight: 'solid 2px var(--blue)',
-      borderBottom: 'solid 2px var(--blue)',
+      borderLeft: 'solid 3px #99CFFF',
+      borderRight: 'solid 3px #99CFFF',
+      borderBottom: 'solid 3px #99CFFF',
       boxSizing: 'content-box',
-      left: '-1px',
-      width: 'calc(100% - 2px)',
+      left: '0px',
+      width: 'calc(100% - 6px)',
       borderRadius: '0px 0px 4px 4px',
       zIndex: 2
     }),

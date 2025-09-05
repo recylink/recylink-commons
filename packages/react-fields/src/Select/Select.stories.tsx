@@ -4,7 +4,7 @@ import Select from './Select';
 
 const meta: Meta = {
   component: Select,
-  title: 'Select',
+  title: 'RecylinkReactFields/Select',
   parameters: {
     controls: { expanded: true, hideNoControlsWarning: true, console: true},
   },
