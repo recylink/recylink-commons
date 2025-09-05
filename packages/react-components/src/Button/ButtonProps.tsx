@@ -1,11 +1,10 @@
-import {ReactNode} from 'react'
+import React from 'react'
 
-export interface ButtonInterface {
+export type ButtonProps = {
   id?: string
   tooltip?: string
   to?: string
   href?: string
-  linkButton?: boolean
   label?: any
   children?: any
   primary?: boolean
@@ -17,10 +16,10 @@ export interface ButtonInterface {
   style?: object
   disabled?: boolean
   loading?: boolean
-  loadingComponent?: ReactNode
+  loadingComponent?: any
   fullWidth?: boolean
   icon?: any
-  onClick: ((...args: any | any[]) => any | void | Promise<any>| Promise<void>)
+  onClick?: (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void | Promise<void>
   state?: object
   noLoading?: boolean
   containerClassName?: string
@@ -28,7 +27,10 @@ export interface ButtonInterface {
   small?: boolean
   iconName?: string
   iconLibrary?: string
-  type: string
-  use: string
   onlyText?: boolean
+
+  gaclickid?: string
+
+  type?: 'button' | 'icon'
+  use?: 'function' | 'link' | 'href'
 }

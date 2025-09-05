@@ -1,55 +1,16 @@
-import React, {forwardRef, useEffect, useImperativeHandle, useState} from 'react'
-import {InferProps} from 'prop-types'
-import keys from 'lodash.keys'
-import omit from 'lodash.omit'
+import React, {forwardRef, useImperativeHandle, useState} from 'react'
 import {Link} from 'react-router-dom'
-import ButtonLoading from './ButtonLoading'
-import Tooltip from '../Tooltip'
+
+import {debounce} from 'lodash'
+
 import Icon from '../Icon'
-import './styles.css'
-import ButtonPropTypes from './ButtonPropTypes'
-import { ButtonInterface } from './ButtonInterface'
+import Tooltip from '../Tooltip'
 
-const debounce = (func: Function, time: number, immediate?: boolean) => {
-  var timeout: any
-  return (...args) => {
-    var context = this
-    const later = () => {
-      timeout = null
-      if (!immediate) func.apply(context, args)
-    }
-    var callNow = immediate && !timeout
-    clearTimeout(timeout)
-    timeout = setTimeout(later, time)
-    if (callNow) func.apply(context, args)
-  }
-}
+import ButtonLoading from './ButtonLoading'
+import {ButtonProps} from './ButtonProps'
 
-const defaultProps = {
-  className: undefined,
-  primary: undefined,
-  default: undefined,
-  danger: undefined,
-  big: undefined,
-  style: {},
-  disabled: undefined,
-  fullWidth: undefined,
-  state: {},
-  onClick: async (e) => {console.log(e)},
-  noLoading: undefined,
-  type: 'button',
-  use: 'function',
-
-  gaclickid: undefined
-}
-
-const Button = forwardRef((props: InferProps<typeof ButtonPropTypes> & ButtonInterface, buttonRef) => {
+const Button = forwardRef((props: ButtonProps, buttonRef) => {
   const [loading, setLoading] = useState(false)
-  const [isMounted, setMounted] = useState(true)
-
-  useEffect(() => {
-    return () => setMounted(false)
-  }, [])
 
   const click = async (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
     if (props.disabled || props.loading || loading) return null
@@ -57,21 +18,20 @@ const Button = forwardRef((props: InferProps<typeof ButtonPropTypes> & ButtonInt
       setLoading(true)
     }
     try {
-      await debounce(await props.onClick?.(e), 250)
+      if (props.onClick) {
+        debounce(await props.onClick(e), 250)(e)
+      }
     } catch (error) {
       setLoading(false)
     }
-    if (isMounted && !props.noLoading) {
+    if (!props.noLoading) {
       setLoading(false)
     }
   }
 
-  useImperativeHandle(buttonRef, () => ({onClick: async (e: any) => await click(e)}))
-
-  const getChildProps = () => {
-    const omitKeys = keys(ButtonPropTypes)
-    return omit(props, ...omitKeys)
-  }
+  useImperativeHandle(buttonRef, () => ({
+    onClick: async (e: any) => await click(e)
+  }))
 
   const getClassName = () => {
     const classes = ['recylink-button']
@@ -113,6 +73,24 @@ const Button = forwardRef((props: InferProps<typeof ButtonPropTypes> & ButtonInt
     return classes.join(' ')
   }
 
+  const renderIconType = () => {
+    if (!props.iconLibrary) {
+      return 'Error: iconLibrary needed'
+    }
+    if (!props.iconName) {
+      return 'Error: iconName needed'
+    }
+    return (
+      <Icon
+        className={`recylink-icon-button ${props.className || ''}`}
+        library={props.iconLibrary}
+        icon={props.iconName}
+        onClick={async (e: any) => await click(e)}
+        gaclickid={props.gaclickid}
+      />
+    )
+  }
+
   const renderButtonInner = () => {
     if (props.loading || loading) {
       return props.loadingComponent || <ButtonLoading />
@@ -140,26 +118,13 @@ const Button = forwardRef((props: InferProps<typeof ButtonPropTypes> & ButtonInt
     </span>
   )
 
-  const renderIconType = () => {
-    if (!props.iconLibrary) {
-      return 'Error: iconLibrary needed'
-    }
-    if (!props.iconName) {
-      return 'Error: iconName needed'
-    }
-    return (
-      <Icon
-        className={`recylink-icon-button ${props.className || ''}`}
-        library={props.iconLibrary}
-        icon={props.iconName}
-        onClick={async (e: any) => await click(e)}
-        gaclickid={props.gaclickid}
-      />
-    )
+  const buttonTypes = {
+    button: () => renderButtonType(),
+    icon: () => renderIconType()
   }
 
   const renderButton = () => {
-    const buttonType = buttonTypes[props.type]
+    const buttonType = buttonTypes[props.type || 'button']
     if (!buttonType) {
       return 'Error: Type not valid'
     }
@@ -200,16 +165,11 @@ const Button = forwardRef((props: InferProps<typeof ButtonPropTypes> & ButtonInt
   const renderFunctionButton = () => (
     <span
       className={`recylink-button-container ${props.containerClassName}`}
-      {...getChildProps()}
+      {...props}
       onClick={async e => await click(e)}>
       {renderButton()}
     </span>
   )
-
-  const buttonTypes = {
-    button: () => renderButtonType(),
-    icon: () => renderIconType()
-  }
 
   const buttonUses = {
     href: () => renderHrefButton(),
@@ -218,7 +178,7 @@ const Button = forwardRef((props: InferProps<typeof ButtonPropTypes> & ButtonInt
   }
 
   const renderMain = () => {
-    const buttonUse = buttonUses[props.use]
+    const buttonUse = buttonUses[props.use || 'function']
     if (!buttonUse) {
       return 'Error: Use not valid'
     }
@@ -236,7 +196,5 @@ const Button = forwardRef((props: InferProps<typeof ButtonPropTypes> & ButtonInt
   }
 })
 
-Button.propTypes = ButtonPropTypes
-Button.defaultProps = defaultProps
 Button.displayName = 'Button'
 export default Button

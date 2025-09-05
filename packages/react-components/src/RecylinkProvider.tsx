@@ -1,17 +1,17 @@
-import React, { FC, Fragment, PropsWithChildren } from 'react';
+import React, { FC, Fragment, ReactNode } from 'react';
 import { ModalProvider } from './Modal/modalContext';
 import { ToastProvider } from './Toast/toastContext';
 import { DayjsProvider } from './dayjs/dayjsContext';
 import { WorkersProvider } from './Workers/workersContext';
 
 type CurrentComponentProps = {
-  children: React.ReactNode
+  children: ReactNode
 }
 
-const combineProviders = (...components: (FC<CurrentComponentProps>)[]): FC => {
+const combineProviders = (...components: (FC<CurrentComponentProps>)[]): FC<CurrentComponentProps> => {
   return components.reduce(
     (AccumulatedComponents, CurrentComponent) => {
-      return ({ children }: PropsWithChildren<any>): JSX.Element => {
+      return ({ children }: CurrentComponentProps): JSX.Element => {
         return (
           <AccumulatedComponents>
             <CurrentComponent>{children}</CurrentComponent>
@@ -19,7 +19,7 @@ const combineProviders = (...components: (FC<CurrentComponentProps>)[]): FC => {
         );
       };
     },
-    ({ children }: PropsWithChildren<any>)  => <Fragment>{children}</Fragment>,
+    ({ children }: CurrentComponentProps)  => <Fragment>{children}</Fragment>,
   );
 };
 

@@ -1,16 +1,15 @@
-import React, {useRef, useState} from 'react'
-import {InferProps} from 'prop-types'
+import React, {FC, useRef, useState} from 'react'
 import {createPortal} from 'react-dom'
 import {useOutsideClick} from '@recylink/react-hooks'
 import Button from '../Button'
 import ButtonsContainer from '../ButtonsContainer'
 import SuspenseLoading from '../SuspenseLoading'
-import ModalPropTypes from './ModalPropTypes'
+import {ModalProps} from './ModalProps'
+
 import './styles.css'
 
-const Modal = (props: InferProps<typeof ModalPropTypes>) => {
-  const {isOpen, setOpenModal, modalContent, setModalContent, positionContainerButtons}: InferProps<typeof ModalPropTypes> =
-    props
+const Modal: FC<ModalProps> = props => {
+  const {isOpen, setOpenModal, modalContent, setModalContent, positionContainerButtons} = props
   const [loadingConfirm, setLoadingConfirm] = useState(false)
   const [loadingCancel, setLoadingCancel] = useState(false)
 
@@ -27,55 +26,57 @@ const Modal = (props: InferProps<typeof ModalPropTypes>) => {
     }
   })
 
-  const onConfirm = async () => {
-    let result = true
+  const onConfirm = async (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
     if (props.onConfirm) {
-      result = await props.onConfirm()
+      const result = await props.onConfirm(e)
+
+      if (result !== true) {
+        return
+      }
     }
-    if (result !== false) {
-      closeAndEmptyModal()
-    }
+    closeAndEmptyModal()
   }
 
-  const onCancel = async () => {
-    let result = true
+  const onCancel = async (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
     if (props.onCancel) {
-      result = await props.onCancel()
+      const result = await props.onCancel(e)
+
+      if (result !== true) {
+        return
+      }
     }
-    if (result !== false) {
-      closeAndEmptyModal()
-    }
+    closeAndEmptyModal()
   }
 
-  const onClickConfirm = async e => {
+  const onClickConfirm = async (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
     setLoadingConfirm(true)
     if (e) {
       e.preventDefault()
     }
-    await onConfirm()
+    await onConfirm(e)
     setLoadingConfirm(false)
   }
 
-  const onClickCancel = async e => {
+  const onClickCancel = async (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
     setLoadingCancel(true)
     if (e) {
       e.preventDefault()
     }
-    await onCancel()
+    await onCancel(e)
     setLoadingCancel(false)
   }
 
-  const confirmButton = () =>( 
-      <Button
-        className={props.confirmButtonClassName}
-        type="button"
-        use="function"
-        label={props.confirmText}
-        onClick={async e => await onClickConfirm(e)}
-        disabled={props.confirmDisabled}
-        loading={loadingConfirm}
-      />)
-  
+  const confirmButton = () => (
+    <Button
+      className={props.confirmButtonClassName}
+      type="button"
+      use="function"
+      label={props.confirmText || 'Aceptar'}
+      onClick={async e => await onClickConfirm(e)}
+      disabled={props.confirmDisabled}
+      loading={loadingConfirm}
+    />
+  )
 
   const cancelButton = () => {
     if (!props.cancelText) {
@@ -83,7 +84,7 @@ const Modal = (props: InferProps<typeof ModalPropTypes>) => {
     }
     return (
       <Button
-        className={props.cancelButtonClassName}
+        className={props.cancelButtonClassName || 'recylink-button-ghost'}
         type="button"
         use="function"
         label={props.cancelText}
@@ -95,7 +96,9 @@ const Modal = (props: InferProps<typeof ModalPropTypes>) => {
   }
 
   const renderButtons = () => (
-    <ButtonsContainer position={positionContainerButtons} className={props.buttonsContainerClassName}>
+    <ButtonsContainer
+      position={positionContainerButtons}
+      className={props.buttonsContainerClassName}>
       {cancelButton()}
       {confirmButton()}
     </ButtonsContainer>
@@ -117,6 +120,4 @@ const Modal = (props: InferProps<typeof ModalPropTypes>) => {
   } else return null
 }
 
-Modal.propTypes = ModalPropTypes
-Modal.defaultProps = {confirmText: 'Aceptar', cancelButtonClassName: 'recylink-button-ghost'}
 export default Modal

@@ -1,14 +1,16 @@
-import React, {PropsWithChildren, createContext, useEffect, useState} from 'react'
+import React, {FC, PropsWithChildren, ReactNode, createContext, useEffect, useState} from 'react'
 import Modal from './Modal'
 import {ModalContextInterface} from './ModalContextInterface'
+import {ModalContextProps} from './ModalContextProps'
+import {ModalProps} from './ModalProps'
 
-let ModalContext: React.Context<ModalContextInterface>;
-const {Provider} = (ModalContext = createContext<ModalContextInterface>({} as any))
+const ModalContext = createContext<ModalContextInterface>({} as ModalContextInterface)
+const Provider = ModalContext.Provider
 
-const ModalProvider = ({ children }: PropsWithChildren<any>): JSX.Element => {
-  const [isOpen, setOpenModal] = useState(false)
-  const [modalContent, setModalContent] = useState(<span />)
-  const [modalProps, setModalProps] = useState({})
+const ModalProvider: FC<PropsWithChildren<ModalContextProps>> = ({children}) => {
+  const [isOpen, setOpenModal] = useState<boolean>(false)
+  const [modalContent, setModalContent] = useState<ReactNode>(<span />)
+  const [modalProps, setModalProps] = useState<ModalProps>({})
 
   useEffect(() => {
     if (!isOpen) {
@@ -17,7 +19,7 @@ const ModalProvider = ({ children }: PropsWithChildren<any>): JSX.Element => {
     }
   }, [isOpen])
 
- const handleModal = (content = null, props) => {
+  const handleModal = (content: ReactNode, props: ModalProps) => {
     setOpenModal(true)
     setModalProps(props)
     if (content) {
@@ -26,7 +28,8 @@ const ModalProvider = ({ children }: PropsWithChildren<any>): JSX.Element => {
   }
 
   return (
-    <Provider value={{isOpen, setOpenModal, handleModal, modalContent, setModalContent, setModalProps}}>
+    <Provider
+      value={{isOpen, setOpenModal, handleModal, modalContent, setModalContent, setModalProps}}>
       <Modal
         {...modalProps}
         isOpen={isOpen}

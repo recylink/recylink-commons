@@ -1,19 +1,15 @@
 import React from 'react'
-import {Story, ComponentMeta} from '@storybook/react'
+import {StoryFn, Meta} from '@storybook/react'
 import Button from './Button'
-import ButtonPropTypes from './ButtonPropTypes'
-import {InferProps} from 'prop-types'
-import { ButtonInterface } from './ButtonInterface'
-
-// type ButtonPropsInterface = InferProps<typeof ButtonPropTypes>
+import {ButtonProps} from './ButtonProps'
 
 export default {
   title: 'RecylinkReactComponents/Button',
   component: Button,
-  tags: ['autodocs'],
-} as ComponentMeta<typeof Button>
+  tags: ['autodocs']
+} as Meta<typeof Button>
 
-const Template: Story<ButtonInterface> = args => <Button {...args} />
+const Template: StoryFn<ButtonProps> = args => <Button {...args} />
 
 export const TestButton = Template.bind({})
 TestButton.args = {
@@ -57,7 +53,7 @@ DisabledButton.args = {
   disabled: true
 }
 
-export const LoadingButton = Template.bind({}) 
+export const LoadingButton = Template.bind({})
 LoadingButton.args = {
   label: 'Loading Button',
   loading: true
