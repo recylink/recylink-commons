@@ -1,25 +1,29 @@
-import React, {useMemo} from 'react'
-import PropTypes from 'prop-types'
-import useModal from './useModal'
-import ViewportSuspenseLoading from '../ViewportSuspenseLoading'
-import Button from '../Button'
+import React, {FC, useMemo} from 'react'
 
-function ShowModal(props) {
+import Button from '../Button'
+import ViewportSuspenseLoading from '../ViewportSuspenseLoading'
+
+import {ModalProps} from './ModalProps.types'
+import useModal from './useModal'
+
+const ShowModal: FC<ModalProps> = props => {
   const {handleModal} = useModal()
 
   const getClassName = useMemo(() => {
-    let className: string[] = []
+    const className: string[] = []
     if (props.className) {
       className.push(props.className)
     }
     return className.join(' ')
   }, [props.className])
 
-  const submit = async () => {
+  const submit = async (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
     try {
-      await props.confirm()
+      await props.onConfirm(e)
       return
-    } catch (error) {}
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   const renderContent = () => (
@@ -30,12 +34,14 @@ function ShowModal(props) {
     </ViewportSuspenseLoading>
   )
 
-  const open = e => {
-    props.children && e.stopPropagation()
+  const open = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
+    if (props.children) {
+      e.stopPropagation()
+    }
     handleModal(renderContent(), {
       title: props.title,
-      onConfirm: async () => await submit(),
-      confirmText: props.confirmText,
+      onConfirm: async (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => await submit(e),
+      confirmText: props.confirmText || 'Guardar',
       confirmDisabled: props.confirmDisabled,
       disableOutsideClick: props.disableOutsideClick
     })
@@ -66,39 +72,5 @@ function ShowModal(props) {
     renderButton()
   )
 }
-ShowModal.propTypes = {
-  showModal: PropTypes.func,
-  label: PropTypes.node,
-  title: PropTypes.node,
-  confirmText: PropTypes.node,
-  primary: PropTypes.bool,
-  danger: PropTypes.bool,
-  link: PropTypes.bool,
-  style: PropTypes.object,
-  buttonStyle: PropTypes.object,
-  content: PropTypes.node,
-  confirm: PropTypes.func,
-  children: PropTypes.node,
-  disabled: PropTypes.bool,
-  confirmDisabled: PropTypes.bool,
-  cancelDisabled: PropTypes.bool,
-  contentClassName: PropTypes.string,
-  className: PropTypes.string,
-  disableOutsideClick: PropTypes.bool,
-  bottomLeft: PropTypes.node,
 
-  buttonType: PropTypes.string,
-  buttonClassName: PropTypes.string,
-  buttonIconLibrary: PropTypes.string,
-  buttonIconName: PropTypes.string
-}
-ShowModal.defaultProps = {
-  confirmText: 'Guardar',
-  buttonStyle: {},
-  onSuccess: () => {},
-  confirm: () => {},
-  style: {},
-  buttonType: 'button',
-  buttonIconLibrary: 'fi'
-}
 export default ShowModal

@@ -1,29 +1,39 @@
-import React, {PropsWithChildren, createContext, useState} from 'react'
+import React, {createContext, PropsWithChildren, useState} from 'react'
 import {createPortal} from 'react-dom'
+
 import clonedeep from 'lodash.clonedeep'
+
 import Toast from './Toast'
-import {ToastContextInterface} from './ToastContextInterface'
+import {ToastContextProps, ToastProps} from './ToastProps.types'
 
 import './styles.css'
 
-let ToastContext: React.Context<ToastContextInterface>;
-const {Provider} = (ToastContext = createContext<ToastContextInterface>({} as any))
+let ToastContext: React.Context<ToastContextProps>
 
-const ToastProvider = ({children}: PropsWithChildren<any>): JSX.Element => {
-  const [toastList, setToastList] = useState<any>({list: [], counter: 0})
+const {Provider} = (ToastContext = createContext<ToastContextProps>({} as ToastContextProps))
 
-  const addToast = (toast: Object) => {
+type ToastListProps = {
+  id: string
+  props: ToastProps
+}
+
+type ToastListStateProps = {
+  list: ToastListProps[]
+  counter: number
+}
+
+const ToastProvider = ({children}: PropsWithChildren<ToastContextProps>): JSX.Element => {
+  const [toastList, setToastList] = useState<ToastListStateProps>({list: [], counter: 0})
+
+  const addToast = (toast: ToastProps) => {
     setToastList(currentList => {
-      const newToastList = [
-        ...currentList.list,
-        {id: `toast_${currentList.counter}`, props: toast}
-      ]
+      const newToastList = [...currentList.list, {id: `toast_${currentList.counter}`, props: toast}]
       return {list: newToastList, counter: currentList.counter + 1}
     })
   }
 
   const deleteToast = (id: string) => {
-    setToastList((currentList: {list: any[]; counter: any}) => {
+    setToastList((currentList: ToastListStateProps) => {
       const toastIndex = currentList.list.findIndex(t => t.id === id)
       if (toastIndex > -1) {
         const newToastList = clonedeep(currentList.list)
@@ -38,11 +48,11 @@ const ToastProvider = ({children}: PropsWithChildren<any>): JSX.Element => {
     <Provider value={{addToast}}>
       {createPortal(
         <div className={`toast-container toast-position-top-right`}>
-          {toastList.list.map((toast: any) => (
+          {toastList.list.map((toast: ToastListProps) => (
             <Toast
               key={toast.id}
-              id={toast.id}
               {...toast.props}
+              id={toast.id}
               deleteToast={() => deleteToast(toast.id)}
             />
           ))}

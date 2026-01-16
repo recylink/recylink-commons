@@ -140,7 +140,7 @@ const Select = (props: SelectFieldProps & typeof defaultProps) => {
             className={isSelected ? 'recylink-select-selected-check' : 'recylink-select-check'}
           />
         </div>
-        {label}
+        <span className={isSelected ? 'recylink-select-selected-option-label' : 'recylink-select-non-selected-option-label'}>{label}</span>
       </div>
     )
   }

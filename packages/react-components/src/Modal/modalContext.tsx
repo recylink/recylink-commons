@@ -1,10 +1,9 @@
-import React, {FC, PropsWithChildren, ReactNode, createContext, useEffect, useState} from 'react'
-import Modal from './Modal'
-import {ModalContextInterface} from './ModalContextInterface'
-import {ModalContextProps} from './ModalContextProps'
-import {ModalProps} from './ModalProps'
+import React, {createContext, FC, PropsWithChildren, ReactNode, useEffect, useState} from 'react'
 
-const ModalContext = createContext<ModalContextInterface>({} as ModalContextInterface)
+import Modal from './Modal'
+import {ModalContextProps, ModalProps} from './ModalProps.types'
+
+const ModalContext = createContext<ModalContextProps>({} as ModalContextProps)
 const Provider = ModalContext.Provider
 
 const ModalProvider: FC<PropsWithChildren<ModalContextProps>> = ({children}) => {

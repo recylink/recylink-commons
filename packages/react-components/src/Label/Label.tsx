@@ -1,23 +1,24 @@
-import React from 'react'
-import {InferProps} from 'prop-types'
-import LabelPropTypes from './LabelPropTypes'
+import React, {FC} from 'react'
+
+import {LabelProps} from './LabelProps.types'
+
 import './styles.css'
 
-const Label = (props: InferProps<typeof LabelPropTypes>) => {
+const Label: FC<LabelProps> = (props: LabelProps) => {
   const {label, isOptional, isOptionalLabel, isRequired, isRequiredLabel} = props
 
   const renderOptional = () => {
     if (!isOptional) {
       return null
     }
-    return <span className="recylink-label-optional">{isOptionalLabel}</span>
+    return <span className="recylink-label-optional">{isOptionalLabel || 'Opcional'}</span>
   }
 
   const renderRequired = () => {
     if (!isRequired) {
       return null
     }
-    return <span className="recylink-label-required">{isRequiredLabel}</span>
+    return <span className="recylink-label-required">{isRequiredLabel || '*'}</span>
   }
 
   const renderLabel = () => {
@@ -37,6 +38,4 @@ const Label = (props: InferProps<typeof LabelPropTypes>) => {
   )
 }
 
-Label.propTypes = LabelPropTypes
-Label.defaultProps = {isOptionalLabel: 'Opcional', isRequiredLabel: '*'}
 export default Label

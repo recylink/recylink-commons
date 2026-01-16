@@ -1,95 +1,90 @@
-import { useContext } from 'react';
+import {useContext} from 'react'
+
+import {WorkersContext} from './workersContext'
 import {
   GetWorkerOutput,
   SetWorkerInput,
   SetWorkerWithWorkerIdInput,
-  WorkersContextInterface,
-} from './WorkersContextInterface';
-import { WorkersContext } from './workersContext';
+  WorkersContextProps
+} from './WorkersContextProps.types'
 
 type UseWorkersWithoutId = () => {
-  getWorker: (workerId: string) => GetWorkerOutput | undefined;
-  setWorker: (input: SetWorkerInput) => Worker | undefined;
-  removeWorker: (workerId: string) => void;
-  terminateWorker: (workerId: string) => void;
-};
+  getWorker: (workerId: string) => GetWorkerOutput | undefined
+  setWorker: (input: SetWorkerInput) => Worker | undefined
+  removeWorker: (workerId: string) => void
+  terminateWorker: (workerId: string) => void
+}
 
 type UseWorkersWithId = (useWorkerWorkerId: string) => {
-  getWorker: () => GetWorkerOutput | undefined;
-  setWorker: (input: SetWorkerWithWorkerIdInput) => Worker | undefined;
-  removeWorker: () => void;
-  terminateWorker: () => void;
-};
+  getWorker: () => GetWorkerOutput | undefined
+  setWorker: (input: SetWorkerWithWorkerIdInput) => Worker | undefined
+  removeWorker: () => void
+  terminateWorker: () => void
+}
 
-const useWorkers: UseWorkersWithoutId & UseWorkersWithId = (
-  useWorkerWorkerId?: string,
-) => {
-  const {
-    getWorker,
-    setWorker,
-    removeWorker,
-    terminateWorker,
-  }: WorkersContextInterface = useContext(WorkersContext);
+const useWorkers: UseWorkersWithoutId & UseWorkersWithId = (useWorkerWorkerId?: string) => {
+  const {getWorker, setWorker, removeWorker, terminateWorker}: WorkersContextProps =
+    useContext(WorkersContext)
 
   const getWorkerByWorkerId = (workerId?: string) => {
     if (useWorkerWorkerId) {
-      return getWorker(useWorkerWorkerId);
+      return getWorker(useWorkerWorkerId)
     }
     if (!workerId) {
-      throw new Error('workerId is required');
+      throw new Error('workerId is required')
     }
-    return getWorker(workerId);
-  };
+    return getWorker(workerId)
+  }
 
   const setWorkerByWorkerId = ({
     workerId,
     worker,
     methods,
-    eventListeners,
+    eventListeners
   }: SetWorkerWithWorkerIdInput) => {
     if (useWorkerWorkerId) {
       return setWorker({
         workerId: useWorkerWorkerId,
         worker,
         methods,
-        eventListeners,
-      });
+        eventListeners
+      })
     } else {
       if (!workerId) {
-        throw new Error('workerId is required');
+        throw new Error('workerId is required')
       }
-      return setWorker({ workerId, worker, methods, eventListeners });
+      return setWorker({workerId, worker, methods, eventListeners})
     }
-  };
+  }
 
   const removeWorkerByWorkerId = (workerId?: string) => {
     if (useWorkerWorkerId) {
-      removeWorker(useWorkerWorkerId);
+      removeWorker(useWorkerWorkerId)
     } else {
       if (!workerId) {
-        throw new Error('workerId is required');
+        throw new Error('workerId is required')
       }
-      removeWorker(workerId);
+      removeWorker(workerId)
     }
-  };
+  }
 
   const terminateWorkerByWorkerId = (workerId?: string) => {
     if (useWorkerWorkerId) {
-      terminateWorker(useWorkerWorkerId);
+      terminateWorker(useWorkerWorkerId)
     } else {
       if (!workerId) {
-        throw new Error('workerId is required');
+        throw new Error('workerId is required')
       }
-      terminateWorker(workerId);
+      terminateWorker(workerId)
     }
-  };
+  }
 
   return {
     getWorker: getWorkerByWorkerId,
     setWorker: setWorkerByWorkerId,
     removeWorker: removeWorkerByWorkerId,
-    terminateWorker: terminateWorkerByWorkerId,
-  };
-};
+    terminateWorker: terminateWorkerByWorkerId
+  }
+}
 
-export default useWorkers;
+export default useWorkers

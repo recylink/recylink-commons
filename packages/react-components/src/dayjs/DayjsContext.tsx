@@ -1,16 +1,14 @@
-import React, {PropsWithChildren, createContext} from "react"
-import {dayjs, setDayjs} from "./dayjs"
-import {DayjsContextInterface} from "./DayjsContextInterface"
+import React, {createContext, PropsWithChildren} from 'react'
 
-let DayjsContext: React.Context<DayjsContextInterface>;
-const {Provider} = (DayjsContext = createContext<DayjsContextInterface>({} as any))
+import {dayjs, setDayjs} from './dayjs'
+import {DayjsContextProps} from './DayjsContextProps.types'
 
-const DayjsProvider = ({children}: PropsWithChildren<any>): JSX.Element => {
-  return (
-    <Provider value={{setDayjs, dayjs}}>
-      {children}
-    </Provider>
-  )
+let DayjsContext: React.Context<DayjsContextProps>
+
+const {Provider} = (DayjsContext = createContext<DayjsContextProps>({} as DayjsContextProps))
+
+const DayjsProvider = ({children}: PropsWithChildren<DayjsContextProps>): JSX.Element => {
+  return <Provider value={{setDayjs, dayjs}}>{children}</Provider>
 }
 
 export {DayjsContext, DayjsProvider}

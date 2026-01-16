@@ -1,2 +1,3 @@
 export {default} from './Button'
-export * from './ButtonProps'
+
+export * from './ButtonProps.types'

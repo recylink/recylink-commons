@@ -1,7 +1,9 @@
 import React from 'react'
-import {StoryFn, Meta} from '@storybook/react'
+
+import {Meta, StoryFn} from '@storybook/react'
+
 import Button from './Button'
-import {ButtonProps} from './ButtonProps'
+import {ButtonProps} from './ButtonProps.types'
 
 export default {
   title: 'RecylinkReactComponents/Button',
@@ -64,4 +66,10 @@ DisabledOnlyTextButton.args = {
   label: 'Disabled Button',
   disabled: true,
   onlyText: true
+}
+
+export const OutlineButton = Template.bind({})
+OutlineButton.args = {
+  label: 'Outline Button',
+  outline: true
 }

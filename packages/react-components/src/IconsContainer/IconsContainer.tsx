@@ -1,13 +1,10 @@
-import React from 'react'
-import PropTypes, {InferProps} from 'prop-types'
+import React, {FC} from 'react'
+
+import {IconsContainerProps} from './IconsContainerProps.types'
+
 import './styles.css'
 
-const IconsContainerPropTypes = {
-  children: PropTypes.node,
-  position: PropTypes.string
-}
-
-const IconsContainer = ({children, position}: InferProps<typeof IconsContainerPropTypes>) => {
+const IconsContainer: FC<IconsContainerProps> = ({children, position}) => {
   if (position === 'right') {
     return <div className="recylink-icon-buttons-container-right">{children}</div>
   }
@@ -15,5 +12,4 @@ const IconsContainer = ({children, position}: InferProps<typeof IconsContainerPr
   return <div className="recylink-icon-buttons-container">{children}</div>
 }
 
-IconsContainer.propTypes = IconsContainerPropTypes
 export default IconsContainer

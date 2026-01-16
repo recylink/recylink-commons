@@ -1,8 +1,11 @@
-import React, {useState, useEffect} from 'react'
-import {InferProps} from 'prop-types'
-import ToastPropTypes from './ToastPropTypes'
+import React, {FC, useState} from 'react'
+
+import {useDeepEffect} from '@recylink/react-hooks'
+
 import Button from '../Button'
 import Icon from '../Icon'
+
+import {ToastProps} from './ToastProps.types'
 
 import './styles.css'
 
@@ -13,31 +16,30 @@ const types = {
   success: {title: 'Ok', color: '#27AE60', icon: 'FiCheckCircle'}
 }
 
-const Toast = (props: InferProps<typeof ToastPropTypes>) => {
-  const {
-    id,
-    title,
-    description,
-    type,
-    autoDelete,
-    autoDeleteTime,
-    deleteToast
-  }: InferProps<typeof ToastPropTypes> = props
+const Toast: FC<ToastProps> = ({
+  id,
+  title,
+  description,
+  type,
+  autoDelete = true,
+  autoDeleteTime = 3000,
+  deleteToast
+}) => {
   const [hide, setHide] = useState(false)
 
   const toastType = types[type]
 
-  useEffect(() => {
+  useDeepEffect(() => {
     const callHide = setTimeout(() => {
       setHide(true)
     }, autoDeleteTime)
     return () => clearTimeout(callHide)
   }, [autoDeleteTime])
 
-  useEffect(() => {
+  useDeepEffect(() => {
     const call = setTimeout(() => {
       if (autoDelete && hide) {
-        deleteToast()
+        deleteToast(id)
       }
     }, 700)
     return () => clearTimeout(call)
@@ -53,7 +55,7 @@ const Toast = (props: InferProps<typeof ToastPropTypes>) => {
           iconLibrary="fi"
           iconName={'FiX'}
           className={'toast-close-button'}
-          onClick={e => deleteToast(id)}
+          onClick={() => deleteToast(id)}
           use="function"
         />
         <div className={'toast-image'}>
@@ -68,9 +70,4 @@ const Toast = (props: InferProps<typeof ToastPropTypes>) => {
   )
 }
 
-Toast.propTypes = ToastPropTypes
-Toast.defaultProps = {
-  autoDelete: true,
-  autoDeleteTime: 3000
-}
 export default React.memo(Toast)

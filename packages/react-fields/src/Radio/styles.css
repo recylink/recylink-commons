@@ -1,0 +1,325 @@
+/* Radio Group Container */
+.recylink-radio-group-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Radio Group */
+.recylink-radio-group {
+  display: flex;
+  gap: 16px;
+}
+
+.recylink-radio-group-vertical {
+  flex-direction: column;
+  gap: 12px;
+}
+
+.recylink-radio-group-horizontal {
+  flex-direction: row;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+/* Radio Group Sizes */
+.recylink-radio-group-small {
+  gap: 8px;
+}
+
+.recylink-radio-group-small.recylink-radio-group-vertical {
+  gap: 8px;
+}
+
+.recylink-radio-group-small.recylink-radio-group-horizontal {
+  gap: 16px;
+}
+
+.recylink-radio-group-medium {
+  gap: 16px;
+}
+
+.recylink-radio-group-medium.recylink-radio-group-vertical {
+  gap: 12px;
+}
+
+.recylink-radio-group-medium.recylink-radio-group-horizontal {
+  gap: 24px;
+}
+
+.recylink-radio-group-large {
+  gap: 24px;
+}
+
+.recylink-radio-group-large.recylink-radio-group-vertical {
+  gap: 16px;
+}
+
+.recylink-radio-group-large.recylink-radio-group-horizontal {
+  gap: 32px;
+}
+
+/* Radio Group Disabled */
+.recylink-radio-group-disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Radio Item */
+.recylink-radio-item {
+  display: flex;
+  align-items: flex-start;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.recylink-radio-item:hover:not(.recylink-radio-item-disabled)
+  > .recylink-radio-item-label
+  .recylink-radio-item-content {
+  opacity: 0.8;
+}
+
+.recylink-radio-item-disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* Radio Item Label */
+.recylink-radio-item-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Radio Position - Left (default) */
+.recylink-radio-item-left .recylink-radio-item-label {
+  flex-direction: row;
+}
+
+/* Radio Position - Right */
+.recylink-radio-item-right .recylink-radio-item-label {
+  flex-direction: row;
+}
+
+.recylink-radio-item-disabled .recylink-radio-item-label {
+  cursor: not-allowed;
+}
+
+/* Radio Item Input */
+.recylink-radio-item-input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  margin: 0;
+  padding: 0;
+}
+
+/* Radio Item Custom */
+.recylink-radio-item-custom {
+  position: relative;
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #d1d5db;
+  border-radius: 50%;
+  background: white;
+  flex-shrink: 0;
+  margin-top: 2px;
+  transition: all 0.2s ease;
+}
+
+.recylink-radio-item:hover:not(.recylink-radio-item-disabled) .recylink-radio-item-custom {
+  border-color: var(--blue);
+  transition: all 0.2s ease;
+}
+
+.recylink-radio-item-custom::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--blue);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.recylink-radio-item-checked:hover:not(.recylink-radio-item-disabled) .recylink-radio-item-custom {
+  outline: 3px solid #cce7ff;
+  transition: all 0.2s ease;
+}
+
+.recylink-radio-item-checked .recylink-radio-item-custom {
+  border-color: var(--blue);
+  background: white;
+}
+
+.recylink-radio-item-checked .recylink-radio-item-custom::after {
+  opacity: 1;
+}
+
+.recylink-radio-item-disabled .recylink-radio-item-custom {
+  border-color: #e5e7eb;
+  background: #f9fafb;
+}
+
+.recylink-radio-item-disabled.recylink-radio-item-checked .recylink-radio-item-custom {
+  border-color: #d1d5db;
+}
+
+.recylink-radio-item-disabled.recylink-radio-item-checked .recylink-radio-item-custom::after {
+  background: #9ca3af;
+}
+
+/* Radio Item Content */
+.recylink-radio-item-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+/* Radio Item Label Text */
+.recylink-radio-item-label-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  line-height: 1.4;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.recylink-radio-item-disabled .recylink-radio-item-label-text {
+  color: #9ca3af;
+}
+
+/* Radio Item Description */
+.recylink-radio-item-description {
+  font-size: 12px;
+  color: #6b7280;
+  line-height: 1.4;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.recylink-radio-item-disabled .recylink-radio-item-description {
+  color: #9ca3af;
+}
+
+/* Radio Item Sizes */
+.recylink-radio-item-small .recylink-radio-item-custom {
+  width: 16px;
+  height: 16px;
+}
+
+.recylink-radio-item-small .recylink-radio-item-custom::after {
+  width: 6px;
+  height: 6px;
+}
+
+.recylink-radio-item-small .recylink-radio-item-label-text {
+  font-size: 12px;
+}
+
+.recylink-radio-item-small .recylink-radio-item-description {
+  font-size: 11px;
+}
+
+.recylink-radio-item-medium .recylink-radio-item-custom {
+  width: 18px;
+  height: 18px;
+}
+
+.recylink-radio-item-medium .recylink-radio-item-custom::after {
+  width: 10px;
+  height: 10px;
+}
+
+.recylink-radio-item-medium .recylink-radio-item-label-text {
+  font-size: 14px;
+}
+
+.recylink-radio-item-medium .recylink-radio-item-description {
+  font-size: 12px;
+}
+
+.recylink-radio-item-large .recylink-radio-item-custom {
+  width: 20px;
+  height: 20px;
+}
+
+.recylink-radio-item-large .recylink-radio-item-custom::after {
+  width: 10px;
+  height: 10px;
+}
+
+.recylink-radio-item-large .recylink-radio-item-label-text {
+  font-size: 16px;
+}
+
+.recylink-radio-item-large .recylink-radio-item-description {
+  font-size: 14px;
+}
+
+/* Radio Group Error */
+.recylink-radio-group-error {
+  color: #dc2626;
+  font-size: 12px;
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+.recylink-radio-item-disabled .recylink-radio-item-input:focus + .recylink-radio-item-custom {
+  outline: none;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .recylink-radio-group-horizontal {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .recylink-radio-group-large.recylink-radio-group-horizontal {
+    gap: 16px;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .recylink-radio-item-custom {
+    border-color: #4b5563;
+    background: #1f2937;
+  }
+
+  .recylink-radio-item-label-text {
+    color: #e5e7eb;
+  }
+
+  .recylink-radio-item-description {
+    color: #9ca3af;
+  }
+
+  .recylink-radio-item-disabled .recylink-radio-item-custom {
+    border-color: #374151;
+    background: #111827;
+  }
+
+  .recylink-radio-item-disabled .recylink-radio-item-label-text {
+    color: #6b7280;
+  }
+
+  .recylink-radio-item-disabled .recylink-radio-item-description {
+    color: #6b7280;
+  }
+}

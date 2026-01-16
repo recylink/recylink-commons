@@ -1,21 +1,24 @@
 import React from 'react'
-import {ComponentStory, ComponentMeta} from '@storybook/react'
-import useModal from './useModal'
-import Modal from './Modal'
+
+import {ComponentMeta, ComponentStory} from '@storybook/react'
+
 import Button from '../Button'
+
+import Modal from './Modal'
 import {ModalProvider} from './modalContext'
+import useModal from './useModal'
 
 export default {
   title: 'RecylinkReactComponents/Modal',
   component: Modal,
   decorators: [
-    Story => (<>
-    <div id="modal-root"></div>
-      <ModalProvider>
-        <Story />
-      </ModalProvider>
-    </>
-
+    Story => (
+      <>
+        <div id="modal-root"></div>
+        <ModalProvider>
+          <Story />
+        </ModalProvider>
+      </>
     )
   ]
 } as ComponentMeta<typeof Modal>
@@ -26,23 +29,25 @@ export const Example = () => {
   const {handleModal} = useModal()
   return (
     <Button
-          primary
-          type="button"
-          use="function"
-          label="Open Modal"
-          onClick={() =>
-            handleModal(
-              <div>
-                <h1>Modal</h1>
-                <p>Modal Content</p>
-              </div>,
-              {confirmText: 'Confirmar',
-              confirmButtonClassName: 'recylink-button-primary',
-              onConfirm: () => alert('Confirmado'),
-              cancelText: 'Cancelar'}
-            )
+      primary
+      type="button"
+      use="function"
+      label="Open Modal"
+      onClick={() =>
+        handleModal(
+          <div>
+            <h1>Modal</h1>
+            <p>Modal Content</p>
+          </div>,
+          {
+            confirmText: 'Confirmar',
+            confirmButtonClassName: 'recylink-button-primary',
+            onConfirm: () => alert('Confirmado'),
+            cancelText: 'Cancelar'
           }
-        />
+        )
+      }
+    />
   )
 }
 
@@ -50,21 +55,45 @@ export const DefaultButtons = () => {
   const {handleModal} = useModal()
   return (
     <Button
-          primary
-          type="button"
-          use="function"
-          label="Open Modal"
-          onClick={() =>
-            handleModal(
-              <div>
-                <h1>Modal</h1>
-                <p>Modal Content</p>
-              </div>,
-              {confirmText: 'Confirmar',
-              onConfirm: () => alert('Confirmado'),
-              cancelText: 'Cancelar'}
-            )
+      primary
+      type="button"
+      use="function"
+      label="Open Modal"
+      onClick={() =>
+        handleModal(
+          <div>
+            <h1>Modal</h1>
+            <p>Modal Content</p>
+          </div>,
+          {confirmText: 'Confirmar', onConfirm: () => alert('Confirmado'), cancelText: 'Cancelar'}
+        )
+      }
+    />
+  )
+}
+
+export const WithCustomButtons = () => {
+  const {handleModal, setOpenModal} = useModal()
+  return (
+    <Button
+      primary
+      type="button"
+      use="function"
+      label="Open Modal"
+      onClick={() =>
+        handleModal(
+          <div>
+            <div onClick={() => setOpenModal(false)}>Click to close</div>
+            <p>Modal Content</p>
+          </div>,
+          {
+            cancelText: null,
+            confirmText: null,
+            confirmDisabled: true,
+            cancelDisabled: true
           }
-        />
+        )
+      }
+    />
   )
 }

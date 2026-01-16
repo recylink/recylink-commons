@@ -1,16 +1,12 @@
-import React, {Suspense} from 'react'
-import PropTypes, {InferProps} from 'prop-types'
+import React, {FC, Suspense} from 'react'
+
+import {useDeepEffect} from '@recylink/react-hooks'
+
+import {SuspenseLoadingProps} from './SuspenseLoadingProps.types'
+
 import './styles.css'
 
-const SuspenseLoadingPropTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string,
-  fallback: PropTypes.node,
-  onRender: PropTypes.func
-  // delay: PropTypes.number
-}
-
-const SuspenseLoading = (props: InferProps<typeof SuspenseLoadingPropTypes>) => {
+const SuspenseLoading: FC<SuspenseLoadingProps> = props => {
   // const {delay} = props
 
   // const [isShown, setIsShown] = useState(delay === 0)
@@ -29,18 +25,15 @@ const SuspenseLoading = (props: InferProps<typeof SuspenseLoadingPropTypes>) => 
   //   }, delay)
   // }, [delay])
 
+  useDeepEffect(() => {
+    props.onRender?.()
+  }, [props.onRender])
+
   const renderChildren = () => {
     return props.children
   }
 
-  return (
-    <Suspense fallback={renderFallback()}>
-      {renderChildren()}
-      {props.onRender?.()}
-    </Suspense>
-  )
+  return <Suspense fallback={renderFallback()}>{renderChildren()}</Suspense>
 }
 
-SuspenseLoading.propTypes = SuspenseLoadingPropTypes
-SuspenseLoading.defaultProps = {onRender: () => {}}
 export default SuspenseLoading

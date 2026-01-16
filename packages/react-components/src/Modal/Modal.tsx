@@ -1,10 +1,13 @@
 import React, {FC, useRef, useState} from 'react'
 import {createPortal} from 'react-dom'
+
 import {useOutsideClick} from '@recylink/react-hooks'
+
 import Button from '../Button'
 import ButtonsContainer from '../ButtonsContainer'
 import SuspenseLoading from '../SuspenseLoading'
-import {ModalProps} from './ModalProps'
+
+import {ModalProps} from './ModalProps.types'
 
 import './styles.css'
 
@@ -66,17 +69,22 @@ const Modal: FC<ModalProps> = props => {
     setLoadingCancel(false)
   }
 
-  const confirmButton = () => (
-    <Button
-      className={props.confirmButtonClassName}
-      type="button"
-      use="function"
-      label={props.confirmText || 'Aceptar'}
-      onClick={async e => await onClickConfirm(e)}
-      disabled={props.confirmDisabled}
-      loading={loadingConfirm}
-    />
-  )
+  const confirmButton = () => {
+    if (!props.confirmText) {
+      return null
+    }
+    return (
+      <Button
+        className={props.confirmButtonClassName}
+        type="button"
+        use="function"
+        label={props.confirmText || 'Aceptar'}
+        onClick={async e => await onClickConfirm(e)}
+        disabled={props.confirmDisabled}
+        loading={loadingConfirm}
+      />
+    )
+  }
 
   const cancelButton = () => {
     if (!props.cancelText) {

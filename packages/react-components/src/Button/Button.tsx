@@ -7,7 +7,7 @@ import Icon from '../Icon'
 import Tooltip from '../Tooltip'
 
 import ButtonLoading from './ButtonLoading'
-import {ButtonProps} from './ButtonProps'
+import {ButtonProps} from './ButtonProps.types'
 
 const Button = forwardRef((props: ButtonProps, buttonRef) => {
   const [loading, setLoading] = useState(false)
@@ -22,6 +22,7 @@ const Button = forwardRef((props: ButtonProps, buttonRef) => {
         debounce(await props.onClick(e), 250)(e)
       }
     } catch (error) {
+      console.error(error)
       setLoading(false)
     }
     if (!props.noLoading) {
@@ -30,7 +31,7 @@ const Button = forwardRef((props: ButtonProps, buttonRef) => {
   }
 
   useImperativeHandle(buttonRef, () => ({
-    onClick: async (e: any) => await click(e)
+    onClick: async (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => await click(e)
   }))
 
   const getClassName = () => {
@@ -56,6 +57,8 @@ const Button = forwardRef((props: ButtonProps, buttonRef) => {
         classes.push('recylink-button-ghost')
       } else if (props.link) {
         classes.push('recylink-button-link')
+      } else if (props.outline) {
+        classes.push('recylink-button-outline')
       }
     }
     if (props.big) {
@@ -85,7 +88,7 @@ const Button = forwardRef((props: ButtonProps, buttonRef) => {
         className={`recylink-icon-button ${props.className || ''}`}
         library={props.iconLibrary}
         icon={props.iconName}
-        onClick={async (e: any) => await click(e)}
+        onClick={async (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => await click(e)}
         gaclickid={props.gaclickid}
       />
     )

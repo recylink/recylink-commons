@@ -5,20 +5,21 @@ export type ButtonProps = {
   tooltip?: string
   to?: string
   href?: string
-  label?: any
-  children?: any
+  label?: React.ReactNode
+  children?: React.ReactNode
   primary?: boolean
   ghost?: boolean
   danger?: boolean
+  outline?: boolean
   link?: boolean
   default?: boolean
   big?: boolean
   style?: object
   disabled?: boolean
   loading?: boolean
-  loadingComponent?: any
+  loadingComponent?: React.ReactNode
   fullWidth?: boolean
-  icon?: any
+  icon?: React.ReactNode
   onClick?: (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void | Promise<void>
   state?: object
   noLoading?: boolean
@@ -26,7 +27,7 @@ export type ButtonProps = {
   className?: string
   small?: boolean
   iconName?: string
-  iconLibrary?: string
+  iconLibrary?: 'fi' | 'md'
   onlyText?: boolean
 
   gaclickid?: string

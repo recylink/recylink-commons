@@ -1,4 +1,4 @@
-import dayjsInstance, { Dayjs } from 'dayjs'
+import dayjsInstance, {Dayjs} from 'dayjs'
 import esLocaleDefault from 'dayjs/locale/es'
 import customParseFormat from 'dayjs/plugin/customParseFormat.js'
 import dayOfYear from 'dayjs/plugin/dayOfYear.js'
@@ -25,19 +25,23 @@ dayjsInstance.extend(duration)
 dayjsInstance.extend(customParseFormat)
 dayjsInstance.locale(esLocale)
 
-const getDayjs = (...args: any[]): Dayjs =>  dayjsInstance(...args)
+const getDayjs = (...args: (string | number | Dayjs | Date)[]): Dayjs => dayjsInstance(...args)
 
 getDayjs.weekdays = dayjsInstance.weekdays
 getDayjs.duration = dayjsInstance.duration
 
-export const setDayjs = function (options: any = {}) {
+type DayjsOptions = {
+  timezone?: string
+}
+
+export const setDayjs = function (options: DayjsOptions = {}) {
   if (options?.timezone) {
     const optionsTimezone = options.timezone
     dayjsInstance.tz.setDefault(optionsTimezone)
   }
 }
 
-export const dayjs = (...args: any[]): Dayjs => getDayjs(...args)
+export const dayjs = (...args: (string | number | Dayjs | Date)[]): Dayjs => getDayjs(...args)
 
 export {
   Dayjs,

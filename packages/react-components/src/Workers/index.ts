@@ -1,4 +1,6 @@
-import useWorkers from './useWorkers';
-import { WorkersProvider, WorkersContext } from './workersContext';
+import useWorkers from './useWorkers'
+import {WorkersContext, WorkersProvider} from './workersContext'
 
-export { WorkersProvider, WorkersContext, useWorkers };
+export {WorkersProvider, WorkersContext, useWorkers}
+
+export * from './WorkersContextProps.types'

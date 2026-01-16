@@ -1,24 +1,20 @@
-import React from 'react'
-import {InferProps} from 'prop-types'
+import React, {FC} from 'react'
+
 import uniqueId from 'lodash.uniqueid'
-import IconPropTypes from './IconPropTypes'
-import RenderIcon from './RenderIcon'
+
 import SuspenseLoading from '../SuspenseLoading'
 
-const defaultProps = {
-  className: ''
-}
+import {IconProps} from './IconProps.types'
+import RenderIcon from './RenderIcon'
 
-const Icon = (props: InferProps<typeof IconPropTypes> & typeof defaultProps) => {
+const Icon: FC<IconProps> = props => {
   const id = uniqueId('recylink-icon')
-  
+
   return (
     <SuspenseLoading className={props.suspenseClassName}>
-      <RenderIcon id={id} {...props} />
+      <RenderIcon id={id} className={props.className} {...props} />
     </SuspenseLoading>
   )
 }
 
-Icon.propTypes = IconPropTypes
-Icon.defaultProps = defaultProps
 export default React.memo(Icon)

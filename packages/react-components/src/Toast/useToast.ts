@@ -1,9 +1,10 @@
 import {useContext} from 'react'
+
 import {ToastContext} from './toastContext'
-import {ToastContextInterface} from './ToastContextInterface'
+import {ToastContextProps} from './ToastProps.types'
 
 const useToast = () => {
-  const {addToast}: ToastContextInterface = useContext(ToastContext)
+  const {addToast}: ToastContextProps = useContext(ToastContext)
 
   return addToast
 }

@@ -9,8 +9,11 @@ dependencies:
     specifier: ^4.1.0
     version: 4.1.0(react@18.3.1)
   '@recylink/react-hooks':
-    specifier: ^1.2.3
-    version: 1.2.3(prop-types@15.8.1)(react-dom@18.3.1)(react@18.3.1)
+    specifier: ^1.2.4
+    version: 1.2.4(prop-types@15.8.1)(react-dom@18.3.1)(react@18.3.1)
+  '@tanstack/react-table':
+    specifier: ^8.21.3
+    version: 8.21.3(react-dom@18.3.1)(react@18.3.1)
   dayjs:
     specifier: ^1.11.10
     version: 1.11.11
@@ -2309,8 +2312,8 @@ packages:
       react: 18.3.1
     dev: false
 
-  /@recylink/react-hooks@1.2.3(prop-types@15.8.1)(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-uKP7w+6fQygytQV/vARRWQHl2giZ3/BIIAszB/dl5DGeTZs7HGeoWwTX3cw9GWZTEMT83DuohN5bDMHGjr3BYg==}
+  /@recylink/react-hooks@1.2.4(prop-types@15.8.1)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-RCeVyxXNEYTMBSuPP08S6OF3HgjVDiVtAdh0SxhAaSClW10jT6IHDc+vFYiKwcXF+6eZM1UJq6EZBUvSZJQXHw==}
     peerDependencies:
       prop-types: ^15.8.1
       react: ^18.2.0
@@ -3551,6 +3554,23 @@ packages:
     dependencies:
       '@swc/counter': 0.1.3
     dev: true
+
+  /@tanstack/react-table@8.21.3(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-5nNMTSETP4ykGegmVkhjcS8tTLW6Vl4axfEGQN3v0zdHYbK4UfoqfPChclTrJ4EoK9QynqAu9oUf8VEmrpZ5Ww==}
+    engines: {node: '>=12'}
+    peerDependencies:
+      react: '>=16.8'
+      react-dom: '>=16.8'
+    dependencies:
+      '@tanstack/table-core': 8.21.3
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+    dev: false
+
+  /@tanstack/table-core@8.21.3:
+    resolution: {integrity: sha512-ldZXEhOBb8Is7xLs01fR3YEc3DERiz5silj8tnGkFZytt1abEvl/GhUmCE0PMLaMPTa3Jk4HbKmRlHmu+gCftg==}
+    engines: {node: '>=12'}
+    dev: false
 
   /@testing-library/dom@9.3.4:
     resolution: {integrity: sha512-FlS4ZWlp97iiNWig0Muq8p+3rVDjRiYE+YKGbAqXOu9nwJFFOdL00kFpz42M+4huzYi86vAK1sOOfyOG45muIQ==}

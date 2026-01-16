@@ -1,133 +1,126 @@
-import React, { PropsWithChildren, createContext, useRef } from 'react';
-import omit from 'lodash/omit';
+import React, {createContext, PropsWithChildren, useRef} from 'react'
+
+import omit from 'lodash/omit'
+
 import {
   AddEventListenerInput,
   GetWorkerOutput,
   SetWorkerInput,
   WorkerMethods,
-  WorkersContextInterface,
-} from './WorkersContextInterface';
+  WorkersContextProps
+} from './WorkersContextProps.types'
 
-let WorkersContext: React.Context<WorkersContextInterface>;
-const { Provider } = (WorkersContext = createContext<WorkersContextInterface>(
-  {} as any,
-));
+let WorkersContext: React.Context<WorkersContextProps>
+const {Provider} = (WorkersContext = createContext<WorkersContextProps>({} as WorkersContextProps))
 
-const WorkersProvider = ({ children }: PropsWithChildren<any>): JSX.Element => {
-  const workers = useRef<any>({});
-  const workingWorkers = useRef<any>({});
+const WorkersProvider = ({children}: PropsWithChildren<WorkersContextProps>): JSX.Element => {
+  const workers = useRef<Record<string, Worker>>({})
+  const workingWorkers = useRef<Record<string, boolean>>({})
 
   const setWorkerLoading = (workerId: string, isWorking: boolean) => {
     workingWorkers.current = {
       ...workingWorkers.current,
-      [workerId]: isWorking,
-    };
-  };
+      [workerId]: isWorking
+    }
+  }
 
   const getWorker = (workerId: string): GetWorkerOutput | undefined =>
     workers.current[workerId]
       ? {
           worker: workers.current[workerId],
-          loading: workingWorkers.current[workerId] || false,
+          loading: workingWorkers.current[workerId] || false
         }
-      : undefined;
+      : undefined
 
   const terminateWorker = (workerId: string) => {
     if (workerId) {
       if (workers.current[workerId]) {
-        workers.current[workerId].terminate();
+        workers.current[workerId].terminate()
       }
     }
-    setWorkerLoading(workerId, false);
-  };
+    setWorkerLoading(workerId, false)
+  }
 
   const removeWorker = (workerId: string) => {
     if (workerId) {
       if (workers.current[workerId]) {
-        workers.current[workerId].terminate();
-        workers.current = omit(workers.current, workerId);
+        workers.current[workerId].terminate()
+        workers.current = omit(workers.current, workerId)
       }
-      setWorkerLoading(workerId, false);
+      setWorkerLoading(workerId, false)
     }
-  };
+  }
 
   const setWorkerPostMessage = (
     workerId: string,
     worker: Worker,
-    methods: WorkerMethods | undefined,
+    methods: WorkerMethods | undefined
   ): void => {
-    const originalPostMessage = worker.postMessage.bind(worker);
+    const originalPostMessage = worker.postMessage.bind(worker)
 
-    worker.postMessage = (message: any) => {
-      setWorkerLoading(workerId, true);
+    worker.postMessage = (message: unknown) => {
+      setWorkerLoading(workerId, true)
 
-      let finalMessage = message;
+      let finalMessage = message
 
       if (methods?.postMessage?.getMessage) {
-        finalMessage = methods.postMessage.getMessage(message);
+        finalMessage = methods.postMessage.getMessage(message)
       } else if (methods?.postMessage?.message) {
-        finalMessage = methods.postMessage.message;
+        finalMessage = methods.postMessage.message
       }
 
-      originalPostMessage(finalMessage);
+      originalPostMessage(finalMessage)
       if (methods?.postMessage?.event) {
-        console.log('postMessage');
+        console.log('postMessage')
 
-        methods.postMessage.event(finalMessage);
+        methods.postMessage.event(finalMessage)
       }
-    };
-  };
+    }
+  }
 
   const setWorkerAddEventListeners = (
     workerId: string,
     worker: Worker,
-    eventListeners?: AddEventListenerInput[],
+    eventListeners?: AddEventListenerInput[]
   ): void => {
     const eventListenersByType = (eventListeners || []).reduce(
       (acc, eventListener: AddEventListenerInput) => ({
         ...acc,
-        [eventListener.type]: eventListener,
+        [eventListener.type]: eventListener
       }),
-      {},
-    );
+      {}
+    )
 
     for (const eventKey of ['error', 'message', 'messageerror']) {
-      const eventListener = eventListenersByType[eventKey];
+      const eventListener = eventListenersByType[eventKey]
 
-      worker.addEventListener(eventKey, (event) => {
+      worker.addEventListener(eventKey, event => {
         if (eventListener) {
-          console.log({ eventListener });
+          console.log({eventListener})
 
-          eventListener.event(event);
+          eventListener.event(event)
         }
-      });
+      })
     }
-  };
+  }
 
-  const setWorker = ({
-    workerId,
-    worker,
-    methods,
-    eventListeners,
-  }: SetWorkerInput): Worker => {
+  const setWorker = ({workerId, worker, methods, eventListeners}: SetWorkerInput): Worker => {
     if (worker && !workers[workerId]) {
-      setWorkerPostMessage(workerId, worker, methods);
-      setWorkerAddEventListeners(workerId, worker, eventListeners);
+      setWorkerPostMessage(workerId, worker, methods)
+      setWorkerAddEventListeners(workerId, worker, eventListeners)
 
       workers.current = {
         ...workers.current,
-        [workerId]: worker,
-      };
+        [workerId]: worker
+      }
     }
 
-    return worker;
-  };
+    return worker
+  }
 
   return (
-    <Provider value={{ getWorker, setWorker, removeWorker, terminateWorker }}>
-      {children}
-    </Provider>
-  );
-};
+    <Provider value={{getWorker, setWorker, removeWorker, terminateWorker}}>{children}</Provider>
+  )
+}
 
-export { WorkersContext, WorkersProvider };
+export {WorkersContext, WorkersProvider}
